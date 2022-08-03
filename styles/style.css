@@ -1,0 +1,43 @@
+.textLink{
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    color: #F4F5F5;
+    position: relative;
+    display: inline-block;
+}
+
+.textLink::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0.1875rem;
+    left: 0;
+    background-color: #D7263D;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-in;
+}
+
+.textLink:hover::after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.titleUnderline{
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+
+.titleUnderline::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    bottom: 0.1875em;
+    left: 0;
+    background-color: #D7263D;
+    z-index: -1;
+}
+
