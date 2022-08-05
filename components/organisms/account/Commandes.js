@@ -1,6 +1,10 @@
-import { TableContent, TableHead } from "../../atoms";
+import { useState } from "react";
+import { Modal, TableContent, TableHead } from "../../atoms";
 
 export function Commandes(){
+
+  const [isOpen, setIsOpen] = useState(false);
+
     return (
         <div className="grid grid-cols-12 mt-[70px] ">
             <table className="col-span-10 col-start-2 ">
@@ -15,7 +19,7 @@ export function Commandes(){
                 </tr>
               </thead>
               <tbody>
-                <tr className="h-[60px] cursor-pointer hover:bg-red duration-200 odd:bg-black">
+                <tr onClick={() => {setIsOpen(true)}} className="h-[60px] cursor-pointer hover:bg-red duration-200 odd:bg-black">
                   <TableContent>1</TableContent>
                   <TableContent>VBMX00000001</TableContent>
                   <TableContent>1 article</TableContent>
@@ -23,7 +27,7 @@ export function Commandes(){
                   <TableContent>En cours</TableContent>
                   <TableContent>05/07/2022</TableContent>
                 </tr>
-                <tr className="h-[60px] cursor-pointer hover:bg-red duration-200 odd:bg-black">
+                <tr onClick={() => {setIsOpen(true)}} className="h-[60px] cursor-pointer hover:bg-red duration-200 odd:bg-black">
                   <TableContent>158</TableContent>
                   <TableContent>VBMX00000002</TableContent>
                   <TableContent>2 article</TableContent>
@@ -33,6 +37,7 @@ export function Commandes(){
                 </tr>
               </tbody>
             </table>
+            <Modal isOpen={isOpen} setIsOpen={setIsOpen}/>
           </div>
 
     )

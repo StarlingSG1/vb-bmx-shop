@@ -5,3 +5,7 @@ export { Header } from "./navs/Header";
 export { Footer } from "./navs/Footer";
 
 export { Template } from "./templates/Template";
+
+// ARTICLES
+export { SmallArticle } from "./articles/SmallArticle";
+export { PanierArticle } from "./articles/PanierArticle";

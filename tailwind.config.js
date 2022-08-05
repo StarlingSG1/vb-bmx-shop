@@ -18,7 +18,8 @@ module.exports = {
           DEFAULT: "#f4f5f5",
         },
         grey: {
-          DEFAULT: "808080"
+          light: "#D9D9D9",
+          DEFAULT: "#808080",
         },
         black: {
           DEFAULT: "#010D17",
@@ -41,6 +42,9 @@ module.exports = {
         cta_slide: "1.25rem 4rem",
         input: "0.75rem 10px 0.75rem 1.25rem",
       },
+      boxShadow: {
+        card: "2px 4px 4px rgba(255, 255, 255, 0.25)",
+      }
     },
   },
   plugins: [
