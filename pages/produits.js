@@ -1,9 +1,23 @@
 import Head from "next/head";
 import Image from "next/image";
+import { getAllFrom } from "../api/products/products";
+import { useEffect, useState } from "react";
 import { BigParagraph, PanierButton, Paragraph } from "../components/atoms";
 import { Template } from "../components/molecules/templates/Template";
+import { Article } from "../components/molecules";
 
 export default function Produit() {
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = async () => {
+    const products = await getAllFrom("products");
+    setProducts(products);
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <Head>
@@ -11,97 +25,9 @@ export default function Produit() {
       </Head>
       <Template title="Nos produits">
         <PanierButton />
-        <div className="grid grid-cols-4 gap-[50px]">
-          <div className="flex flex-col gap-2.5 cursor-pointer">
-            <Image src={"/assets/img/product1.png"} width="364" height="367" />
-            <div className="flex justify-between">
-              <BigParagraph>Nom du produit</BigParagraph>
-              <BigParagraph>Prix€</BigParagraph>
-            </div>
-            <Paragraph className={"text-justify line-clamp-4 "}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting,
-            </Paragraph>
-          </div>
-          <div className="flex flex-col gap-2.5 cursor-pointer">
-            <Image src={"/assets/img/product2.png"} width="364" height="367" />
-            <div className="flex justify-between">
-              <BigParagraph>Nom du produit</BigParagraph>
-              <BigParagraph>Prix€</BigParagraph>
-            </div>
-            <Paragraph className={"text-justify line-clamp-4 "}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting,
-            </Paragraph>
-          </div>
-          <div className="flex flex-col gap-2.5 cursor-pointer">
-            <Image src={"/assets/img/product3.png"} width="364" height="367" />
-            <div className="flex justify-between">
-              <BigParagraph>Nom du produit</BigParagraph>
-              <BigParagraph>Prix€</BigParagraph>
-            </div>
-            <Paragraph className={"text-justify line-clamp-4 "}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting,
-            </Paragraph>
-          </div>
-          <div className="flex flex-col gap-2.5 cursor-pointer">
-            <Image src={"/assets/img/product4.png"} width="364" height="367" />
-            <div className="flex justify-between">
-              <BigParagraph>Nom du produit</BigParagraph>
-              <BigParagraph>Prix€</BigParagraph>
-            </div>
-            <Paragraph className={"text-justify line-clamp-4 "}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting,
-            </Paragraph>
-          </div>
-          <div className="flex flex-col gap-2.5 cursor-pointer">
-            <Image src={"/assets/img/product1.png"} width="364" height="367" />
-            <div className="flex justify-between">
-              <BigParagraph>Nom du produit</BigParagraph>
-              <BigParagraph>Prix€</BigParagraph>
-            </div>
-            <Paragraph className={"text-justify line-clamp-4 "}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting,
-            </Paragraph>
-          </div>
-          <div className="flex flex-col gap-2.5 cursor-pointer">
-            <Image src={"/assets/img/product2.png"} width="364" height="367" />
-            <div className="flex justify-between">
-              <BigParagraph>Nom du produit</BigParagraph>
-              <BigParagraph>Prix€</BigParagraph>
-            </div>
-            <Paragraph className={"text-justify line-clamp-4 "}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting,
-            </Paragraph>
-          </div>
+        <div className=" flex flex-col gap-6 sm:grid sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-[50px] lg:grid-cols-4">
+          {/* ne pas oublier le props image */}
+          {products && products.map((product) => <Article key={product.id} id={product.id} name={product.name} price={product.price} description={product.description}  />)}
         </div>
       </Template>
     </>

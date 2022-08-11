@@ -33,7 +33,7 @@ export function Footer(){
                 
             </div>
             </div>
-            <Paragraph className="mx-[160px]">Made by <TextLink>Starling</TextLink></Paragraph>
+            <Paragraph className="mx-[160px]">Made by <TextLink>Jérémie Barrière</TextLink></Paragraph>
         </footer>
     )
 }

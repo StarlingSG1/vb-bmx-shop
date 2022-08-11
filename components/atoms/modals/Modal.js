@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { SmallArticle } from "../../molecules";
-import { Paragraph,RoundedIcon,BigParagraph, SubTitle } from "../../atoms";
+import { Paragraph, RoundedIcon, BigParagraph, SubTitle } from "../../atoms";
 
 export function Modal({ isOpen, setIsOpen = () => {} }) {
   return (
@@ -22,8 +22,12 @@ export function Modal({ isOpen, setIsOpen = () => {} }) {
                   05/07/2022
                 </BigParagraph>
               </div>
-              <RoundedIcon onClick={() => {setIsOpen(false)}} icon={"/assets/img/cross.svg"}/>
-              
+              <RoundedIcon
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+                icon={"/assets/img/cross.svg"}
+              />
             </div>
             <div className="w-full flex items-center mt-5 px-8">
               <div className="flex py-2 flex-col gap-5 ">
@@ -39,15 +43,28 @@ export function Modal({ isOpen, setIsOpen = () => {} }) {
                   Nombre d'articles : X articles
                 </Paragraph>
                 <Paragraph className="text-blue">Total : XXX€</Paragraph>
-                <Paragraph className="text-blue">Status : en cours</Paragraph>
+                {/* Remplacer le "en cours" par la valeur du status , dans la version non admin */}
+                {/* <Paragraph className="text-blue">Status : en cours</Paragraph> */}
+                <div className="flex items-center gap-2">
+                  <Paragraph className="text-blue">Status :</Paragraph>
+                  <select className="h-[25px] w-[200px] border border-red focus:outline-red pl-2" type="select">
+                    <option>en cours</option>
+                    <option>prêt à être récupéré</option>
+                    <option>Archivé</option>
+                    <option>Autre</option>
+                  </select>
+                  {/* Si on change la valeur de l'input, on affiche ces 2 boutons */}
+                  <p className="cursor-pointer font-lato underline">Valider</p>
+                  <p className="cursor-pointer font-lato italic text-red">Annuler</p>
+                </div>
               </div>
             </div>
             <div className="mt-[30px] px-8">
               <BigParagraph className="text-blue">ARTICLES : </BigParagraph>
               <div className="w-full grid grid-cols-2 gap-4 mt-4 mb-8">
-                <SmallArticle/>
-                <SmallArticle/>
-                <SmallArticle/>
+                <SmallArticle />
+                <SmallArticle />
+                <SmallArticle />
               </div>
             </div>
           </div>

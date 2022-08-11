@@ -15,7 +15,7 @@ export function Header({children, className}){
                 <ul className="flex gap-[100px] items-center">
                     <li><HeaderLink href="/">Accueil</HeaderLink></li>
                     <li><HeaderLink href="/produits">Nos produits</HeaderLink></li>
-                    <li><HeaderLink href="http://vb-bmx-club.fr/">Notre site</HeaderLink></li>
+                    <li><HeaderLink href="/adhesion">Adhésion</HeaderLink></li>
                     <span className="w-[1px] h-[35px] bg-white"></span>
                     <li><HeaderLink href="/login">Connexion</HeaderLink></li>
                     <li><HeaderLink href="/register">Inscription</HeaderLink></li>

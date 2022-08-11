@@ -26,8 +26,9 @@ export { Input } from "./inputs/Input";
 export { Modal } from "./modals/Modal";
 export { PanierModal } from "./modals/PanierModal";
 
-// ICONS
+// DECORATIONS
 export { RoundedIcon } from "./decorations/RoundedIcon";
+export { Bloc } from "./decorations/Bloc";
 
 // CARDS
 export { Card } from "./cards/Card";
