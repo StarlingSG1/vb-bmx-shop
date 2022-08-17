@@ -91,7 +91,7 @@ export default function Produit() {
           <div className="col-span-8 col-start-3 grid grid-cols-8 gap-[50px] ">
             <div className="col-span-4 h-[550px] relative">
               <Image
-                src="/assets/img/product1.png"
+                src={article && article.image}
                 layout="fill"
                 loading="lazy"
               />
@@ -199,7 +199,7 @@ export default function Produit() {
                     
                     <div className="col-span-2   relative">
                     <div className="h-[265px] relative">
-                    <Image src="/assets/img/product1.png" layout="fill" />
+                    <Image src={product.image} layout="fill" />
                     </div>
                     <Paragraph className={"my-2.5"}>{product.name}</Paragraph>
                     <Price>{product.price}€</Price>
@@ -220,7 +220,7 @@ export default function Produit() {
           </div>
         </div>
       </Template>
-      <PanierModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <PanierModal isOpen={isOpen} article={article} setIsOpen={setIsOpen} />
     </>
   );
 }

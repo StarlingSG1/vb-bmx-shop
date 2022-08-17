@@ -5,11 +5,8 @@ import { BigParagraph, Paragraph } from "../../atoms";
 
 export function Article({ id, name, description, price, image }) {
 
-  // call my context
   const {  setArticleId } = useUserContext();
-  // name into slug and remove accents
   let slug = name.toLowerCase().replace(/ /g, "-");
-  // remove slug accent
   slug = slug.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
   
@@ -19,7 +16,7 @@ export function Article({ id, name, description, price, image }) {
       <a onClick={() => {setArticleId(id)}}>
         <div className="flex flex-col gap-2.5 cursor-pointer ">
           <div className="relative w-full   aspect-square">
-            <Image src={"/assets/img/product1.png"} objectFit="cover" layout="fill" />
+            <Image src={image} objectFit="cover" layout="fill" />
           </div>
           <div className="flex justify-between">
             <BigParagraph>{name}</BigParagraph>

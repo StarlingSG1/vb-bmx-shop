@@ -11,7 +11,7 @@ import {
 } from "../../atoms";
 import { SmallArticle } from "../../molecules";
 
-export function PanierModal({ isOpen, setIsOpen = () => {} }) {
+export function PanierModal({ isOpen, setIsOpen = () => {}, article }) {
   return (
     <>
       {isOpen && (
@@ -37,18 +37,20 @@ export function PanierModal({ isOpen, setIsOpen = () => {} }) {
             <div className="h-[230px] w-full mt-[25px] flex gap-[15px]">
               <div className="w-2/3 flex border-r-2 border-red  gap-[15px]">
                 <div className="aspect-square h-full relative">
-                  <Image src="/assets/img/product1.png" layout="fill" />
+                  <Image src={article.image} layout="fill" />
                 </div>
                 <div className="flex flex-col  gap-2.5 w-[183px]">
                   <BigParagraph className="uppercase text-blue">
-                    Nom du produit
+                    {article.name}
                   </BigParagraph>
                   <Paragraph className="text-blue">Quantité : X</Paragraph>
                   <Paragraph className="text-blue">Taille : X</Paragraph>
+                  {article.flocage &&
                   <Paragraph className="text-blue">
                     Flocage : NomDuGars7
                   </Paragraph>
-                  <Price className="text-blue">PRIX€</Price>
+                  }
+                  <Price className="text-blue">{article.price}</Price>
                 </div>
               </div>
               <div className="w-1/3 ">

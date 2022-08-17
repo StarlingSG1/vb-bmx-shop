@@ -36,7 +36,7 @@ export function PanierButton() {
           </svg>
           Panier {" "}
           
-          {panierLength > 0 && panierLength}
+          {panierLength > 0 && "("+panierLength+")"}
         </a>
       </Link>
     </div>

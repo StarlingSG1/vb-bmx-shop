@@ -14,7 +14,7 @@ export function PanierArticle({article, panierContent, setPanierContent = () => 
     <>
       <div className="relative aspect-square mb-6 col-span-2 mr-[15px]">
         <Image
-          src="/assets/img/product1.png"
+          src={article.image}
           className="absolute object-contain "
           layout="fill"
         />
@@ -23,7 +23,9 @@ export function PanierArticle({article, panierContent, setPanierContent = () => 
         <BigParagraph className={"mb-2.5"}>{article.name}</BigParagraph>
         <Paragraph>Taille : XX</Paragraph>
         <Paragraph>Quantité : XX</Paragraph>
+        {article.flocage && 
         <Paragraph>Flocage : Nom du gars</Paragraph>
+        }
         <Price>{article.price}€</Price>
 
       </div>

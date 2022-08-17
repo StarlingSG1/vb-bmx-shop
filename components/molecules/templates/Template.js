@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useUserContext } from "../../../context";
 import { Title } from "../../atoms";
 import { Header, Footer } from "../../molecules";
 
 export function Template({children, title = "VB BMX", hasReturn = false}) {
+
+    const { user } = useUserContext();
 
 
     return (
