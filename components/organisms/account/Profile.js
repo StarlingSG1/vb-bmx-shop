@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUserContext } from "../../../context";
 import { BorderedButton, Button, Input, Paragraph } from "../../atoms";
 
 export function Profile() {
   const [update, setUpdate] = useState(false);
   const [password, setPassword] = useState(false);
+
+  const { user } = useUserContext();
 
   const toUpdate = () => {
     setUpdate(true);
@@ -42,8 +45,8 @@ export function Profile() {
           >
             {update ? (
               <>
-                <Input className={"!w-1/2"} placeholder="Prénom" />
-                <Input className={"!w-1/2"} placeholder="Nom" />
+                <Input className={"!w-1/2"} placeholder="Prénom" defaultValue={user && user.firstName} />
+                <Input className={"!w-1/2"} placeholder="Nom" defaultValue={user && user.lastName} />
               </>
             ) : (
               <>
@@ -51,40 +54,42 @@ export function Profile() {
                   <Paragraph className="!font-bold underline">
                     Prénom :
                   </Paragraph>
-                  <Paragraph>Jérémie</Paragraph>
+                  <Paragraph>{user && user.firstName}</Paragraph>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Paragraph className="!font-bold underline">Nom :</Paragraph>
-                  <Paragraph>Barrière</Paragraph>
+                  <Paragraph>{user && user.lastName}</Paragraph>
                 </div>
               </>
             )}
           </div>
         )}
-        {update ? (
+        {update && (
           <>
-            <Input className="!w-full" placeholder="Adresse mail" />
-            <Input className="!w-full" placeholder="Numéro de téléphone" />
+            <Input className="!w-full" placeholder="Adresse mail" defaultValue={user && user.email}/>
+            <Input className="!w-full" placeholder="Numéro de téléphone" defaultValue={user && user.phone} />
           </>
-        ) : password ? (
+        )}
+        {password  && (
           <>
-            <Input className={"!w-full"} placeholder="Ancien mot de passe" />
-            <Input className={"!w-full"} placeholder="Nouveau mot de passe" />
-            <Input className={"!w-full"} placeholder="Confirmer mot de passe" />
+            <Input className="!w-full"  placeholder="Ancien mot de passe" defaultValue={null} />
+            <Input className="!w-full"  placeholder="Nouveau mot de passe" defaultValue={null}/>
+            <Input className="!w-full"  placeholder="Confirmer mot de passe" defaultValue={null}/>
           </>
-        ) : (
+        ) }
+        {!password && !update && (
           <>
             <div className="flex items-center gap-2.5">
               <Paragraph className="!font-bold underline">
                 Adresse mail :
               </Paragraph>
-              <Paragraph>barriere.jeremie@gmail.com</Paragraph>
+              <Paragraph>{user && user.email}</Paragraph>
             </div>
             <div className="flex items-center gap-2.5">
               <Paragraph className="!font-bold underline">
                 Numéro de téléphone :
               </Paragraph>
-              <Paragraph>01 23 45 67 89</Paragraph>
+              <Paragraph>{user && user.phone}</Paragraph>
             </div>
           </>
         )}

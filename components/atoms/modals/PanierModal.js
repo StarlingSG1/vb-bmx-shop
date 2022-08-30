@@ -11,7 +11,7 @@ import {
 } from "../../atoms";
 import { SmallArticle } from "../../molecules";
 
-export function PanierModal({ isOpen, setIsOpen = () => {}, article }) {
+export function PanierModal({ isOpen, setIsOpen = () => {}, article, modalItem, total }) {
   return (
     <>
       {isOpen && (
@@ -37,20 +37,20 @@ export function PanierModal({ isOpen, setIsOpen = () => {}, article }) {
             <div className="h-[230px] w-full mt-[25px] flex gap-[15px]">
               <div className="w-2/3 flex border-r-2 border-red  gap-[15px]">
                 <div className="aspect-square h-full relative">
-                  <Image src={article.image} layout="fill" />
+                  <Image src={article.image} layout="fill" alt={article.name} />
                 </div>
                 <div className="flex flex-col  gap-2.5 w-[183px]">
                   <BigParagraph className="uppercase text-blue">
                     {article.name}
                   </BigParagraph>
-                  <Paragraph className="text-blue">Quantité : X</Paragraph>
-                  <Paragraph className="text-blue">Taille : X</Paragraph>
-                  {article.flocage &&
+                  <Paragraph className="text-blue">Quantité : 1</Paragraph>
+                  <Paragraph className="text-blue">Taille : {modalItem.size}</Paragraph>
+                  {article?.flocage && modalItem.flocage && 
                   <Paragraph className="text-blue">
-                    Flocage : NomDuGars7
+                    Flocage : {modalItem.flocage}
                   </Paragraph>
                   }
-                  <Price className="text-blue">{article.price}</Price>
+                  <Price className="text-blue">{article.price}€</Price>
                 </div>
               </div>
               <div className="w-1/3 ">
@@ -60,7 +60,7 @@ export function PanierModal({ isOpen, setIsOpen = () => {}, article }) {
                 <Paragraph className="text-blue mb-2.5">X article</Paragraph>
                 <div className="flex items-center  gap-2.5">
                   <Price className="text-blue">Total :</Price>
-                  <Price className="text-blue">XXX€</Price>
+                  <Price className="text-blue">{total}€</Price>
                 </div>
                 <Link href="/produits">
                   <a>

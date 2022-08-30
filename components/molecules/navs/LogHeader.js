@@ -26,7 +26,7 @@ export function LogHeader({ children, className }) {
             <HeaderLink href="/produits">Nos produits</HeaderLink>
           </li>
           <li>
-            <HeaderLink href="http://vb-bmx-club.fr/">Notre site</HeaderLink>
+            <HeaderLink href="/adhesion">Adhésion</HeaderLink>
           </li>
           <span className="w-[1px] h-[35px] bg-white"></span>
           <li>

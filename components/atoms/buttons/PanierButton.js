@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useUserContext } from "../../../context";
 
 export function PanierButton() {
 
   const [panierLength, setPanierLength] = useState(0);
+
+  const { panier } = useUserContext();
 
   useEffect(() => {
     // if localstorage is empty, set panierLength to 0
@@ -16,6 +19,10 @@ export function PanierButton() {
     }
       
   }, []);
+
+  useEffect(() => {
+    setPanierLength(JSON.parse(localStorage.getItem("vb-bmx-panier")).length)
+  }, [panier])
 
 
   return (

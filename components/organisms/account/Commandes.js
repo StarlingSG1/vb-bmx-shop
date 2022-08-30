@@ -1,44 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {getUserCommandes} from "../../../api/commandes/commandes";
+import { useUserContext } from "../../../context";
 import { Modal, TableContent, TableHead } from "../../atoms";
+import { TableCommandes } from "../../molecules/commandes/TableCommande";
 
-export function Commandes(){
-
+export function Commandes() {
   const [isOpen, setIsOpen] = useState(false);
+  const [commandes, setCommandes] = useState([]);
+  const [commande, setCommande] = useState(null);
 
-    return (
-        <div className="grid grid-cols-12 mt-[70px] ">
-            <table className="col-span-10 col-start-2 ">
-              <thead className="border-b-[5px] border-l-[5px] border-red ">
-                <tr >
-                  <TableHead>ID</TableHead>
-                  <TableHead>N° de commande</TableHead>
-                  <TableHead>Nb Articles</TableHead>
-                  <TableHead>Total</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
-                </tr>
-              </thead>
-              <tbody>
-                <tr onClick={() => {setIsOpen(true)}} className="h-[60px] cursor-pointer hover:bg-red duration-200 odd:bg-black">
-                  <TableContent>1</TableContent>
-                  <TableContent>VBMX00000001</TableContent>
-                  <TableContent>1 article</TableContent>
-                  <TableContent>22.00€</TableContent>
-                  <TableContent>En cours</TableContent>
-                  <TableContent>05/07/2022</TableContent>
-                </tr>
-                <tr onClick={() => {setIsOpen(true)}} className="h-[60px] cursor-pointer hover:bg-red duration-200 odd:bg-black">
-                  <TableContent>158</TableContent>
-                  <TableContent>VBMX00000002</TableContent>
-                  <TableContent>2 article</TableContent>
-                  <TableContent>452.00€</TableContent>
-                  <TableContent>En cours</TableContent>
-                  <TableContent>05/07/2022</TableContent>
-                </tr>
-              </tbody>
-            </table>
-            <Modal isOpen={isOpen} setIsOpen={setIsOpen}/>
-          </div>
+  const { user } = useUserContext();
 
-    )
+  const getCommandes = async () => {
+    const data = await getUserCommandes(user.id);
+    setCommandes(data);
+  };
+
+    const [date, setDate] = useState(0)
+
+    
+
+  useEffect(() => {
+    getCommandes();
+  }, []);
+
+  return (
+    <div className="grid grid-cols-12 mt-[70px] ">
+      <table className="col-span-10 col-start-2 ">
+        <thead className="border-b-[5px] border-l-[5px] border-red ">
+          <tr>
+            <TableHead>ID</TableHead>
+            <TableHead>N° de commande</TableHead>
+            <TableHead>Nb Articles</TableHead>
+            <TableHead>Total</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Date</TableHead>
+          </tr>
+        </thead>
+        <tbody>
+          {commandes &&
+            commandes.map((commande, index) => (
+              <TableCommandes onClick={() => {setIsOpen(true); setCommande(commande)}} id={index} key={commande.id} commande={commande} />
+            ))}
+        </tbody>
+      </table>
+      <Modal isOpen={isOpen} commande={commande} user={user} setIsOpen={setIsOpen} />
+    </div>
+  );
 }

@@ -14,10 +14,11 @@ export async function verifyToken() {
     if (!token) {
         return false;
     }
-    const response = await axios.get(`http://localhost:8080/api/auth/me`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
+    const response = await axios.post(`http://localhost:8080/api/auth/me`, {token: token}
+    );
     return response.data;
 }   
+
+export async function logout()  {
+    localStorage.removeItem("vb-bmx-token");
+}
