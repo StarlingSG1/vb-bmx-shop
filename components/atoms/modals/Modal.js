@@ -2,12 +2,14 @@ import Image from "next/image";
 import { SmallArticle } from "../../molecules";
 import { Paragraph, RoundedIcon, BigParagraph, SubTitle } from "../../atoms";
 import { useEffect, useState } from "react";
+import { updateCommandStatus } from "../../../api/commandes/commandes";
 
-export function Modal({ isOpen, setIsOpen = () => {}, user, commande }) {
+export function Modal({ isOpen, setIsOpen = () => {}, user, commande, setCommande = () => {} }) {
 
   const [date, setDate] = useState(0)
   const [total, setTotal] = useState(0)
   const [articleQuantity, setArticleQuantity] = useState(0)
+  const [commandStatus, setCommandStatus] = useState(commande?.status)
 
   const formatDate = () => {
     const date = new Date(commande?.createdAt)
@@ -33,11 +35,19 @@ const articleLength = () => {
   setArticleQuantity(length)
 }
 
+const changeStatus = async () => {
+  const response = await updateCommandStatus(commande.id, commandStatus)
+  setCommandStatus(response.status)
+  setCommande({...commande, status: response.status})
+  setIsOpen(false)
+}
+
 
   useEffect(() => {
     formatDate()
     getTotal()
     articleLength()
+    setCommandStatus(commande?.status)
   }, [isOpen]);
 
   return (
@@ -88,32 +98,34 @@ const articleLength = () => {
                     <select
                       className="h-[25px] w-[200px] border border-red focus:outline-red pl-2"
                       type="select"
+                      defaultValue={commande?.status}
+                      onChange={(e) => {setCommandStatus(e.target.value)}}
                     >
-                      {commande?.status === "ENCOURS" ? (
-                        <option selected>en cours</option>
+                      {commandStatus && commandStatus === "ENCOURS" ? (
+                        <option value="ENCOURS"  selected>en cours</option>
                       ) : (
-                        <option>en cours</option>
+                        <option value="ENCOURS" >en cours</option>
                       )}
-                      {commande?.status === "RECUPERATION" ? (
-                        <option selected>prêt à être récupéré</option>
+                      {commandStatus && commandStatus === "RECUPERATION" ? (
+                        <option value="RECUPERATION"  selected >prêt à être récupéré</option>
                       ) : (
-                        <option>prêt à être récupéré</option>
+                        <option value="RECUPERATION">prêt à être récupéré</option>
                       )}
-                      {commande?.status === "ARCHIVE" ? (
-                        <option selected>Archivé</option>
+                      {commandStatus && commandStatus === "ARCHIVE" ? (
+                        <option value="ARCHIVE"  selected >Archivé</option>
                       ) : (
-                        <option>Archivé</option>
+                        <option value="ARCHIVE" >Archivé</option>
                       )}
                     </select>
                   ) : (
                     commande?.status
                   )}
-                  {user?.role !== "USER" && (
+                  {user?.role !== "USER" && commandStatus != commande?.status && (
                     <>
-                      <p className="cursor-pointer font-lato underline">
+                      <p onClick={() => changeStatus()} className="cursor-pointer font-lato underline">
                         Valider
                       </p>
-                      <p className="cursor-pointer font-lato italic text-red">
+                      <p onClick={(() => setCommandStatus(commande?.status))} className="cursor-pointer font-lato italic text-red">
                         Annuler
                       </p>
                     </>

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input, Paragraph, TextLink } from "../components/atoms";
 import { Template } from "../components/molecules/templates/Template";
 import { useUserContext } from "../context";
@@ -7,12 +7,13 @@ import { useUserContext } from "../context";
 export default function Login() {
 
   // import context 
-  const { loading, loginTheUser } = useUserContext();
+  const { loading, loginTheUser, setLoading } = useUserContext();
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     password: "",
   });
   
+  useEffect(() => {setLoading(false)}, []);
 
   return (
     <>

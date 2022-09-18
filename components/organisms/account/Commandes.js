@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import {getUserCommandes} from "../../../api/commandes/commandes";
+import {getAllCommandes, getUserCommandes} from "../../../api/commandes/commandes";
 import { useUserContext } from "../../../context";
 import { Modal, TableContent, TableHead } from "../../atoms";
 import { TableCommandes } from "../../molecules/commandes/TableCommande";
 
-export function Commandes() {
+export function Commandes({admin = false, setNbCommandes = () => {}}) {
   const [isOpen, setIsOpen] = useState(false);
   const [commandes, setCommandes] = useState([]);
   const [commande, setCommande] = useState(null);
@@ -12,17 +12,35 @@ export function Commandes() {
   const { user } = useUserContext();
 
   const getCommandes = async () => {
-    const data = await getUserCommandes(user.id);
-    setCommandes(data);
+   const data =  admin ?
+     await getAllCommandes()  : 
+     await getUserCommandes(user.id);
+    setCommandes(data)
+    admin && setNbCommandes(data.length)
   };
 
     const [date, setDate] = useState(0)
 
-    
+  //   const getCommandesTotal = () => {
+  //     let total = 0;
+  //     commande?.Article.forEach(article => {
+  //         total += article?.quantity * article?.Product?.price;
+  //     } )
+  //     setTotal(total);
+  // }
 
   useEffect(() => {
     getCommandes();
+    // admin && getCommandesTotal()
   }, []);
+
+  useEffect(() => {
+    console.log(commandes)
+  }, [commandes]);
+
+  useEffect(() => {
+    getCommandes();
+  }, [commande]);
 
   return (
     <div className="grid grid-cols-12 mt-[70px] ">
@@ -44,7 +62,7 @@ export function Commandes() {
             ))}
         </tbody>
       </table>
-      <Modal isOpen={isOpen} commande={commande} user={user} setIsOpen={setIsOpen} />
+      <Modal isOpen={isOpen} commande={commande} setCommande={setCommande} user={user} setIsOpen={setIsOpen} />
     </div>
   );
 }

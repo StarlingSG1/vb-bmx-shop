@@ -30,14 +30,17 @@ const UserContextProvider = ({ children }) => {
   const verifyTheToken = async () => {
     setLoading(true);
     const userToken = await verifyToken();
-    console.log(userToken);
     if (userToken) {
       
         setUser(userToken.user);
         setStatus("connected");
         setLoading(false);
       }
-    };
+    else{
+      setLoading(false);
+    }
+  }
+
 
   useEffect(() => {
     verifyTheToken();
@@ -47,15 +50,17 @@ const UserContextProvider = ({ children }) => {
     () => ({
       user,
       loading,
+      setLoading,
       loginTheUser,
       status,
       articleId,
       panier,
+      verifyTheToken,
       setPanier,
       setStatus,
       setArticleId,
     }),
-    [user, loading, panier, loginTheUser, status, articleId]
+    [user, loading, panier, loginTheUser, setLoading, verifyTheToken, status, articleId]
   );
 
   return (

@@ -43,7 +43,13 @@ export default function Produit() {
 
   useEffect(() => {
     fetchProducts();
+    getSelectedArticle();
   }, []);
+
+  useEffect(() => {
+  handleTotal()}, [handleTotal, isOpen]);
+
+
 
   const flocageYes = () => {
     setBoolFlocageYes(true);
@@ -98,9 +104,7 @@ export default function Produit() {
     }
   };
 
-  useEffect(() => {
-    getSelectedArticle();
-  }, []);
+  
 
   return (
     <>

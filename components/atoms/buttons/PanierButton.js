@@ -21,6 +21,9 @@ export function PanierButton() {
   }, []);
 
   useEffect(() => {
+    if(localStorage.getItem("vb-bmx-panier") === null) {
+      localStorage.setItem("vb-bmx-panier", JSON.stringify([]))
+    }
     setPanierLength(JSON.parse(localStorage.getItem("vb-bmx-panier")).length)
   }, [panier])
 

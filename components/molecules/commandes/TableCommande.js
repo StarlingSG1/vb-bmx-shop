@@ -16,7 +16,7 @@ export function TableCommandes({onClick = () => {}, setIsOpen  = () => {}, id, c
     }
 
     const formatDate = () => {
-        const date = new Date(commande.createdAt)
+        const date = new Date(commande?.createdAt)
         const day = date.getDate()
         const month = date.getMonth() + 1
         const year = date.getFullYear()
@@ -26,7 +26,7 @@ export function TableCommandes({onClick = () => {}, setIsOpen  = () => {}, id, c
     const getTotal = () => {
         let total = 0;
         commande?.Article.forEach(article => {
-            total += article.quantity * article?.Product.price;
+            total += article?.quantity * article?.Product?.price;
         } )
         setTotal(total);
     }
@@ -44,7 +44,7 @@ export function TableCommandes({onClick = () => {}, setIsOpen  = () => {}, id, c
                   <TableContent>{commande.number}</TableContent>
                   <TableContent>{articleQuantity} {articleQuantity > 1 ? "articles" : "article"} </TableContent>
                   <TableContent>{total}€</TableContent>
-                  <TableContent>{commande.status}</TableContent>
+                  <TableContent>{commande?.status}</TableContent>
                   <TableContent>{date}</TableContent>
                 </tr>
     )

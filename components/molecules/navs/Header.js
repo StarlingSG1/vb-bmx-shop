@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useUserContext } from "../../../context";
 
 export function Header({ children, className }) {
-  const { status } = useUserContext();
+  const { status, user } = useUserContext();
 
   return (
     <header className={joinClasses(className, "w-full h-[172px] bg-black flex justify-center")}>
@@ -21,7 +21,7 @@ export function Header({ children, className }) {
             />
           </a>
         </Link>
-        <ul className="flex gap-[100px] items-center">
+        <ul className="flex gap-[75px] items-center">
           <li>
             <HeaderLink href="/">Accueil</HeaderLink>
           </li>
@@ -46,6 +46,11 @@ export function Header({ children, className }) {
               <li>
                 <HeaderLink href="/account">Mon compte</HeaderLink>
               </li>
+              {(user?.role == "ADMIN" || user?.role == "SUPERADMIN") && (
+                <li>
+                  <HeaderLink href="/admin">Espace Admin</HeaderLink>
+                </li>
+              )}
               <li className="flex items-center gap-2.5">
                 <Link href="/logout">
                   <a className="flex items-center">
@@ -53,6 +58,7 @@ export function Header({ children, className }) {
                       src="/assets/img/logout.svg"
                       width={20}
                       height={18}
+                      alt="logout"
                     />
                   </a>
                 </Link>

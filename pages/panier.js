@@ -8,6 +8,7 @@ export default function Panier() {
   const [articles, setArticles] = useState([]);
   const [panierContent, setPanierContent] = useState([]);
   const [total, setTotal] = useState(0);
+  const [nbArticles, SetNbArticles] = useState(0);
 
   // addition each price of article in panierContent
   const handleTotal = () => {
@@ -18,6 +19,15 @@ export default function Panier() {
     setTotal(theTotal);
   };
 
+  const handleQuantiy = () => {
+    let theQuantity = 0;
+    panierContent.forEach((article) => {
+      theQuantity += article.quantity 
+    });
+    SetNbArticles(theQuantity);
+  }
+
+
   useEffect(() => {
     // get json content from localstorage
     const panier = localStorage.getItem("vb-bmx-panier");
@@ -26,7 +36,7 @@ export default function Panier() {
     handleTotal();
   }, []);
 
-  useEffect(() => { handleTotal()}, [panierContent]);
+  useEffect(() => { handleTotal(), handleQuantiy()}, [panierContent]);
 
   return (
     <>
@@ -57,9 +67,9 @@ export default function Panier() {
                   RÉCAPITULATIF
                 </BigParagraph>
                 <Paragraph className={"mb-5"}>
-                  {panierContent?.length > 1
-                    ? panierContent.length + " articles"
-                    : panierContent.length + " article"}
+                  { nbArticles > 1
+                    ? nbArticles + " articles"
+                    : nbArticles + " article"}
                 </Paragraph>
                 <div className="flex items-center justify-between mb-16">
                   <Paragraph>Total : </Paragraph>

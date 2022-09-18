@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
+import { selfPasswordUpdate, selfUserUpdate } from "../../../api/users/user";
 import { useUserContext } from "../../../context";
 import { BorderedButton, Button, Input, Paragraph } from "../../atoms";
 
 export function Profile() {
   const [update, setUpdate] = useState(false);
   const [password, setPassword] = useState(false);
+  const [userData, setUserData] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+  });
 
-  const { user } = useUserContext();
+  const [passwordData, setPasswordData] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  const { user , verifyTheToken} = useUserContext();
 
   const toUpdate = () => {
     setUpdate(true);
@@ -17,9 +30,23 @@ export function Profile() {
     setUpdate(false);
   };
 
-  const validateUpdate = () => {};
+  const validateUpdate = async () => {
+    userData.token = localStorage.getItem("vb-bmx-token");
+    const response = await selfUserUpdate(userData)
+    localStorage.setItem("vb-bmx-token", response.newToken);
+    verifyTheToken()
+    setUpdate(false)
+  };
 
-  const validePassword = () => {};
+  const validePassword = async () => {
+    passwordData.token = localStorage.getItem("vb-bmx-token");
+    const response = await selfPasswordUpdate(passwordData)
+    console.log(response)
+
+    localStorage.setItem("vb-bmx-token", response.newToken);
+    verifyTheToken()
+    setPassword(false)
+  };
 
   const returnPassword = () => {
     setPassword(false);
@@ -29,6 +56,10 @@ export function Profile() {
   const returnUpdate = () => {
     setUpdate(false);
   };
+
+  useEffect(() => {
+    setUserData({...userData, email: user?.email , firstName: user?.firstName, lastName: user?.lastName, phone: user?.phone});
+    }, []);
 
   return (
     <>
@@ -45,8 +76,8 @@ export function Profile() {
           >
             {update ? (
               <>
-                <Input className={"!w-1/2"} placeholder="Prénom" defaultValue={user && user.firstName} />
-                <Input className={"!w-1/2"} placeholder="Nom" defaultValue={user && user.lastName} />
+                <Input className={"!w-1/2"} placeholder="Prénom" onChange={(e) => setUserData({...userData, firstName: e.target.value})} defaultValue={user && user.firstName} />
+                <Input className={"!w-1/2"} placeholder="Nom" onChange={(e) => setUserData({...userData, lastName: e.target.value})} defaultValue={user && user.lastName} />
               </>
             ) : (
               <>
@@ -66,15 +97,15 @@ export function Profile() {
         )}
         {update && (
           <>
-            <Input className="!w-full" placeholder="Adresse mail" defaultValue={user && user.email}/>
-            <Input className="!w-full" placeholder="Numéro de téléphone" defaultValue={user && user.phone} />
+            <Input className="!w-full" type="email" placeholder="Adresse mail" onChange={(e) => setUserData({...userData, email: e.target.value})} defaultValue={user && user.email}/>
+            <Input className="!w-full" type="phone" placeholder="Numéro de téléphone" defaultValue={user && user.phone} onChange={(e) => setUserData({...userData, phone: e.target.value})} />
           </>
         )}
         {password  && (
           <>
-            <Input className="!w-full"  placeholder="Ancien mot de passe" defaultValue={null} />
-            <Input className="!w-full"  placeholder="Nouveau mot de passe" defaultValue={null}/>
-            <Input className="!w-full"  placeholder="Confirmer mot de passe" defaultValue={null}/>
+            <Input className="!w-full" type="password"  placeholder="Ancien mot de passe" onChange={(e) => setPasswordData({...passwordData, oldPassword: e.target.value})} defaultValue={null} />
+            <Input className="!w-full" type="password"  placeholder="Nouveau mot de passe" onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})} defaultValue={null}/>
+            <Input className="!w-full" type="password"  placeholder="Confirmer mot de passe" onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})} defaultValue={null}/>
           </>
         ) }
         {!password && !update && (
@@ -117,7 +148,7 @@ export function Profile() {
             </BorderedButton>
             <Button
               onClick={() => {
-                setUpdate(false);
+                validateUpdate()
               }}
             >
               Enregister
@@ -135,7 +166,7 @@ export function Profile() {
           </BorderedButton>
           <Button
             onClick={() => {
-              setPassword(false);
+              validePassword()
             }}
           >
             Enregister
