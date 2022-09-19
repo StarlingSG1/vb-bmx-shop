@@ -47,7 +47,7 @@ export default function Produit() {
   }, []);
 
   useEffect(() => {
-  handleTotal()}, [handleTotal, isOpen]);
+  handleTotal()}, [isOpen]);
 
 
 
@@ -111,19 +111,15 @@ export default function Produit() {
       <Head>
         <title>Shop - Nom du produit</title>
       </Head>
-      <Template title="Nos produits" hasReturn={true}>
+      <Template title="Nos produits" hasReturn={true} panier={true}>
         <PanierButton />
         <ReturnButton href={"/produits"} />
-        <div className="grid grid-cols-12 gap-[50px]">
-          <div className="col-span-8 col-start-3 grid grid-cols-8 gap-[50px] ">
-            <div className="col-span-4 h-[550px] relative">
-              <Image
-                src={article && article.image}
-                layout="fill"
-                loading="lazy"
+        <div className="md:grid md:grid-cols-12 gap-[50px]">
+          <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 md:grid md:grid-cols-8 gap-[50px] flex flex-col  ">
+              <img src={article && article.image}
                 alt={article && article.name}
-              />
-            </div>
+                className="md:col-span-4 md:w-auto md:h-auto h-[400px] w-full  object-cover"
+                />
             <div className="col-span-4 pt-4">
               <IntermediateParagraph className={"text-center"}>
                 {article && article.name}
@@ -210,8 +206,8 @@ export default function Produit() {
           <div className="col-span-12 flex justify-center mt-10">
             <Title className="!text-intermediate">Nos autres produits</Title>
           </div>
-          <div className="col-span-10 col-start-2 gap-[50px] grid grid-cols-10">
-            <div className="col-span-1 flex items-center cursor-pointer">
+          <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 grid grid-cols-8 gap-[50px]">
+            {/* <div className="col-span-1 flex items-center cursor-pointer">
               <div className="bg-red h-20 w-[66px] flex items-center justify-center">
                 <Image
                   src="/assets/img/arrow.svg"
@@ -220,17 +216,18 @@ export default function Produit() {
                   alt="left arrow"
                 />
               </div>{" "}
-            </div>
-            <div className="col-span-8 grid-cols-8 gap-[50px] grid">
+            </div> */}
+            <div className="xl:col-span-8 lg:col-span-10 col-span-12 896:grid-cols-8 md:grid-cols-9 sm:grid-cols-2 gap-[50px] grid">
               {products &&
                 products.map(
                   (product, index) =>
                     product.id !== article.id && (
-                      <div key={index} className="col-span-2   relative">
+                      <div key={index} className="896:col-span-2 md:col-span-3  relative">
                         <div className="h-[265px] relative">
                           <Image
                             src={product.image}
                             layout="fill"
+                            objectFit="cover"
                             alt="produit"
                           />
                         </div>
@@ -242,7 +239,7 @@ export default function Produit() {
                     )
                 )}
             </div>
-            <div className="col-span-1 flex items-center cursor-pointer">
+            {/* <div className="col-span-1 flex items-center cursor-pointer">
               <div className="bg-red h-20 w-[66px] flex items-center justify-center">
                 <Image
                   src="/assets/img/arrow.svg"
@@ -252,7 +249,7 @@ export default function Produit() {
                   alt="right arrow"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </Template>

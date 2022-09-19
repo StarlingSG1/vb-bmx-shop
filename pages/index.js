@@ -10,7 +10,7 @@ export default function Home() {
       <Head>
         <title>Shop - VB BMX</title>
       </Head>
-      <Template title="Home Page">
+      <Template panier={true} title="Home Page">
       <PanierButton />
 
       </Template>

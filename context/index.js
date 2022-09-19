@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { loginUser, verifyToken } from "../api/auth/auth";
+import { toast } from "react-toastify";
 
 const UserContext = React.createContext({ user: null });
 UserContext.displayName = "UserContext";
@@ -17,14 +18,20 @@ const UserContextProvider = ({ children }) => {
     setLoading(true);
     setStatus("pending");
     const user = await loginUser(payload);
+    console.log(user.error);
     // if user, set token in localstorage
-    if (user) {
+    if (!user.error) {
       localStorage.setItem("vb-bmx-token", user.token);
-    }
-    setUser(user);
+      setUser(user);
     setStatus("connected");
     setLoading(false);
     navigate.push("/");
+    }else {
+      toast.error(user.message);
+      setStatus("error");
+      setLoading(false);
+    }
+    
   };
 
   const verifyTheToken = async () => {
@@ -60,7 +67,7 @@ const UserContextProvider = ({ children }) => {
       setStatus,
       setArticleId,
     }),
-    [user, loading, panier, loginTheUser, setLoading, verifyTheToken, status, articleId]
+    [user, loading, panier, setLoading, verifyTheToken, status, articleId]
   );
 
   return (

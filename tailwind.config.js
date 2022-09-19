@@ -44,6 +44,11 @@ module.exports = {
       },
       boxShadow: {
         card: "2px 4px 4px rgba(255, 255, 255, 0.25)",
+      },
+      screens: {
+        '2xl' : '1600px',
+        '896' : '896px',
+        '500' : '500px',
       }
     },
   },

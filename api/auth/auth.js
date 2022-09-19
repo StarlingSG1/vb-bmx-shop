@@ -5,8 +5,7 @@ export async function loginUser(payload) {
         `http://localhost:8080/api/auth/login`,
         payload
     );
-    console.log(response.data)
-    return response.data;
+        return response.data;
 }
 
 export async function verifyToken() {
@@ -21,4 +20,12 @@ export async function verifyToken() {
 
 export async function logout()  {
     localStorage.removeItem("vb-bmx-token");
+}
+
+export async function registerUser(payload){
+    const response = await axios.post(
+        `http://localhost:8080/api/auth/register`,
+        payload
+    );
+    return response.data;
 }

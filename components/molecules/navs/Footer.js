@@ -4,9 +4,9 @@ import { Paragraph, HeaderLink, TextLink } from "../../atoms";
 
 export function Footer() {
   return (
-    <footer className="h-[367px] flex flex-col items-center bg-black mt-20">
-      <div className="mx-[160px] h-[300px] max-w-[1600px] w-full  flex items-center justify-between">
-        <div className="h-full w-1/3 flex items-center">
+    <footer className="md:h-[367px] md:px-16 px-5 flex flex-col items-center bg-black mt-20">
+      <div className=" md:h-[300px] max-w-[1600px] w-full  flex md:flex-row flex-col items-center justify-between md:pt-0 pt-10">
+        <div className="h-full w-1/3 flex items-center xl:justify-start lg:justify-center justify-center ">
           <Link href="/">
             <a>
               <Image
@@ -19,12 +19,13 @@ export function Footer() {
             </a>
           </Link>
         </div>
-        <div className="h-[250px] border-x border-white w-1/3 flex flex-col justify-center items-center gap-[65px]">
+        <div className="md:h-[250px] md:py-0 py-14 md:border-x md:border-white lg:w-1/3 md:w-1/2 flex md:flex-col sm:flex-row flex-col justify-center items-center gap-[40px]">
           <HeaderLink href="/">Notre site</HeaderLink>
           <HeaderLink href="/">Conditions générales d’utilisation</HeaderLink>
+          <HeaderLink href="/">Conditions générales de vente</HeaderLink>
           <HeaderLink href="/">Mentions légales</HeaderLink>
         </div>
-        <div className="h-full w-1/3 flex items-center  justify-end gap-40">
+        <div className="h-full md:w-1/3 flex sm:items-center items-end  justify-end lg:gap-40 gap-16">
           <Link href="/">
             <a>
               <Image
@@ -49,7 +50,7 @@ export function Footer() {
           </Link>
         </div>
       </div>
-      <div className="w-full mx-[160px] max-w-[1600px]">
+      <div className="w-full md:my-0 my-5 max-w-[1600px]">
         <Paragraph>
           Made by <TextLink>Jérémie Barrière</TextLink>
         </Paragraph>

@@ -22,7 +22,7 @@ export function Modal({ isOpen, setIsOpen = () => {}, user, commande, setCommand
 const getTotal = () => {
   let total = 0;
   commande?.Article.forEach(article => {
-    total += article.quantity * article?.Product.price;
+    total += article.quantity * article?.Product?.price;
   } )
   setTotal(total);
 }

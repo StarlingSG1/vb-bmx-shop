@@ -9,7 +9,7 @@ export function Header({ children, className }) {
 
   return (
     <header className={joinClasses(className, "w-full h-[172px] bg-black flex justify-center")}>
-      <div className="h-full max-w-[1600px] mx-[160px] w-full flex items-center justify-between">
+      <div className="h-full max-w-[1600px]  md:mx-16 mx-5 w-full flex items-center justify-between">
         <Link href="/">
           <a>
             <Image
@@ -21,7 +21,7 @@ export function Header({ children, className }) {
             />
           </a>
         </Link>
-        <ul className="flex gap-[75px] items-center">
+        <ul className=" 2xl:gap-[75px] xl:gap-[55px] lg:gap-[40px] md:gap-2.5 sm:flex hidden items-center">
           <li>
             <HeaderLink href="/">Accueil</HeaderLink>
           </li>
@@ -70,5 +70,6 @@ export function Header({ children, className }) {
         {children}
       </div>
     </header>
+    
   );
 }

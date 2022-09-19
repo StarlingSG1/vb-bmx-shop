@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
-import {getAllCommandes, getUserCommandes} from "../../../api/commandes/commandes";
+import {
+  getAllCommandes,
+  getUserCommandes,
+} from "../../../api/commandes/commandes";
 import { useUserContext } from "../../../context";
 import { Modal, TableContent, TableHead } from "../../atoms";
 import { TableCommandes } from "../../molecules/commandes/TableCommande";
 
-export function Commandes({admin = false, setNbCommandes = () => {}}) {
+export function Commandes({
+  admin = false,
+  setNbCommandes = () => {},
+  setCommandeTotal = () => {},
+  setNbArticles = () => {},
+  setNbCommandesEnCours =() => {},
+  setNbCommandesArchive= () => {}
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [commandes, setCommandes] = useState([]);
   const [commande, setCommande] = useState(null);
@@ -12,35 +22,58 @@ export function Commandes({admin = false, setNbCommandes = () => {}}) {
   const { user } = useUserContext();
 
   const getCommandes = async () => {
-   const data =  admin ?
-     await getAllCommandes()  : 
-     await getUserCommandes(user.id);
-    setCommandes(data)
-    admin && setNbCommandes(data.length)
+    const data = admin
+      ? await getAllCommandes()
+      : await getUserCommandes(user.id);
+    setCommandes(data);
+    admin && setNbCommandes(data.length);
   };
 
-    const [date, setDate] = useState(0)
+  const [date, setDate] = useState(0);
 
-  //   const getCommandesTotal = () => {
-  //     let total = 0;
-  //     commande?.Article.forEach(article => {
-  //         total += article?.quantity * article?.Product?.price;
-  //     } )
-  //     setTotal(total);
-  // }
+  const getCommandesTotal = () => {
+    let total = 0;
+    commandes.forEach((commande) => {
+      commande?.Article.forEach((article) => {
+        total += article?.quantity * article?.Product?.price;
+      });
+    });
+    setCommandeTotal(total);
+  };
+
+  const articleLength = () => {
+    let length = 0;
+    commandes.forEach((commande) => {
+      commande?.Article.forEach((article) => {
+        length += article?.quantity;
+      });
+    });
+    setNbArticles(length);
+  };
+
+  const commandesStatus = () => {
+    let enCours = 0;
+    let archive = 0;
+    commandes.forEach((commande) => {
+      (commande.status === "ENCOURS" || commande.status === "RECUPERATION") ? enCours++ : archive++;
+    });
+    setNbCommandesEnCours(enCours);
+    setNbCommandesArchive(archive);
+  }
 
   useEffect(() => {
     getCommandes();
-    // admin && getCommandesTotal()
-  }, []);
+  }, [])
 
   useEffect(() => {
-    console.log(commandes)
+    admin && getCommandesTotal();
+    admin &&  articleLength();
+    admin && commandesStatus();
   }, [commandes]);
+  
 
-  useEffect(() => {
-    getCommandes();
-  }, [commande]);
+  
+
 
   return (
     <div className="grid grid-cols-12 mt-[70px] ">
@@ -58,11 +91,25 @@ export function Commandes({admin = false, setNbCommandes = () => {}}) {
         <tbody>
           {commandes &&
             commandes.map((commande, index) => (
-              <TableCommandes onClick={() => {setIsOpen(true); setCommande(commande)}} id={index} key={commande.id} commande={commande} />
+              <TableCommandes
+                onClick={() => {
+                  setIsOpen(true);
+                  setCommande(commande);
+                }}
+                id={index}
+                key={commande.id}
+                commande={commande}
+              />
             ))}
         </tbody>
       </table>
-      <Modal isOpen={isOpen} commande={commande} setCommande={setCommande} user={user} setIsOpen={setIsOpen} />
+      <Modal
+        isOpen={isOpen}
+        commande={commande}
+        setCommande={setCommande}
+        user={user}
+        setIsOpen={setIsOpen}
+      />
     </div>
   );
 }
