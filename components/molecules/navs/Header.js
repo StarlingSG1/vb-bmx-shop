@@ -9,7 +9,7 @@ export function Header({ children, className }) {
 
   return (
     <header className={joinClasses(className, "w-full h-[172px] bg-black flex justify-center")}>
-      <div className="h-full max-w-[1600px]  md:mx-16 mx-5 w-full flex items-center justify-between">
+      <div className="h-full max-w-[1600px]  md:mx-16 mx-4 w-full flex items-center justify-between">
         <Link href="/">
           <a>
             <Image

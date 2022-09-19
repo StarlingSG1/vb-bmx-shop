@@ -115,7 +115,7 @@ export default function Produit() {
         <PanierButton />
         <ReturnButton href={"/produits"} />
         <div className="md:grid md:grid-cols-12 gap-[50px]">
-          <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 md:grid md:grid-cols-8 gap-[50px] flex flex-col  ">
+          <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 md:grid md:grid-cols-8 md:gap-[50px]  flex flex-col  ">
               <img src={article && article.image}
                 alt={article && article.name}
                 className="md:col-span-4 md:w-auto md:h-auto h-[400px] w-full  object-cover"
@@ -151,9 +151,10 @@ export default function Produit() {
                     </select>
                   </>
                 )}
-                <span className="h-[25px] w-[1px] bg-white"></span>
-                <Price>{article && article.price}€</Price>
+                <span className="h-[25px] w-[1px] bg-white 350:block hidden"></span>
+                <Price className="350:block hidden">{article && article.price}€</Price>
               </div>
+              <Price className="350:hidden block mb-5">Prix : {article && article.price}€</Price>
               {article && article.flocage && (
                 <div className="flex gap-5">
                   <BigParagraph>Flocage : </BigParagraph>
@@ -203,10 +204,10 @@ export default function Produit() {
               </div>
             </div>
           </div>
-          <div className="col-span-12 flex justify-center mt-10">
+          <div className="col-span-12 flex justify-center mt-10 md:mb-0 mb-10">
             <Title className="!text-intermediate">Nos autres produits</Title>
           </div>
-          <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 grid grid-cols-8 gap-[50px]">
+          <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 md:col-span-12 grid  gap-[50px]">
             {/* <div className="col-span-1 flex items-center cursor-pointer">
               <div className="bg-red h-20 w-[66px] flex items-center justify-center">
                 <Image
@@ -217,20 +218,15 @@ export default function Produit() {
                 />
               </div>{" "}
             </div> */}
-            <div className="xl:col-span-8 lg:col-span-10 col-span-12 896:grid-cols-8 md:grid-cols-9 sm:grid-cols-2 gap-[50px] grid">
+            <div className="xl:col-span-8 lg:col-span-10  896:grid-cols-8 md:grid-cols-9 sm:grid-cols-2 xl:grid-cols-12 gap-[50px] sm:grid flex flex-col">
               {products &&
                 products.map(
                   (product, index) =>
                     product.id !== article.id && (
-                      <div key={index} className="896:col-span-2 md:col-span-3  relative">
-                        <div className="h-[265px] relative">
-                          <Image
-                            src={product.image}
-                            layout="fill"
-                            objectFit="cover"
-                            alt="produit"
-                          />
-                        </div>
+                      <div key={index} className="896:col-span-2 md:col-span-3 sm:w-auto col-span-1 relative">     
+                          <img src={product.image}
+                            className=" w-full object-cover sm:h-[265px] h-[300px]"
+                            alt="produit"/>
                         <Paragraph className={"my-2.5"}>
                           {product.name}
                         </Paragraph>

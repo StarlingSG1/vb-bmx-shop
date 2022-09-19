@@ -11,7 +11,7 @@ export function Template({children, title = "VB BMX", hasReturn = false, panier 
     return (
         <>
             <Header/>
-                <main className={`w-full   px-6 ${panier ? "md:pt-20 pt-32" : "pt-20"}`} style={{minHeight: "calc(100vh - 539px)"}}>
+                <main className={`w-full   px-4 ${panier ? "md:pt-20 pt-32" : "pt-20"}`} style={{minHeight: "calc(100vh - 539px)"}}>
                     <div className={`w-full flex justify-center ${hasReturn ? "mb-8" : "mb-20"}`}>
                         <Title className={"text-center"}>{title}</Title>
                     </div>
