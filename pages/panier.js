@@ -58,7 +58,7 @@ export default function Panier() {
   return (
     <>
       <Head>
-        <title>Shop - Panier</title>
+        <title>Panier</title>
       </Head>
       <Template title="Panier">
         <div className="grid grid-cols-12 ">

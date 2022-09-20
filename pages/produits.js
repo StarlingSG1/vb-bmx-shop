@@ -21,7 +21,7 @@ export default function Produit() {
   return (
     <>
       <Head>
-        <title>Shop - Nos produits</title>
+        <title>Nos produits</title>
       </Head>
       <Template title="Nos produits">
         <PanierButton />

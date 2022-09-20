@@ -70,14 +70,14 @@ export function Profile() {
       >
         {!password && (
           <div
-            className={`flex items-center justify-between ${
-              update && "gap-[50px]"
+            className={`flex 500:flex-row flex flex-col 500:items-center 500:justify-between ${
+              update && "500:gap-[50px] gap-5"
             }`}
           >
             {update ? (
               <>
-                <Input className={"!w-1/2"} placeholder="Prénom" onChange={(e) => setUserData({...userData, firstName: e.target.value})} defaultValue={user && user.firstName} />
-                <Input className={"!w-1/2"} placeholder="Nom" onChange={(e) => setUserData({...userData, lastName: e.target.value})} defaultValue={user && user.lastName} />
+                <Input className={"!500:w-1/2 !w-full"} placeholder="Prénom" onChange={(e) => setUserData({...userData, firstName: e.target.value})} defaultValue={user && user.firstName} />
+                <Input className={"500:!w-1/2 !w-full"} placeholder="Nom" onChange={(e) => setUserData({...userData, lastName: e.target.value})} defaultValue={user && user.lastName} />
               </>
             ) : (
               <>
@@ -128,7 +128,7 @@ export function Profile() {
 
       {update ? (
         <>
-          <div className="flex justify-end mt-[5px]">
+          <div className="flex justify-end md:mt-[5px] mt-2.5">
             <p
               onClick={() => {
                 toPassword();
@@ -138,7 +138,7 @@ export function Profile() {
               changer mon mot de passe
             </p>
           </div>
-          <div className="flex justify-between px-[79px] mt-10">
+          <div className="flex justify-between md:px-[79px] mt-10">
             <BorderedButton
               onClick={() => {
                 returnUpdate();
@@ -156,7 +156,7 @@ export function Profile() {
           </div>
         </>
       ) : password ? (
-        <div className="flex justify-between px-[79px] mt-10">
+        <div className="flex justify-between md:px-[79px] mt-10">
           <BorderedButton
             onClick={() => {
               returnPassword();

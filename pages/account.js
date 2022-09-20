@@ -10,11 +10,6 @@ import { useUserContext } from "../context";
 export default function Account() {
   const [commandes, setCommandes] = useState(0);
 
-  // get user from context
-
-  const { user  } = useUserContext();
-
-
   return (
     <>
       <Head>

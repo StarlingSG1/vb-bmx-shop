@@ -27,7 +27,7 @@ export function Header({ children, className }) {
             </a>
           </Link>
           <svg width="40" onClick={() => { setMenuToggle(true) }} className="md:hidden mr-9" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5.5 24.5H26.5M5.5 16.5H26.5M5.5 8.5H26.5" stroke="#F4F5F5" stroke-Wdth="3" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M5.5 24.5H26.5M5.5 16.5H26.5M5.5 8.5H26.5" stroke="#F4F5F5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
 
           <ul className=" 2xl:gap-[75px] xl:gap-[55px] lg:gap-[40px] md:gap-2.5 md:flex hidden items-center">

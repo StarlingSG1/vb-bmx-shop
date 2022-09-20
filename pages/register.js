@@ -32,14 +32,14 @@ export default function Register() {
   return (
     <>
       <Head>
-        <title>Register</title>
+        <title>Inscription</title>
       </Head>
       <Template title="Inscription">
         <div className="sm:w-[593px] w-full m-auto">
           <div className=" gap-4 flex flex-col items-center relative bg-blue z-10">
             <span className="absolute top-0 left-0 right-0 bottom-0 bg-blue -z-10"></span>
             <span className="w-[284px] h-[284px] absolute -z-20  rounded-full border-8 border-red -top-[60px] -left-[109px]"></span>
-            <div className=" flex sm:flex-row flex-col items-center sm:justify-between sm:gap-0 gap-4  w-full">
+            <div className=" flex sm:flex-row flex-col items-center sm:justify-between sm:gap-0 gap-4 w-full">
               <Input
                 type="text"
                 className={"sm:!w-[284px] "}

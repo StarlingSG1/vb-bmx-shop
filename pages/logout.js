@@ -25,10 +25,10 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Déconnexion</title>
       </Head>
-      <Template title="Deconnexion">
-        
+      <Template title="Déconnexion">
+        <Paragraph>Vous êtes déconnecté</Paragraph>
       </Template>
     </>
   );
