@@ -21,13 +21,9 @@ export function PanierArticle({
     const index = panierArray.findIndex(
       (item) => item.id === article.id && item.size === article.size
     );
-    console.log(index);
-
     panierArray.splice(index, 1);
     localStorage.setItem("vb-bmx-panier", JSON.stringify(panierArray));
     setPanierContent(panierArray);
-
-  
     // const newPanierContent = panierContent.filter(
     //   (item) => item.id !== article.id
     // );
@@ -43,16 +39,15 @@ export function PanierArticle({
     localStorage.setItem("vb-bmx-panier", JSON.stringify(newPanier));
     const panier = localStorage.getItem("vb-bmx-panier");
     const panierArray = panier ? JSON.parse(panier) : [];
-    setPanierContent(panierArray);
-    
-
-    
+    setPanierContent(panierArray);  
   }
 
   const handlePrice = () => {
     const price = article.price * article.quantity;
     setArticlePrice(price);
   }
+
+  
 
   useEffect(() => {
     handlePrice()
@@ -67,7 +62,7 @@ export function PanierArticle({
           <a>
             <Image
               src={article.image}
-              className="absolute object-contain "
+              className="absolute object-cover "
               layout="fill"
               alt={article.name}
             />

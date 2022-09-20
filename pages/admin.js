@@ -42,7 +42,7 @@ export default function Admin() {
         <title>Shop - Espace Admin</title>
       </Head>
       <Template title="Espace admin">
-        <div className="grid grid-cols-12 gap-[50px]">
+        <div className="grid xl:grid-cols-12 lg:grid-cols-10 sm:grid-cols-12 grid-cols-2  xl:px-0 md:px-12 gap-[50px]">
           <Card title="Total de commande" icon={"/assets/img/user.svg"}>
             {stats(nbCommandes)}
           </Card>

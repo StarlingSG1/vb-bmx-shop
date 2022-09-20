@@ -1,10 +1,17 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { orderPanier } from "../api/order/order";
 import { BigParagraph, Button, Paragraph } from "../components/atoms";
 import { PanierArticle, Template } from "../components/molecules";
+import { useUserContext } from "../context";
 
 export default function Panier() {
+
+  const  { user } = useUserContext();
+  const navigate = useRouter();
+
   const [articles, setArticles] = useState([]);
   const [panierContent, setPanierContent] = useState([]);
   const [total, setTotal] = useState(0);
@@ -27,6 +34,16 @@ export default function Panier() {
     SetNbArticles(theQuantity);
   }
 
+  const sendOrder = async () => {
+    if(user){
+      const response = await orderPanier(panierContent);
+      if(!response.error){
+        navigate.push(response.content.url)
+      }
+    } else {
+      navigate.push("/login")
+    }
+  }
 
   useEffect(() => {
     // get json content from localstorage
@@ -77,7 +94,7 @@ export default function Panier() {
                 </div>
                 <Button
                   onClick={() => {
-                    alert("Redirection vers Stripe -> Paiement commande");
+                    sendOrder()
                   }}
                 >
                   Commander

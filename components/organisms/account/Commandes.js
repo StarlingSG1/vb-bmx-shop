@@ -77,15 +77,15 @@ export function Commandes({
 
   return (
     <div className="grid grid-cols-12 mt-[70px] ">
-      <table className="col-span-10 col-start-2 ">
+      <table className="xl:col-span-10 col-span-12 xl:col-start-2 xl:mx-0 md:mx-12 ">
         <thead className="border-b-[5px] border-l-[5px] border-red ">
           <tr>
             <TableHead>ID</TableHead>
             <TableHead>N° de commande</TableHead>
-            <TableHead>Nb Articles</TableHead>
-            <TableHead>Total</TableHead>
+            <TableHead className="md:block hidden">Nb Articles</TableHead>
+            <TableHead className="350:table-cell hidden">Total</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Date</TableHead>
+            <TableHead className="500:table-cell hidden">Date</TableHead>
           </tr>
         </thead>
         <tbody>
@@ -97,7 +97,7 @@ export function Commandes({
                   setCommande(commande);
                 }}
                 id={index}
-                key={commande.id}
+                key={index}
                 commande={commande}
               />
             ))}

@@ -42,10 +42,10 @@ export function TableCommandes({onClick = () => {}, setIsOpen  = () => {}, id, c
         <tr onClick={onClick} className="h-[60px] cursor-pointer hover:bg-red duration-200 odd:bg-black">
                   <TableContent>{id + 1}</TableContent>
                   <TableContent>{commande.number}</TableContent>
-                  <TableContent>{articleQuantity} {articleQuantity > 1 ? "articles" : "article"} </TableContent>
-                  <TableContent>{total}€</TableContent>
+                  <TableContent className="md:table-cell hidden">{articleQuantity} {articleQuantity > 1 ? "articles" : "article"} </TableContent>
+                  <TableContent className="350:table-cell hidden">{total}€</TableContent>
                   <TableContent>{commande?.status}</TableContent>
-                  <TableContent>{date}</TableContent>
+                  <TableContent className="500:table-cell hidden">{date}</TableContent>
                 </tr>
     )
 }

@@ -22,29 +22,29 @@ export default function Account() {
       </Head>
       <Template title="Mon compte">
         {
-          <div className="w-[500px] m-auto ">
-          <div className="w-full flex justify-between relative bg-transparent h-[60px] border-2 border-red rounded-full">
+          <div className="md:w-[500px] 500:w-[400px]  m-auto ">
+          <div className="500:w-full flex justify-between w-[260px] m-auto relative bg-transparent h-[60px] border-2 border-red rounded-full">
             <button
-              className="px-[65px] z-10 bg-transparent rounded-full "
+              className="md:px-[65px] 500:px-[30px] px-4 z-10 bg-transparent rounded-full "
               onClick={() => {
                 setCommandes(0);
               }}
               >
-              <Paragraph>Mon profil</Paragraph>
+              <Paragraph className={"500:text-base text-sm min-w-max"}>Mon profil</Paragraph>
             </button>
             <button
-              className="px-[65px] z-10 bg-transparent rounded-full"
+              className="md:px-[65px] 500:px-[30px] px-4 z-10 bg-transparent rounded-full"
               onClick={() => {
                 setCommandes(1);
               }}
               >
-              <Paragraph>Mes commandes</Paragraph>
+              <Paragraph className={"500:text-base text-sm min-w-max"}>Mes commandes</Paragraph>
             </button>
             <span
               className={`absolute h-full rounded-full bg-red duration-200 ${
                 commandes
-                ? "w-[250px] translate-x-[250px]"
-                : "w-[205px] -left-1"
+                ? "md:w-[250px] 500:w-[189px] w-[134px] translate-x-[124px] md:translate-x-[250px] 500:translate-x-[209px]"
+                : "md:w-[205px] 500:w-[144px] w-[103px] left-0"
               } `}
               ></span>
           </div>

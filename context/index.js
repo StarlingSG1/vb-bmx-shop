@@ -56,6 +56,7 @@ const UserContextProvider = ({ children }) => {
   const stateValues = useMemo(
     () => ({
       user,
+      setUser,
       loading,
       setLoading,
       loginTheUser,
@@ -67,7 +68,7 @@ const UserContextProvider = ({ children }) => {
       setStatus,
       setArticleId,
     }),
-    [user, loading, panier, setLoading, verifyTheToken, status, articleId]
+    [user, loading, panier, setUser, setLoading, verifyTheToken, status, articleId]
   );
 
   return (

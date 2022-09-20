@@ -64,7 +64,7 @@ export default function Produit() {
   const addToCart = async (article) => {
     const panier = localStorage.getItem("vb-bmx-panier");
     const panierArray = panier ? JSON.parse(panier) : [];
-    const item = { id:  article.id, name: article.name, price: article.price, size: sizeValue, flocage: flocageValue, image: article.image, slug: article.slug, quantity: 1 };
+    const item = { id:  article.id, name: article.name, price: article.price, size: sizeValue, flocage: flocageValue, image: article.image, slug: article.slug, quantity: 1, stripe : article.stripe_id };
     setModalItem(item);
     const toAdd = true
     panierArray.forEach((article) => {
