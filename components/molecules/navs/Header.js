@@ -37,9 +37,9 @@ export function Header({ children, className }) {
             <li>
               <HeaderLink href="/produits">Nos produits</HeaderLink>
             </li>
-            <li>
+            {/* <li>
               <HeaderLink href="/adhesion">Adhésion</HeaderLink>
-            </li>
+            </li> */}
             <span className="w-[1px] h-[35px] bg-white"></span>
             {status !== "connected" ? (
               <>

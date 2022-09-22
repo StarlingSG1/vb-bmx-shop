@@ -4,9 +4,9 @@ import { Template } from "../../components/molecules";
 
 export default function Success(){
 
-    useEffect(() => {
-        localStorage.removeItem("vb-bmx-panier");
-    } ,[])
+    // useEffect(() => {
+    //     localStorage.removeItem("vb-bmx-panier");
+    // } ,[])
     return (
         <>
         <Head>
