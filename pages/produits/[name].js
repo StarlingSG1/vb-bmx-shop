@@ -24,17 +24,19 @@ import { useUserContext } from "../../context";
 export default function Produit() {
   // call context
 
-  const { panier, setPanier = () => {} } = useUserContext();
+  const { panier, setPanier = () => { } } = useUserContext();
 
   const [isOpen, setIsOpen] = useState(false);
   const [boolFlocageYes, setBoolFlocageYes] = useState(false);
   const [boolFlocageNo, setBoolFlocageNo] = useState(true);
   const [article, setArticle] = useState({});
   const [sizeValue, setSizeValue] = useState(null);
+  const [colorValue, setColorValue] = useState(null);
   const [flocageValue, setFlocageValue] = useState(null);
   const [modalItem, setModalItem] = useState(null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
+  const [panierLength, setPanierLength] = useState(0);
 
   const fetchProducts = async () => {
     const products = await getAllFrom("products");
@@ -47,7 +49,8 @@ export default function Produit() {
   }, []);
 
   useEffect(() => {
-  handleTotal()}, [isOpen]);
+    handleTotal()
+  }, [isOpen]);
 
 
 
@@ -64,21 +67,26 @@ export default function Produit() {
   const addToCart = async (article) => {
     const panier = localStorage.getItem("vb-bmx-panier");
     const panierArray = panier ? JSON.parse(panier) : [];
-    const item = { id:  article.id, name: article.name, price: article.price, size: sizeValue, flocage: flocageValue, image: article.image, slug: article.slug, quantity: 1, stripe : article.stripe_id };
+    const item = { id: article.id, name: article.name, price: article.price, size: sizeValue, flocage: flocageValue, color: colorValue, image: article.image, slug: article.slug, quantity: 1, stripe: article.stripe_id };
     setModalItem(item);
     const toAdd = true
     panierArray.forEach((article) => {
-      if(article.id === item.id && article.size === item.size && article.flocage === item.flocage){
+      if (article.id === item.id && article.size === item.size && article.flocage === item.flocage && article.color === item.color) {
         article.quantity += 1;
         toAdd = false;
       }
     }
     );
-    if(toAdd === true){
+    if (toAdd === true) {
       panierArray.push(item);
-    }       
+    }
     localStorage.setItem("vb-bmx-panier", JSON.stringify(panierArray));
     setPanier(panierArray)
+    var theQuantity = 0;
+    panierArray.forEach((article) => {
+      theQuantity += article.quantity 
+    });
+    setPanierLength(theQuantity);
     setIsOpen(true);
   };
 
@@ -106,6 +114,8 @@ export default function Produit() {
 
   
 
+
+
   return (
     <>
       <Head>
@@ -116,10 +126,10 @@ export default function Produit() {
         <ReturnButton href={"/produits"} />
         <div className="md:grid md:grid-cols-12 gap-[50px]">
           <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 md:grid md:grid-cols-8 md:gap-[50px]  flex flex-col  ">
-              <img src={article && article.image}
-                alt={article && article.name}
-                className="md:col-span-4 md:w-auto md:h-auto h-[400px] w-full  object-cover"
-                />
+            <img src={article && article.image}
+              alt={article && article.name}
+              className="md:col-span-4 md:w-auto md:h-auto h-[400px] w-full  object-cover"
+            />
             <div className="col-span-4 pt-4">
               <IntermediateParagraph className={"text-center"}>
                 {article && article.name}
@@ -130,27 +140,61 @@ export default function Produit() {
               {/* Séparator */}
               <div className="h-[2px] w-full bg-red mb-[30px]"></div>
               <div className="flex justify-between items-center mb-5">
-                {article?.Size?.length === 0 ||
-                (article?.Size &&
-                  article?.Size[0] &&
-                  article?.Size[0]?.name === "Unique") ? (
-                  <BigParagraph className={"flex items-center gap-2.5"}>
-                    Taille :
-                    <Paragraph className={"w-[200px]"}>Unique</Paragraph>
-                  </BigParagraph>
-                ) : (
-                  <>
-                    <BigParagraph>Taille :</BigParagraph>
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-center gap-4">
+
+                    {article?.Size?.length === 0 ||
+                      (article?.Size &&
+                        article?.Size[0] &&
+                        article?.Size[0]?.name === "Unique") ? (
+                      <BigParagraph className={"flex items-center gap-2.5"}>
+                        Taille :
+                        <Paragraph className={"w-[200px]"}>Unique</Paragraph>
+                      </BigParagraph>
+                    ) : (
+                      <>
+                        <BigParagraph>Taille :</BigParagraph>
+                        <select className="h-[25px] w-[200px] pl-2" type="select" onChange={(e) => { setSizeValue(e.target.value) }}>
+                          <option value={null}>Choisir une taille</option>
+                          {article &&
+                            article.Size &&
+                            article.Size.map((size, index) => (
+                              <option key={index} value={size.name}>{size.name}</option>
+                            ))}
+                        </select>
+                      </>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-4">
+                    {article?.Color?.length > 0 &&
+                      <>
+                        <BigParagraph>Couleur :</BigParagraph>
+                        <select className="h-[30px] w-[200px] pl-2" type="select" onChange={(e) => { setColorValue(e.target.value) }}>
+                          <option value={null}>Choisir une couleur</option>
+                          {article &&
+                            article.Color &&
+                            article.Color.map((color, index) => (
+                              <option key={index} value={color.name}>{color.name}</option>
+                            ))}
+                        </select>
+                      </>
+                    }
+                  </div>
+                </div>
+                {/* {article?.Color?.length > 0 &&
+                <>
+                    <BigParagraph>Couleur :</BigParagraph>
                     <select className="h-[25px] w-[200px] pl-2" type="select" onChange={(e) => {setSizeValue(e.target.value)}}>
-                      <option value={null}>Choisir une taille</option>
+                      <option value={null}>Choisir une couleur</option>
                       {article &&
-                        article.Size &&
-                        article.Size.map((size, index) => (
-                          <option key={index} value={size.name}>{size.name}</option>
-                        ))}
+                        article.Color &&
+                        article.Color.map((color, index) => (
+                          <option key={index} value={color.name}>{color.name}</option>
+                          ))}
                     </select>
                   </>
-                )}
+                } */}
+
                 <span className="h-[25px] w-[1px] bg-white 350:block hidden"></span>
                 <Price className="350:block hidden">{article && article.price}€</Price>
               </div>
@@ -165,9 +209,8 @@ export default function Produit() {
                     className="flex items-center gap-2.5 cursor-pointer"
                   >
                     <div
-                      className={`h-4 w-4 ${
-                        boolFlocageYes ? "bg-red" : "bg-white"
-                      } rounded-full`}
+                      className={`h-4 w-4 ${boolFlocageYes ? "bg-red" : "bg-white"
+                        } rounded-full`}
                     ></div>
                     <Paragraph>Oui</Paragraph>
                   </div>
@@ -178,9 +221,8 @@ export default function Produit() {
                     className="flex items-center gap-2.5 cursor-pointer"
                   >
                     <div
-                      className={`h-4 w-4 ${
-                        !boolFlocageNo ? "bg-white" : "bg-red"
-                      } rounded-full`}
+                      className={`h-4 w-4 ${!boolFlocageNo ? "bg-white" : "bg-red"
+                        } rounded-full`}
                     ></div>
                     <Paragraph>Non</Paragraph>
                   </div>
@@ -188,7 +230,7 @@ export default function Produit() {
                     <input
                       className="h-[25px] w-[200px] pl-2.5"
                       placeholder="Flocage"
-                      onChange={(e) => {setFlocageValue(e.target.value)}}
+                      onChange={(e) => { setFlocageValue(e.target.value) }}
                     />
                   )}
                 </div>
@@ -223,10 +265,10 @@ export default function Produit() {
                 products.map(
                   (product, index) =>
                     product.id !== article.id && (
-                      <div key={index} className="896:col-span-2 md:col-span-3 sm:w-auto col-span-1 relative">     
-                          <img src={product.image}
-                            className=" w-full object-cover sm:h-[265px] h-[300px]"
-                            alt="produit"/>
+                      <div key={index} className="896:col-span-2 md:col-span-3 sm:w-auto col-span-1 relative">
+                        <img src={product.image}
+                          className=" w-full object-cover sm:h-[265px] h-[300px]"
+                          alt="produit" />
                         <Paragraph className={"my-2.5"}>
                           {product.name}
                         </Paragraph>
@@ -249,7 +291,7 @@ export default function Produit() {
           </div>
         </div>
       </Template>
-      <PanierModal isOpen={isOpen} article={article} modalItem={modalItem} setIsOpen={setIsOpen} total={total} />
+      <PanierModal isOpen={isOpen} article={article} modalItem={modalItem} panierLength={panierLength} setIsOpen={setIsOpen} total={total} />
     </>
   );
 }

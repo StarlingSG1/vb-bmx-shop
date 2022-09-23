@@ -18,6 +18,5 @@ export async function getOneFromBody(item, body) {
     const response = await axios.post(
         `http://localhost:8080/api/${item}/`, body
     );
-    console.log(response)
     return response.data;
 }

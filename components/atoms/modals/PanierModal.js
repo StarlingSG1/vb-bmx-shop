@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import {
   RoundedIcon,
   Paragraph,
@@ -11,7 +12,9 @@ import {
 } from "../../atoms";
 import { SmallArticle } from "../../molecules";
 
-export function PanierModal({ isOpen, setIsOpen = () => {}, article, modalItem, total }) {
+export function PanierModal({ isOpen, setIsOpen = () => {}, article, modalItem, total, panierLength}) {
+
+
   return (
     <>
       {isOpen && (
@@ -57,7 +60,7 @@ export function PanierModal({ isOpen, setIsOpen = () => {}, article, modalItem, 
                 <BigParagraph className="text-blue mb-3">
                   MON PANIER :
                 </BigParagraph>
-                <Paragraph className="text-blue mb-2.5">X article</Paragraph>
+                <Paragraph className="text-blue mb-2.5">{panierLength > 1 ? panierLength + " " + "articles" : panierLength + " " + "article"}</Paragraph>
                 <div className="flex items-center  gap-2.5">
                   <Price className="text-blue">Total :</Price>
                   <Price className="text-blue">{total}€</Price>

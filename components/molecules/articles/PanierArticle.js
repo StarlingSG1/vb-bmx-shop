@@ -32,7 +32,7 @@ export function PanierArticle({
   };
 
   const changeQuantity = (payload) => {
-    const index = panierContent.findIndex((item) => item.id === payload.id);
+    const index = panierContent.findIndex((item) => item.id === payload.id && item.size === payload.size && item.flocage === payload.flocage && item.color === payload.color);
     const newArticle = { ...panierContent[index], quantity: payload.quantity};
     const newPanier = panierContent
     newPanier[index] = newArticle;
@@ -57,7 +57,7 @@ export function PanierArticle({
 
   return (
     <>
-      <div className="relative aspect-square mb-6 col-span-2 mr-[15px]">
+      <div className="relative aspect-square mb-8 col-span-2 mr-[15px]">
         <Link href={"/produits/" + article.slug}>
           <a>
             <Image
@@ -69,44 +69,57 @@ export function PanierArticle({
           </a>
         </Link>
       </div>
-      <div className={"col-span-2 flex flex-col gap-5"}>
+      <div className={"col-span-3 flex flex-col gap-5 pr-6  "}>
         <BigParagraph className={"mb-2.5"}>{article.name}</BigParagraph>
         <Paragraph>
           Taille : {article?.size != null ? article?.size : "Unique"}
         </Paragraph>
+        <div className="flex items-center gap-4">
+
         <Paragraph>
           Quantité :
+          </Paragraph>
           <select
             className="h-[25px] w-[200px] pl-2 text-black"
             type="select"
-            onChange={(e) => {changeQuantity({id: article.id, quantity: parseInt(e.target.value, 10)})}}
-          >
+            onChange={(e) => {changeQuantity({id: article.id, size: article.size, flocage: article.flocage, color: article.color, quantity: parseInt(e.target.value, 10)})}}
+            >
             {arrayNumber.map((number) => (
               <>
               {number == article.quantity ? (
                 <option key={number} value={number} selected >{number}</option>
-              ) : (
-                <option key={number} value={number}>{number}</option>
-              )                
-                
-              }
+                ) : (
+                  <option key={number} value={number}>{number}</option>
+                  )                
+                  
+                }
               </>
             ))}
           </select>
-        </Paragraph>
+        </div>
+        <div className="flex items-center gap-5">
+
+        {article?.color !== null && (
+          <Paragraph>Couleur : {article.color}</Paragraph>
+          )}
+          {article?.color && article?.flocage && <div className="h-[25px] w-[1px] bg-white"></div>}
         {article?.flocage !== null && (
           <Paragraph>Flocage : {article.flocage}</Paragraph>
-        )}
+          )}
+          </div>
         <Price>{articlePrice} €</Price>
       </div>
+      <div className="col-start-6">
+
       <p
         onClick={() => {
           removeOneFromArray();
         }}
-        className="font-lato col-start-6 cursor-pointer  underline text-white"
-      >
+        className="font-lato  cursor-pointer  underline text-white"
+        >
         supprimer article
       </p>
+        </div>
     </>
   );
 }

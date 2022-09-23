@@ -8,7 +8,7 @@ import { Commandes, Profile } from "../components/organisms";
 import { useUserContext } from "../context";
 
 export default function Account() {
-  const [commandes, setCommandes] = useState(0);
+  const [commandes, setCommandes] = useState(false);
 
   return (
     <>
@@ -16,13 +16,13 @@ export default function Account() {
         <title>Mon compte</title>
       </Head>
       <Template title="Mon compte">
-        {
+        
           <div className="md:w-[500px] 500:w-[400px]  m-auto ">
           <div className="500:w-full flex justify-between w-[260px] m-auto relative bg-transparent h-[60px] border-2 border-red rounded-full">
             <button
               className="md:px-[65px] 500:px-[30px] px-4 z-10 bg-transparent rounded-full "
               onClick={() => {
-                setCommandes(0);
+                setCommandes(false);
               }}
               >
               <Paragraph className={"500:text-base text-sm min-w-max"}>Mon profil</Paragraph>
@@ -30,7 +30,7 @@ export default function Account() {
             <button
               className="md:px-[65px] 500:px-[30px] px-4 z-10 bg-transparent rounded-full"
               onClick={() => {
-                setCommandes(1);
+                setCommandes(true);
               }}
               >
               <Paragraph className={"500:text-base text-sm min-w-max"}>Mes commandes</Paragraph>
@@ -43,10 +43,10 @@ export default function Account() {
               } `}
               ></span>
           </div>
-          {commandes === 0 && <Profile />}
+          {commandes === false && <Profile />}
         </div>
-        }
-        {commandes === 1 && (
+        
+        {commandes === true && (
          <Commandes/>
         )}
       </Template>

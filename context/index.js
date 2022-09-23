@@ -18,7 +18,6 @@ const UserContextProvider = ({ children }) => {
     setLoading(true);
     setStatus("pending");
     const user = await loginUser(payload);
-    console.log(user.error);
     // if user, set token in localstorage
     if (!user.error) {
       localStorage.setItem("vb-bmx-token", user.token);

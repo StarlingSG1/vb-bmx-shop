@@ -36,7 +36,7 @@ export default function Panier() {
 
   const sendOrder = async () => {
     if(user){
-      const response = await orderPanier(panierContent);
+      const response = await orderPanier(user.id, panierContent);
       if(!response.error){
         navigate.push(response.content.url)
       }

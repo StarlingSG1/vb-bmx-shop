@@ -29,8 +29,6 @@ export function Commandes({
     admin && setNbCommandes(data.length);
   };
 
-  const [date, setDate] = useState(0);
-
   const getCommandesTotal = () => {
     let total = 0;
     commandes.forEach((commande) => {
@@ -71,10 +69,6 @@ export function Commandes({
     admin && commandesStatus();
   }, [commandes]);
   
-
-  
-
-
   return (
     <div className="grid grid-cols-12 mt-[70px] ">
       <table className="xl:col-span-10 col-span-12 xl:col-start-2 xl:mx-0 md:mx-12 ">

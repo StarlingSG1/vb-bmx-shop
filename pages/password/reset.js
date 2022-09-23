@@ -17,6 +17,8 @@ export default function Reset() {
       </Head>
       <Template title="Mot de passe oublié" hasReturn={true}>
         <ReturnButton />
+        <form onSubmit={(e) => { alert("envoyer le mail"); e.preventDefault() }}>
+
         <div className="flex items-center flex-col gap-5">
           <BigParagraph>
             Renseigner votre adresse mail pour recevoir un mail de changement de{" "}
@@ -24,9 +26,10 @@ export default function Reset() {
           </BigParagraph>
           <Input type="email" placeholder={"Adresse mail"} />
           <div className="flex justify-end mt-2.5 w-[593px]">
-            <Button>Envoyer email</Button>
+            <Button type="submit">Envoyer email</Button>
           </div>
         </div>
+        </form>
       </Template>
     </>
   );

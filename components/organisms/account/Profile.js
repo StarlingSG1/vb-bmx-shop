@@ -41,7 +41,6 @@ export function Profile() {
   const validePassword = async () => {
     passwordData.token = localStorage.getItem("vb-bmx-token");
     const response = await selfPasswordUpdate(passwordData)
-    console.log(response)
 
     localStorage.setItem("vb-bmx-token", response.newToken);
     verifyTheToken()

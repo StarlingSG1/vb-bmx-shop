@@ -11,12 +11,15 @@ export function PanierButton() {
 
   useEffect(() => {
     // if localstorage is empty, set panierLength to 0
-    if (localStorage.getItem("vb-bmx-panier") === null) {
-      setPanierLength(0);
-    } else {
-      // else, set panierLength to the length of the localstorage
-      setPanierLength(JSON.parse(localStorage.getItem("vb-bmx-panier")).length);
-    }
+    const thePanier = localStorage.getItem("vb-bmx-panier");
+    const panierArray = thePanier ? JSON.parse(thePanier) : [];
+    console.log(panierArray)
+    var theQuantity = 0;
+    panierArray.forEach((article) => {
+      theQuantity += article.quantity 
+    });
+    setPanierLength(theQuantity);
+
       
   }, []);
 
@@ -24,14 +27,21 @@ export function PanierButton() {
     if(localStorage.getItem("vb-bmx-panier") === null) {
       localStorage.setItem("vb-bmx-panier", JSON.stringify([]))
     }
-    setPanierLength(JSON.parse(localStorage.getItem("vb-bmx-panier")).length)
+    const thePanier = localStorage.getItem("vb-bmx-panier");
+    const panierArray = thePanier ? JSON.parse(thePanier) : [];
+    console.log(panierArray)
+    var theQuantity = 0;
+    panierArray.forEach((article) => {
+      theQuantity += article.quantity 
+    });
+    setPanierLength(theQuantity);
   }, [panier])
 
 
   return (
     <div className="2xl:right-[160px] right-10 absolute top-[222px] ">
       <Link href="/panier">
-        <a className="w-[160px] flex items-center relative col-start-10 h-[50px] group duration-200 text-white font-roboto font-medium gap-[14px] pr-2 group hover:bg-white hover:text-red">
+        <a className="min-w-[160px] flex items-center relative col-start-10 h-[50px] group duration-200 text-white font-roboto font-medium gap-[14px] pr-2 group hover:bg-white hover:text-red">
           <div className="w-[10px] h-[50px] bg-red duration-200  "></div>
           <svg
             width="35"

@@ -8,6 +8,9 @@ export default function Adhesion(){
         <title>Adhésion</title>
       </Head>
       <Template title="Adhésion">
+        <div className="flex items-center justify-center">
+          <p className="text-white">Vous pourrez bientot vous inscrire au club ici ! Un peu de patience...</p>
+        </div>
         </Template>
         </>
     )
