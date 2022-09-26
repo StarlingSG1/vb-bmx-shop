@@ -128,7 +128,7 @@ export default function Produit() {
           <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 md:grid md:grid-cols-8 md:gap-[50px]  flex flex-col  ">
             <img src={article && article.image}
               alt={article && article.name}
-              className="md:col-span-4 md:w-auto md:h-auto h-[400px] w-full  object-cover"
+              className="md:col-span-4 md:w-auto md:h-auto h-[400px] m-auto 500:w-2/3  aspect-square object-cover"
             />
             <div className="col-span-4 pt-4">
               <IntermediateParagraph className={"text-center"}>

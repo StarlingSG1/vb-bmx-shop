@@ -64,7 +64,7 @@ const changeStatus = async () => {
             <div className="w-full flex justify-between  350:items-center items-end 500:pr-[25px] pr-4">
               <div className="flex  500:flex-row flex-col 500:items-center md:w-[653px] w-full justify-between md:pr-0 500:pr-10 350:pr-5 500:h-[98px] border-b-2 border-red 500:pl-[30px] pl-4">
                 <SubTitle className="text-blue md:block hidden ">COMMANDE :</SubTitle>
-                <SubTitle className="text-blue 500:text-subtitle text-2xl">{commande?.number}</SubTitle>
+                <SubTitle className="text-blue 500:!text-subtitle !text-2xl">{commande?.number}</SubTitle>
                 <BigParagraph className="italic text-blue">
                   {date}
                 </BigParagraph>
@@ -93,7 +93,7 @@ const changeStatus = async () => {
                 <Paragraph className="text-blue">Total : {total}€</Paragraph>
                 {/* Remplacer le "en cours" par la valeur du status , dans la version non admin */}
                 {/* <Paragraph className="text-blue">Status : en cours</Paragraph> */}
-                <div className="flex sm:flex-row 500:flex-col 350:flex-row flex-col  md:items-center gap-2">
+                <div className="flex sm:flex-row  flex-col  md:items-center gap-2">
                   <Paragraph className="text-blue">Status :</Paragraph>
                   {user?.role !== "USER" ? (
                     <select
@@ -122,14 +122,14 @@ const changeStatus = async () => {
                     commande?.status
                   )}
                   {user?.role !== "USER" && commandStatus != commande?.status && (
-                    <>
+                    <div className="flex items-center gap-4">
                       <p onClick={() => changeStatus()} className="cursor-pointer font-lato underline">
                         Valider
                       </p>
                       <p onClick={(() => setCommandStatus(commande?.status))} className="cursor-pointer font-lato italic text-red">
                         Annuler
                       </p>
-                    </>
+                    </div>
                   )}
                 </div>
               </div>
