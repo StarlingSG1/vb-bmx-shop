@@ -61,9 +61,9 @@ export default function Panier() {
         <title>Panier</title>
       </Head>
       <Template title="Panier">
-        <div className="grid grid-cols-12 ">
-          <div className=" col-span-8 col-start-3 grid grid-cols-8 gap-[50px]">
-            <div className="border-r-2 border-red col-span-6 grid grid-cols-6 pr-[50px]">
+        <div className="md:grid md:grid-cols-12  ">
+          <div className=" 2xl:col-span-8 xl:col-span-10 md:col-span-12 2xl:col-start-3 xl:col-start-2 md:grid md:grid-cols-8 2xl:px-0 md:px-12 gap-[50px] flex flex-col-reverse">
+            <div className="md:border-r-2 border-red border-t-2  md:border-t-0 md:col-span-6 500:grid md:grid-cols-6 500:grid-cols-2 pt-5 md:pt-0 xl:pr-[50px]">
               {/*  map articles */}
               {panierContent?.map((article, index) => (
                 <PanierArticle
@@ -78,8 +78,9 @@ export default function Panier() {
                 <BigParagraph>Votre panier est vide</BigParagraph>
               )}
             </div>
-            <div className="col-span-2  ">
+            <div className="md:col-span-2 pl-5 ">
               <div className="w-full sticky top-10">
+
                 <BigParagraph className={"underline mb-10"}>
                   RÉCAPITULATIF
                 </BigParagraph>
@@ -88,9 +89,9 @@ export default function Panier() {
                     ? nbArticles + " articles"
                     : nbArticles + " article"}
                 </Paragraph>
-                <div className="flex items-center justify-between mb-16">
+                <div className="flex items-center md:justify-between md:gap-0 gap-4 md:mb-16 mb-5">
                   <Paragraph>Total : </Paragraph>
-                  <Paragraph>{total} €</Paragraph>
+                  <Paragraph className="font-bold">{total} €</Paragraph>
                 </div>
                 <Button
                   onClick={() => {

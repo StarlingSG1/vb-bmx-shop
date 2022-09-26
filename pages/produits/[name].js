@@ -181,19 +181,7 @@ export default function Produit() {
                     }
                   </div>
                 </div>
-                {/* {article?.Color?.length > 0 &&
-                <>
-                    <BigParagraph>Couleur :</BigParagraph>
-                    <select className="h-[25px] w-[200px] pl-2" type="select" onChange={(e) => {setSizeValue(e.target.value)}}>
-                      <option value={null}>Choisir une couleur</option>
-                      {article &&
-                        article.Color &&
-                        article.Color.map((color, index) => (
-                          <option key={index} value={color.name}>{color.name}</option>
-                          ))}
-                    </select>
-                  </>
-                } */}
+                
 
                 <span className="h-[25px] w-[1px] bg-white 350:block hidden"></span>
                 <Price className="350:block hidden">{article && article.price}€</Price>
