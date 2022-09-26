@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Button, Input, Paragraph, TextLink } from "../components/atoms";
 import { Template } from "../components/molecules/templates/Template";
 import { useUserContext } from "../context";
@@ -22,7 +23,7 @@ export default function Login() {
       </Head>
       <Template title="Connexion">
         <div className="sm:w-[593px] w-full m-auto">
-          <form onSubmit={(e) => {loginTheUser(userCredentials); e.preventDefault()}}>
+          <form onSubmit={(e) => {userCredentials.email != "" && userCredentials.password != "" ? loginTheUser(userCredentials) : toast.error("Tous les champs doivent être renseignés"); e.preventDefault()}}>
 
           <div className=" gap-4 flex flex-col items-center relative bg-blue z-10">
             <span className="absolute top-0 left-0 right-0 bottom-0 bg-blue -z-10"></span>

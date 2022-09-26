@@ -24,8 +24,25 @@ export default function Register() {
 
   const registerTheUser = async () => {
     setLoading(true);
-    const response = await registerUser(userCredentials)
-    response?.error ? toast.error(response.message) : navigate.push("/login")
+    if(userCredentials?.firstName != "" && userCredentials?.lastName != "" && userCredentials?.phone != "" && userCredentials?.email != "" && userCredentials?.password != "" && userCredentials?.confirmPassword != "" && userCredentials?.conditions) {
+      if(userCredentials?.password === userCredentials?.confirmPassword) {
+        // if(passwordRegex.test(userCredentials?.password)) {
+          const response = await registerUser(userCredentials);
+          if(response) {
+            toast.success("Votre compte a bien été créé");
+            navigate.push("/login");
+          } else {
+            toast.error("Cette adresse mail est déjà utilisée");  
+          }
+        // } else {
+        //   toast.error("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre");
+        // }
+      } else {
+        toast.error("Les mots de passe ne correspondent pas");
+      }
+    } else {
+      toast.error("Tous les champs doivent être renseignés");
+    }
     setLoading(false);
   }
 
@@ -52,7 +69,7 @@ export default function Register() {
               </div>
               <Input type="email" placeholder={"Adresse mail"} onChange={(e) => { setUserCredentials({ ...userCredentials, email: e.target.value }) }} />
               <Input type="password" placeholder={"Mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, password: e.target.value }) }} />
-              <Input type="password" placeholder={"Confirmer mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, confirmPassword: e.target.value }) }} />
+              <Input type="password " placeholder={"Confirmer mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, confirmPassword: e.target.value }) }} />
               <Input type="phone" placeholder={"Numéro de téléphone"} onChange={(e) => { setUserCredentials({ ...userCredentials, phone: e.target.value }) }} />
             </div>
 
