@@ -25,24 +25,23 @@ export function PanierModal({ isOpen, setIsOpen = () => {}, article, modalItem, 
             }}
             className="cursor-pointer z-20 bg-[#000000]/[.35] overflow-hidden fixed min-h-screen w-screen top-0 left-0 flex items-center justify-center"
           ></div>
-          <div className=" z-30 fixed top-1/2 md:min-h-[366px] md:w-[778px] w-full min-h-[380px]   pt-[30px] px-[25px] left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white opacity-100 rounded-lg">
+          <div className=" z-30 fixed top-1/2 md:min-h-[366px] md:w-[778px] w-[95%] min-h-[380px]   sm:pt-[30px] pt-4 sm:px-[25px] px-3 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white opacity-100 rounded-lg">
             <div className="w-full flex justify-between items-center">
-              <SubTitle className="text-blue ">
+              <SubTitle className="text-blue sm:text-subtitle text-xl ">
                 L'ARTICLE A ÉTÉ AJOUTÉ AU PANIER
               </SubTitle>
               <RoundedIcon
                 onClick={() => {
                   setIsOpen(false);
                 }}
+                className="min-h-[50px] min-w-[50px]"
                 icon={"/assets/img/cross.svg"}
               />
             </div>
-            <div className="h-[230px] w-full mt-[25px] flex gap-[15px]">
-              <div className="w-2/3 flex border-r-2 border-red  gap-[15px]">
-                <div className="aspect-square  md:w-auto  relative">
-                  <Image src={article.image} layout="fill" alt={article.name} />
-                </div>
-                <div className="flex flex-col  gap-2.5 w-[183px]">
+            <div className="sm:h-[230px] w-full mt-[25px] flex sm:flex-row flex-col gap-[15px]">
+              <div className="sm:w-2/3 flex sm:border-r-2 sm:border-b-0 border-b-2 sm:pb-0 pb-4 border-red  gap-[15px]">
+                <img src={article.image} className="aspect-square sm:w-auto 500:w-1/3 350:w-[150px] w-[120px] object-cover" alt={article.name} />
+                <div className="flex flex-col  gap-2.5 sm:w-[183px]">
                   <BigParagraph className="uppercase text-blue">
                     {article.name}
                   </BigParagraph>
@@ -56,27 +55,33 @@ export function PanierModal({ isOpen, setIsOpen = () => {}, article, modalItem, 
                   <Price className="text-blue">{article.price}€</Price>
                 </div>
               </div>
-              <div className="w-1/3 ">
-                <BigParagraph className="text-blue mb-3">
+              <div className="sm:w-1/3 flex sm:block flex-col ">
+                <div className="sm:block flex 350:flex-row flex-col 350:items-center gap-4 sm:gap-0 ">
+
+                <BigParagraph className="text-blue sm:mb-3 sm:text-bigger text-base min-w-max">
                   MON PANIER :
                 </BigParagraph>
-                <Paragraph className="text-blue mb-2.5">{panierLength > 1 ? panierLength + " " + "articles" : panierLength + " " + "article"}</Paragraph>
+                <Paragraph className="text-blue sm:mb-2.5">{panierLength > 1 ? panierLength + " " + "articles" : panierLength + " " + "article"}</Paragraph>
                 <div className="flex items-center  gap-2.5">
                   <Price className="text-blue">Total :</Price>
                   <Price className="text-blue">{total}€</Price>
                 </div>
+                </div>
+                <div className="flex sm:flex-col sm:items-start 350:flex-row flex-col sm:gap-0 items-center gap-4 mt-5 mb-4 sm:mt-0 sm:mb-0 ">
+
                 <Link href="/produits">
                   <a>
-                    <ReversedBorderedButton className="mt-5 mb-4">
+                    <ReversedBorderedButton className="sm:mt-5 sm:mb-4 sm:text-base text-sm">
                       Continuer mes achats
                     </ReversedBorderedButton>
                   </a>
                 </Link>
                 <Link href="/panier">
                   <a>
-                    <Button>Voir mon panier</Button>
+                    <Button className="sm:text-base text-sm">Voir mon panier</Button>
                   </a>
                 </Link>
+                </div>
               </div>
             </div>
           </div>

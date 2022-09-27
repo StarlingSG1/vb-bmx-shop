@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { BigParagraph, Paragraph, Price } from "../../atoms";
 
 export function PanierArticle({
@@ -24,6 +25,7 @@ export function PanierArticle({
     panierArray.splice(index, 1);
     localStorage.setItem("vb-bmx-panier", JSON.stringify(panierArray));
     setPanierContent(panierArray);
+    toast.success("Article(s) supprimé du panier");
     // const newPanierContent = panierContent.filter(
     //   (item) => item.id !== article.id
     // );
@@ -57,7 +59,7 @@ export function PanierArticle({
 
   return (
     <>
-      <div className="relative aspect-square mb-8 col-span-2 mr-[15px]">
+      <div className="relative aspect-square xl:mb-8 md:mb-12 500:mb-10 mb-4 md:col-span-2  ">
         <Link href={"/produits/" + article.slug}>
           <a>
             <Image
@@ -69,8 +71,8 @@ export function PanierArticle({
           </a>
         </Link>
       </div>
-      <div className={"col-span-3 flex flex-col gap-5 pr-6  "}>
-        <BigParagraph className={"mb-2.5"}>{article.name}</BigParagraph>
+      <div className={"md:col-span-3 flex flex-col xl:gap-[18px] gap-3 md:pr-6 500:pl-3  "}>
+        <BigParagraph className="line-clamp-2" >{article.name}</BigParagraph>
         <Paragraph>
           Taille : {article?.size != null ? article?.size : "Unique"}
         </Paragraph>
@@ -80,7 +82,7 @@ export function PanierArticle({
           Quantité :
           </Paragraph>
           <select
-            className="h-[25px] w-[200px] pl-2 text-black"
+            className="h-[25px] pl-2 text-black"
             type="select"
             onChange={(e) => {changeQuantity({id: article.id, size: article.size, flocage: article.flocage, color: article.color, quantity: parseInt(e.target.value, 10)})}}
             >
@@ -107,9 +109,17 @@ export function PanierArticle({
           <Paragraph>Flocage : {article.flocage}</Paragraph>
           )}
           </div>
-        <Price>{articlePrice} €</Price>
+        <Price className="500:mb-5">{articlePrice} €</Price>
+        <p
+        onClick={() => {
+          removeOneFromArray();
+        }}
+        className="font-lato md:hidden cursor-pointer 500:mb-0 mb-10  underline text-white"
+        >
+        supprimer article
+      </p>
       </div>
-      <div className="col-start-6">
+      <div className="md:col-start-6 md:block hidden">
 
       <p
         onClick={() => {

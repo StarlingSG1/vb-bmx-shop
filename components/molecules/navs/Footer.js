@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="md:h-[367px] md:px-16 px-4 flex flex-col items-center bg-black mt-20">
       <div className=" md:h-[300px] max-w-[1600px] w-full  flex md:flex-row flex-col items-center justify-between md:pt-0 pt-10">
-        <div className="h-full w-1/3 flex items-center xl:justify-start lg:justify-center justify-center ">
+        <div className="h-full w-1/3 flex items-center md:justify-start justify-center  ">
           <Link href="/">
             <a>
               <Image
