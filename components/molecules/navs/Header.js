@@ -124,7 +124,7 @@ export function Header({ children, className }) {
                       />
                     </a>
                   </Link>
-                  <HeaderLink href="/logout">Se deconnecter</HeaderLink>
+                  <HeaderLink className="!text-xl" href="/logout">Se deconnecter</HeaderLink>
                 </li>
               </>
             )}

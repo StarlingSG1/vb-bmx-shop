@@ -64,7 +64,7 @@ export function Profile() {
     <>
       <div
         className={`w-full ${
-          update || password ? "gap-5" : " md:px-[86px] 500:px-16 350:px-8  gap-10"
+          update || password ? "gap-5" : "gap-10"
         } mt-[70px] flex flex-col `}
       >
         {!password && (

@@ -14,7 +14,38 @@ export default function Login() {
     password: "",
   });
   
-  useEffect(() => {setLoading(false)}, []);
+  useEffect(() => {
+    const loadScriptByURL = (id, url, callback) => {
+      const isScriptExist = document.getElementById(id);
+   
+      if (!isScriptExist) {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = url;
+        script.id = id;
+        script.onload = function () {
+          if (callback) callback();
+        };
+        document.body.appendChild(script);
+      }
+   
+      if (isScriptExist && callback) callback();
+    }
+   
+    // load the script by passing the URL
+    loadScriptByURL("recaptcha-key", `https://www.google.com/recaptcha/api.js?render=6LeigTEiAAAAAIGfWkks2C0_6EsYXiR2D7xqtmb8`, function () {
+      console.log("Script loaded!");
+    });
+    setLoading(false)
+  }, []);
+
+  const handleOnClick = e => {
+    e.preventDefault();
+    window.grecaptcha.ready(() => {
+      window.grecaptcha.execute("6LeigTEiAAAAAIGfWkks2C0_6EsYXiR2D7xqtmb8", { action: 'submit' }).then(token => {
+        loginTheUser(userCredentials, token)});
+    });
+  }
 
   return (
     <>
@@ -23,7 +54,7 @@ export default function Login() {
       </Head>
       <Template title="Connexion">
         <div className="sm:w-[593px] w-full m-auto">
-          <form onSubmit={(e) => {userCredentials.email != "" && userCredentials.password != "" ? loginTheUser(userCredentials) : toast.error("Tous les champs doivent être renseignés"); e.preventDefault()}}>
+          <form onSubmit={(e) => {userCredentials.email != "" && userCredentials.password != "" ? handleOnClick(e) : toast.error("Tous les champs doivent être renseignés"); e.preventDefault()}}>
 
           <div className=" gap-4 flex flex-col items-center relative bg-blue z-10">
             <span className="absolute top-0 left-0 right-0 bottom-0 bg-blue -z-10"></span>

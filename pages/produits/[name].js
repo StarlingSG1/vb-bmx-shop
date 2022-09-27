@@ -20,6 +20,7 @@ import {
   getOneFromBody,
 } from "../../api/products/products";
 import { useUserContext } from "../../context";
+import { toast } from "react-toastify";
 
 export default function Produit() {
   // call context
@@ -64,15 +65,21 @@ export default function Produit() {
     setBoolFlocageNo(true);
   };
 
-  const addToCart = async (article) => {
+  const addToCart = async (theArticle) => {
     const panier = localStorage.getItem("vb-bmx-panier");
     const panierArray = panier ? JSON.parse(panier) : [];
-    const item = { id: article.id, name: article.name, price: article.price, size: sizeValue, flocage: flocageValue, color: colorValue, image: article.image, slug: article.slug, quantity: 1, stripe: article.stripe_id };
+    if(article?.Size?.length > 0 && (!sizeValue || sizeValue === "Choisir une taille")){
+      return toast.error("Veuillez choisir une taille")
+    }
+    if(article?.Color?.length > 0 && (!colorValue || colorValue === "Choisir une couleur  ")){
+      return toast.error("Veuillez choisir une couleur")
+    }
+    const item = { id: theArticle.id, name: theArticle.name, price: theArticle.price, size: sizeValue, flocage: flocageValue, color: colorValue, image: theArticle.image, slug: theArticle.slug, quantity: 1, stripe: theArticle.stripe_id };
     setModalItem(item);
     const toAdd = true
-    panierArray.forEach((article) => {
-      if (article.id === item.id && article.size === item.size && article.flocage === item.flocage && article.color === item.color) {
-        article.quantity += 1;
+    panierArray.forEach((theArticle) => {
+      if (theArticle.id === item.id && theArticle.size === item.size && theArticle.flocage === item.flocage && theArticle.color === item.color) {
+        theArticle.quantity += 1;
         toAdd = false;
       }
     }
@@ -83,8 +90,8 @@ export default function Produit() {
     localStorage.setItem("vb-bmx-panier", JSON.stringify(panierArray));
     setPanier(panierArray)
     var theQuantity = 0;
-    panierArray.forEach((article) => {
-      theQuantity += article.quantity 
+    panierArray.forEach((theArticle) => {
+      theQuantity += theArticle.quantity 
     });
     setPanierLength(theQuantity);
     setIsOpen(true);
@@ -181,20 +188,6 @@ export default function Produit() {
                     }
                   </div>
                 </div>
-                {/* {article?.Color?.length > 0 &&
-                <>
-                    <BigParagraph>Couleur :</BigParagraph>
-                    <select className="h-[25px] w-[200px] pl-2" type="select" onChange={(e) => {setSizeValue(e.target.value)}}>
-                      <option value={null}>Choisir une couleur</option>
-                      {article &&
-                        article.Color &&
-                        article.Color.map((color, index) => (
-                          <option key={index} value={color.name}>{color.name}</option>
-                          ))}
-                    </select>
-                  </>
-                } */}
-
                 <span className="h-[25px] w-[1px] bg-white 350:block hidden"></span>
                 <Price className="350:block hidden">{article && article.price}€</Price>
               </div>

@@ -14,9 +14,11 @@ const UserContextProvider = ({ children }) => {
   const [panier, setPanier] = useState([]);
   const navigate = useRouter();
 
-  const loginTheUser = async (payload) => {
+  const loginTheUser = async (payload, token) => {
     setLoading(true);
     setStatus("pending");
+    payload.captcha = token
+    console.log(payload);
     const user = await loginUser(payload);
     // if user, set token in localstorage
     if (!user.error) {

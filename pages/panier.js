@@ -75,7 +75,7 @@ export default function Panier() {
                 />
               ))}
               {panierContent?.length === 0 && (
-                <BigParagraph>Votre panier est vide</BigParagraph>
+                <BigParagraph className="m-auto col-span-6">Votre panier est vide</BigParagraph>
               )}
             </div>
             <div className="col-span-2  ">
@@ -92,13 +92,13 @@ export default function Panier() {
                   <Paragraph>Total : </Paragraph>
                   <Paragraph>{total} €</Paragraph>
                 </div>
-                <Button
+                {panierContent?.length > 0 && <Button
                   onClick={() => {
                     sendOrder()
                   }}
                 >
                   Commander
-                </Button>
+                </Button>}
               </div>
             </div>
           </div>

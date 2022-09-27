@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function loginUser(payload) {
     const response = await axios.post(
-        `http://localhost:8080/api/auth/login`,
+        `   /auth/login`,
         payload
     );
         return response.data;
@@ -13,7 +13,7 @@ export async function verifyToken() {
     if (!token) {
         return false;
     }
-    const response = await axios.post(`http://localhost:8080/api/auth/me`, {token: token}
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_LOCAL_BACK_URL}/auth/me`, {token: token}
     );
     return response.data;
 }   
@@ -24,7 +24,7 @@ export async function logout()  {
 
 export async function registerUser(payload){
     const response = await axios.post(
-        `http://localhost:8080/api/auth/register`,
+        `${process.env.NEXT_PUBLIC_LOCAL_BACK_URL}/auth/register`,
         payload
     );
     return response.data;
