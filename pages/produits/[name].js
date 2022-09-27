@@ -138,7 +138,7 @@ export default function Produit() {
               className="md:col-span-4 md:w-auto md:h-auto h-[400px] m-auto 500:w-2/3  aspect-square object-cover"
             />
             <div className="col-span-4 pt-4">
-              <IntermediateParagraph className={"text-center"}>
+              <IntermediateParagraph className={"text-left uppercase"}>
                 {article && article.name}
               </IntermediateParagraph>
               <Paragraph className={"text-justify mt-6 mb-5"}>
@@ -172,8 +172,8 @@ export default function Produit() {
                       </>
                     )}
                   </div>
-                  <div className="flex items-center gap-4">
                     {article?.Color?.length > 0 &&
+                  <div className="flex items-center gap-4">
                       <>
                         <BigParagraph>Couleur :</BigParagraph>
                         <select className="h-[30px] w-[200px] pl-2" type="select" onChange={(e) => { setColorValue(e.target.value) }}>
@@ -185,23 +185,9 @@ export default function Produit() {
                             ))}
                         </select>
                       </>
-                    }
                   </div>
-                </div>
-                {/* {article?.Color?.length > 0 &&
-                <>
-                    <BigParagraph>Couleur :</BigParagraph>
-                    <select className="h-[25px] w-[200px] pl-2" type="select" onChange={(e) => {setSizeValue(e.target.value)}}>
-                      <option value={null}>Choisir une couleur</option>
-                      {article &&
-                        article.Color &&
-                        article.Color.map((color, index) => (
-                          <option key={index} value={color.name}>{color.name}</option>
-                          ))}
-                    </select>
-                  </>
-                } */}
-
+                    }
+                </div>  
                 <span className="h-[25px] w-[1px] bg-white 350:block hidden"></span>
                 <Price className="350:block hidden">{article && article.price}€</Price>
               </div>
