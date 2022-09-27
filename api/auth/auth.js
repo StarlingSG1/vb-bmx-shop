@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function loginUser(payload) {
     const response = await axios.post(
-        `   /auth/login`,
+        `${process.env.NEXT_PUBLIC_LOCAL_BACK_URL}/auth/login`,
         payload
     );
         return response.data;
