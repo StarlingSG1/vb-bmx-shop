@@ -64,12 +64,12 @@ export function Profile() {
     <>
       <div
         className={`w-full ${
-          update || password ? "gap-5" : "gap-10"
+          update || password ? "gap-5" : "500:gap-10 gap-8"
         } mt-[70px] flex flex-col `}
       >
         {!password && (
           <div
-            className={`flex 500:flex-row flex flex-col 500:items-center 500:justify-between ${
+            className={`flex 500:flex-row flex flex-col 500:items-center 500:justify-between  gap-8 ${
               update && "500:gap-[50px] gap-5"
             }`}
           >

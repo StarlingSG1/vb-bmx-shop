@@ -126,7 +126,7 @@ export default function Produit() {
   return (
     <>
       <Head>
-        <title>Shop - Nom du produit</title>
+        <title>{article?.name}</title>
       </Head>
       <Template title="Nos produits" hasReturn={true} panier={true}>
         <PanierButton />
@@ -193,7 +193,7 @@ export default function Produit() {
               </div>
               <Price className="350:hidden block mb-5">Prix : {article && article.price}€</Price>
               {article && article.flocage && (
-                <div className="flex gap-5">
+                <div className="flex gap-5 flex-wrap">
                   <BigParagraph>Flocage : </BigParagraph>
                   <div
                     onClick={() => {

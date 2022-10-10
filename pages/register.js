@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Button, Input, TextLink } from "../components/atoms";
+import { Button, Input, Paragraph, TextLink } from "../components/atoms";
 import { Template } from "../components/molecules/templates/Template";
 import { toast } from "react-toastify";
 import { useState } from "react";
@@ -71,6 +71,11 @@ export default function Register() {
               <Input type="password" placeholder={"Mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, password: e.target.value }) }} />
               <Input type="password " placeholder={"Confirmer mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, confirmPassword: e.target.value }) }} />
               <Input type="phone" placeholder={"Numéro de téléphone"} onChange={(e) => { setUserCredentials({ ...userCredentials, phone: e.target.value }) }} />
+                <div className="flex pl-1 gap-2">
+                  <input type="checkbox" className="w-[18px] mt-1.5 aspect-square h-[18px] border border-gray-400 !text-red accent-red rounded-sm" onChange={(e) => { setUserCredentials({ ...userCredentials, conditions: e.target.checked }) }} />
+                  <Paragraph className="text-sm  text-gray-400  text-base">J'accepte les <TextLink href="/politique-de-confidentialite" className="!text-base">conditions générales d'utilisation</TextLink> ainsi que les <TextLink href="/conditions-generales-de-vente" className="!text-base">conditions générales de vente</TextLink> En continuant, vous acceptez les conditions de
+                l'Accord de l'utilisateur et de la Politique de confidentialité.</Paragraph>
+                  </div>
             </div>
 
             <div className="flex sm:flex-row flex-col-reverse justify-between items-center relative mt-[25px] z-10 pl-8 pr-[15px]">

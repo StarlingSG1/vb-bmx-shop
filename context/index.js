@@ -18,7 +18,6 @@ const UserContextProvider = ({ children }) => {
     setLoading(true);
     setStatus("pending");
     payload.captcha = token
-    console.log(payload);
     const user = await loginUser(payload);
     // if user, set token in localstorage
     if (!user.error) {

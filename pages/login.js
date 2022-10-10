@@ -34,7 +34,6 @@ export default function Login() {
    
     // load the script by passing the URL
     loadScriptByURL("recaptcha-key", `https://www.google.com/recaptcha/api.js?render=6LeigTEiAAAAAIGfWkks2C0_6EsYXiR2D7xqtmb8`, function () {
-      console.log("Script loaded!");
     });
     setLoading(false)
   }, []);

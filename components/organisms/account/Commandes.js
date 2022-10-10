@@ -21,6 +21,7 @@ export function Commandes({
 
   const { user } = useUserContext();
 
+
   const getCommandes = async () => {
     const data = admin
       ? await getAllCommandes()
@@ -68,6 +69,9 @@ export function Commandes({
     admin &&  articleLength();
     admin && commandesStatus();
   }, [commandes]);
+
+  useEffect(() => {console.log("commandes",commandes)}, [commandes]);
+  
   
   return (
     <div className="grid grid-cols-12 mt-[70px] ">
@@ -103,6 +107,8 @@ export function Commandes({
         setCommande={setCommande}
         user={user}
         setIsOpen={setIsOpen}
+        commandes={commandes}
+        setCommandes={setCommandes}
       />
     </div>
   );

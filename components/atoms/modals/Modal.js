@@ -4,7 +4,7 @@ import { Paragraph, RoundedIcon, BigParagraph, SubTitle } from "../../atoms";
 import { useEffect, useState } from "react";
 import { updateCommandStatus } from "../../../api/commandes/commandes";
 
-export function Modal({ isOpen, setIsOpen = () => {}, user, commande, setCommande = () => {} }) {
+export function Modal({ isOpen, setIsOpen = () => {}, user, commande, commandes, setCommandes = () => {}, setCommande = () => {} }) {
 
   const [date, setDate] = useState(0)
   const [total, setTotal] = useState(0)
@@ -21,26 +21,32 @@ export function Modal({ isOpen, setIsOpen = () => {}, user, commande, setCommand
 
 const getTotal = () => {
   let total = 0;
-  commande?.Article.forEach(article => {
-    total += article.quantity * article?.Product?.price;
+  commande?.Article?.forEach(article => {
+    total += article?.quantity * article?.Product?.price;
   } )
   setTotal(total);
 }
 
 const articleLength = () => {
   let length = 0;
-  commande?.Article.forEach(article => {
-      length += article.quantity;
+  commande?.Article?.forEach(article => {
+      length += article?.quantity;
   } )
   setArticleQuantity(length)
 }
 
 const changeStatus = async () => {
   const response = await updateCommandStatus(commande.id, commandStatus)
-  setCommandStatus(response.status)
-  setCommande({...commande, status: response.status})
+  setCommandStatus(response)
+  setCommande({...commande, status: response})
+  // if item.id in commandes === commande.id , item = commande
+  const index = commandes.findIndex(item => item.id === commande.id)
+  const myNewCommandes = commandes
+  myNewCommandes[index] = commande
+  setCommandes(myNewCommandes)
   setIsOpen(false)
 }
+
 
 
   useEffect(() => {
@@ -49,6 +55,7 @@ const changeStatus = async () => {
     articleLength()
     setCommandStatus(commande?.status)
   }, [isOpen]);
+
 
   return (
     <>
@@ -91,8 +98,6 @@ const changeStatus = async () => {
                   Nombre d'articles : {articleQuantity > 1 ? " " + articleQuantity + " articles" : " " + articleQuantity + " article"}
                 </Paragraph>
                 <Paragraph className="text-blue">Total : {total}€</Paragraph>
-                {/* Remplacer le "en cours" par la valeur du status , dans la version non admin */}
-                {/* <Paragraph className="text-blue">Status : en cours</Paragraph> */}
                 <div className="flex sm:flex-row  flex-col  md:items-center gap-2">
                   <Paragraph className="text-blue">Status :</Paragraph>
                   {user?.role !== "USER" ? (

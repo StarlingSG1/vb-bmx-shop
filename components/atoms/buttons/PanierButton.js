@@ -13,7 +13,6 @@ export function PanierButton() {
     // if localstorage is empty, set panierLength to 0
     const thePanier = localStorage.getItem("vb-bmx-panier");
     const panierArray = thePanier ? JSON.parse(thePanier) : [];
-    console.log(panierArray)
     var theQuantity = 0;
     panierArray.forEach((article) => {
       theQuantity += article.quantity 
@@ -29,7 +28,6 @@ export function PanierButton() {
     }
     const thePanier = localStorage.getItem("vb-bmx-panier");
     const panierArray = thePanier ? JSON.parse(thePanier) : [];
-    console.log(panierArray)
     var theQuantity = 0;
     panierArray.forEach((article) => {
       theQuantity += article.quantity 
