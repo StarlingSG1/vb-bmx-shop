@@ -44,3 +44,7 @@
 }
 
 
+.home-bloc{
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 88.5%, 0% 100%);
+clip-path: polygon(0 0, 100% 0, 100% 88.5%, 0% 100%);
+}

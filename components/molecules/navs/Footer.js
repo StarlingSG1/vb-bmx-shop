@@ -4,7 +4,7 @@ import { Paragraph, HeaderLink, TextLink } from "../../atoms";
 
 export function Footer() {
   return (
-    <footer className="md:h-[367px] md:px-16 px-4 flex flex-col items-center bg-black mt-20">
+    <footer className="md:h-[367px] relative md:px-16 px-4 flex flex-col items-center bg-black mt-20">
       <div className=" md:h-[300px] max-w-[1600px] w-full  flex md:flex-row flex-col items-center justify-between md:pt-0 pt-10">
         <div className="h-full w-1/3 flex items-center md:justify-start justify-center  ">
           <Link href="/">
@@ -26,8 +26,7 @@ export function Footer() {
           <HeaderLink href="/politique-de-confidentialite">Mentions légales</HeaderLink>
         </div>
         <div className="h-full md:w-1/3 flex sm:items-center items-end  justify-end lg:gap-40 gap-16">
-          <Link href="/">
-            <a>
+            <a href="https://www.instagram.com/vbbmxclub/" rel="noreferrer" target="_blank">
               <Image
                 src="/assets/img/facebook.svg"
                 alt="logo"
@@ -36,9 +35,7 @@ export function Footer() {
                 className="border-none"
               />
             </a>
-          </Link>
-          <Link href="/">
-            <a>
+            <a href="https://www.facebook.com/profile.php?id=100011345531645" rel="noreferrer" target="_blank">
               <Image
                 src="/assets/img/instagram.svg"
                 alt="logo"
@@ -47,7 +44,6 @@ export function Footer() {
                 className="border-none"
               />
             </a>
-          </Link>
         </div>
       </div>
       <div className="w-full md:my-0 my-5 max-w-[1600px]">

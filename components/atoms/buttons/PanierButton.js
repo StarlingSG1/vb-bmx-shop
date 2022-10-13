@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../../context";
+import joinClasses from "../../../helpers/joinClasses";
 
-export function PanierButton() {
+export function PanierButton({className = ""}) {
 
   const [panierLength, setPanierLength] = useState(0);
 
@@ -37,7 +38,7 @@ export function PanierButton() {
 
 
   return (
-    <div className="2xl:right-[160px] right-10 absolute top-[222px] ">
+    <div className={joinClasses(className,`2xl:right-[160px] right-10 absolute top-[222px]`)}>
       <Link href="/panier">
         <a className="min-w-[160px] flex items-center relative col-start-10 h-[50px] group duration-200 text-white font-roboto font-medium gap-[14px] pr-2 group hover:bg-white hover:text-red">
           <div className="w-[10px] h-[50px] bg-red duration-200  "></div>
