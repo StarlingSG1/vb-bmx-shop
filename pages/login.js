@@ -49,7 +49,7 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Connexion - Boutique BMX club Verrière le Buisson</title>
       </Head>
       <Template title="Connexion">
         <div className="sm:w-[593px] w-full m-auto">

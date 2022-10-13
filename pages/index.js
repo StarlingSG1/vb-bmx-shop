@@ -13,7 +13,7 @@ export default function Home() {
 
     <>
       <Head>
-        <title>Accueil - Boutique VB BMX</title>
+        <title>Accueil - Boutique BMX club Verrière le Buisson</title>
       </Head>
       <Header />
       <main className={`w-full 896:pt-32 -mb-20`} style={{ minHeight: "calc(100vh - 539px)" }}>

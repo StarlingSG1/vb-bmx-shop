@@ -13,7 +13,7 @@ export default function Reset() {
   return (
     <>
       <Head>
-        <title>Mot de pass oublié</title>
+        <title>Mot de passe oublié - Boutique BMX club Verrière le Buisson</title>
       </Head>
       <Template title="Mot de passe oublié" hasReturn={true}>
         <ReturnButton />

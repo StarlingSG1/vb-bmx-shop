@@ -39,7 +39,7 @@ export default function Admin() {
   return (
     <>
       <Head>
-        <title>Espace Admin</title>
+        <title>Espace Admin - Boutique BMX club Verrière le Buisson</title>
       </Head>
       <Template title="Espace admin">
         <div className="grid xl:grid-cols-12 lg:grid-cols-10 sm:grid-cols-12 grid-cols-2  xl:px-0 md:px-12 gap-[50px]">

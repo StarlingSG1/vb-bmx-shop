@@ -6,7 +6,7 @@ export default function Canceled(){
     return (
         <>
         <Head>
-            <title>Echec paiement</title>
+            <title>Echec paiement - Boutique BMX club Verrière le Buisson</title>
         </Head>
         <Template title="Echec de la commande">
             <div className="shadow-card h-48 w-[800px] bg-white rounded-lg m-auto px-10 py-5">
