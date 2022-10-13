@@ -23,7 +23,7 @@ export default function Produit() {
       <Head>
         <title>Nos produits</title>
       </Head>
-      <Template title="Nos produits">
+      <Template title="Nos produits" panier={true}>
         <PanierButton />
         <div className=" flex flex-col gap-6 sm:grid sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-[50px] lg:grid-cols-4">
           {/* ne pas oublier le props image */}
