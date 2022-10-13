@@ -21,7 +21,6 @@ export function Footer() {
         </div>
         <div className="md:h-[250px] md:py-0 py-14 md:border-x md:border-white lg:w-1/3 md:w-1/2 flex md:flex-col sm:flex-row flex-col justify-center items-center gap-[40px]">
           <a href="https://vb-bmx-club.fr" target="_blank" rel="noopener noreferrer" className="textLink 350:text-left text-center">Notre site</a>
-          <HeaderLink href="/politique-de-confidentialite">Conditions générales d’utilisation</HeaderLink>
           <HeaderLink href="/conditions-generales-de-vente">Conditions générales de vente</HeaderLink>
           <HeaderLink href="/politique-de-confidentialite">Mentions légales</HeaderLink>
         </div>
