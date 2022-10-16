@@ -55,7 +55,7 @@ export default function Admin() {
           <Card title="Commandes en cours" icon={"/assets/img/loading.svg"}>
             {stats(nbCommandesEnCours)}
           </Card>
-          <Card title="Commandes archivés" icon={"/assets/img/archive.svg"}>
+          <Card title="Commandes terminés" icon={"/assets/img/archive.svg"}>
             {stats(nbCommandesArchive)}
           </Card>
         </div>

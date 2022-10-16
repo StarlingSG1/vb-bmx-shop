@@ -89,6 +89,7 @@ export function Commandes({
         <tbody>
           {commandes &&
             commandes.map((commande, index) => (
+              <>
               <TableCommandes
                 onClick={() => {
                   setIsOpen(true);
@@ -97,19 +98,22 @@ export function Commandes({
                 id={index}
                 key={index}
                 commande={commande}
-              />
+                />
+      
+                </>
             ))}
+            <Modal
+              isOpen={isOpen}
+              commande={commande}
+              setCommande={setCommande}
+              user={user}
+              setIsOpen={setIsOpen}
+              commandes={commandes}
+              setCommandes={setCommandes}
+            />
         </tbody>
       </table>
-      <Modal
-        isOpen={isOpen}
-        commande={commande}
-        setCommande={setCommande}
-        user={user}
-        setIsOpen={setIsOpen}
-        commandes={commandes}
-        setCommandes={setCommandes}
-      />
     </div>
+    
   );
 }

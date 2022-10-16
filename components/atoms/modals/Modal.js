@@ -4,7 +4,7 @@ import { Paragraph, RoundedIcon, BigParagraph, SubTitle } from "../../atoms";
 import { useEffect, useState } from "react";
 import { updateCommandStatus } from "../../../api/commandes/commandes";
 
-export function Modal({ isOpen, setIsOpen = () => {}, user, commande, commandes, setCommandes = () => {}, setCommande = () => {} }) {
+export function Modal({ isOpen, setIsOpen = () => { }, index, user, commande, commandes, setCommandes = () => { }, setCommande = () => { } }) {
 
   const [date, setDate] = useState(0)
   const [total, setTotal] = useState(0)
@@ -17,37 +17,36 @@ export function Modal({ isOpen, setIsOpen = () => {}, user, commande, commandes,
     const month = date.getMonth() + 1
     const year = date.getFullYear()
     setDate(`${day}/${month}/${year}`)
-}
+  }
 
-const getTotal = () => {
-  let total = 0;
-  commande?.Article?.forEach(article => {
-    total += article?.quantity * article?.Product?.price;
-  } )
-  setTotal(total);
-}
+  const getTotal = () => {
+    let total = 0;
+    commande?.Article?.forEach(article => {
+      total += article?.quantity * article?.Product?.price;
+    })
+    setTotal(total);
+  }
 
-const articleLength = () => {
-  let length = 0;
-  commande?.Article?.forEach(article => {
+  const articleLength = () => {
+    let length = 0;
+    commande?.Article?.forEach(article => {
       length += article?.quantity;
-  } )
-  setArticleQuantity(length)
-}
+    })
+    setArticleQuantity(length)
+  }
 
-const changeStatus = async () => {
-  const response = await updateCommandStatus(commande.id, commandStatus)
-  setCommandStatus(response)
-  setCommande({...commande, status: response})
-  // if item.id in commandes === commande.id , item = commande
-  const index = commandes.findIndex(item => item.id === commande.id)
-  const myNewCommandes = commandes
-  myNewCommandes[index] = commande
-  setCommandes(myNewCommandes)
-  setIsOpen(false)
-}
-
-
+  const changeStatus = async () => {
+    const response = await updateCommandStatus(commande.id, commandStatus)
+    setCommandStatus(response)
+    setCommande({ ...commande, status: response })
+    const myCommande = commande
+    myCommande.status = response
+    const index = commandes.findIndex(item => item.id === commande.id)
+    const myNewCommandes = commandes
+    myNewCommandes[index] = commande
+    setCommandes(myNewCommandes)
+    setIsOpen(false)
+  }
 
   useEffect(() => {
     formatDate()
@@ -55,7 +54,6 @@ const changeStatus = async () => {
     articleLength()
     setCommandStatus(commande?.status)
   }, [isOpen]);
-
 
   return (
     <>
@@ -104,24 +102,12 @@ const changeStatus = async () => {
                     <select
                       className="h-[25px] w-[200px] border border-red focus:outline-red pl-2"
                       type="select"
-                      defaultValue={commande?.status}
-                      onChange={(e) => {setCommandStatus(e.target.value)}}
+                      defaultValue={!commandStatus ? commande?.status : commandStatus}
+                      onChange={(e) => { setCommandStatus(e.target.value) }}
                     >
-                      {commandStatus && commandStatus === "ENCOURS" ? (
-                        <option value="ENCOURS"  selected>en cours</option>
-                      ) : (
-                        <option value="ENCOURS" >en cours</option>
-                      )}
-                      {commandStatus && commandStatus === "RECUPERATION" ? (
-                        <option value="RECUPERATION"  selected >prêt à être récupéré</option>
-                      ) : (
-                        <option value="RECUPERATION">prêt à être récupéré</option>
-                      )}
-                      {commandStatus && commandStatus === "ARCHIVE" ? (
-                        <option value="ARCHIVE"  selected >Archivé</option>
-                      ) : (
-                        <option value="ARCHIVE" >Archivé</option>
-                      )}
+                      <option value="ENCOURS" >en cours</option>
+                      <option value="RECUPERATION">prêt à être récupéré</option>
+                      <option value="ARCHIVE" >Terminé</option>
                     </select>
                   ) : (
                     commande?.status
@@ -143,7 +129,7 @@ const changeStatus = async () => {
               <BigParagraph className="text-blue">ARTICLES : </BigParagraph>
               <div className="w-full grid grid-cols-2 gap-4 mt-4 mb-8">
                 {commande && commande?.Article?.map((article, index) => (
-                  <SmallArticle article={article} key={index}/>
+                  <SmallArticle article={article} key={index} />
                 )
                 )}
               </div>

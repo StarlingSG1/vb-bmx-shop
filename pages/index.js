@@ -14,6 +14,7 @@ export default function Home() {
     <>
       <Head>
         <title>Accueil - Boutique VB BMX</title>
+        <meta name="google-site-verification" content="XWvXQ0flMMlWIuwf6unw5V0t0G1CO2L73gDX3KBhzMk" />
       </Head>
       <Header />
       <main className={`w-full 896:pt-32 -mb-20`} style={{ minHeight: "calc(100vh - 539px)" }}>

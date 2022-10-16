@@ -44,7 +44,7 @@ export function TableCommandes({onClick = () => {}, setIsOpen  = () => {}, id, c
                   <TableContent>{commande.number}</TableContent>
                   <TableContent className="md:table-cell hidden">{articleQuantity} {articleQuantity > 1 ? "articles" : "article"} </TableContent>
                   <TableContent className="350:table-cell hidden">{total}€</TableContent>
-                  <TableContent>{commande?.status}</TableContent>
+                  <TableContent>{commande?.status === "ARCHIVE" ? "Terminé" : (commande?.status === "ENCOURS" ? "En cours" : (commande?.status === "RECUPERATION") && "A récuperer")}</TableContent>
                   <TableContent className="500:table-cell hidden">{date}</TableContent>
                 </tr>
     )
