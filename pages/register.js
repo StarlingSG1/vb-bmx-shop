@@ -49,7 +49,7 @@ export default function Register() {
   return (
     <>
       <Head>
-        <title>Inscription</title>
+        <title>Inscription - Boutique BMX club Verrière le Buisson</title>
       </Head>
       <Template title="Inscription">
 

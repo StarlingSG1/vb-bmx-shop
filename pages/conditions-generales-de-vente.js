@@ -6,7 +6,7 @@ export default function PolitiqueDeConfidentialite() {
   return (
     <>
       <Head>
-        <title>Conditions générales de vente</title>
+        <title>Conditions générales de vente - Boutique BMX club Verrière le Buisson</title>
       </Head>
       <Template title="Conditions générales de vente">
         <Paragraph>

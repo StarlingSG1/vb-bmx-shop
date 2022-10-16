@@ -58,7 +58,7 @@ export default function Panier() {
   return (
     <>
       <Head>
-        <title>Panier</title>
+        <title>Panier - Boutique BMX club Verrière le Buisson</title>
       </Head>
       <Template title="Panier">
         <div className="md:grid md:grid-cols-12  ">

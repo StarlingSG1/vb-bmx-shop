@@ -126,7 +126,7 @@ export default function Produit() {
   return (
     <>
       <Head>
-        <title>{article?.name}</title>
+        <title>{article?.name} - Boutique BMX club Verrière le Buisson</title>
       </Head>
       <Template title="Nos produits" hasReturn={true} panier={true}>
         <PanierButton />
