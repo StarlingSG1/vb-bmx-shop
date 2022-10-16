@@ -8,7 +8,7 @@ export function SmallArticle({article}) {
 
   return (
     <div className="flex md:items-start items-center md:flex-row flex-col md:h-[190px] 500:gap-5 gap-2">
-      <Link href={"/produits/"+article?.Product?.slug}>
+      <Link href={"/produit/"+article?.Product?.slug}>
       <a>
       <img alt={article?.Product?.image} src={article?.Product?.image} className="object-cover aspect-square 500:h-[190px] 500:w-[150px] w-full"  />
       </a>

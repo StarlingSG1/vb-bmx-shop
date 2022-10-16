@@ -12,7 +12,7 @@ export function Article({ id, name, description, price, image }) {
   
 
   return (
-    <Link href={{pathname: `/produits/${slug}`, query: {id: id}}} as={`/produits/${slug}`}>
+    <Link href={{pathname: `/produit/${slug}`, query: {id: id}}} as={`/produit/${slug}`}>
       <a onClick={() => {setArticleId(id)}}>
         <div className="flex flex-col gap-2.5 cursor-pointer ">
           <div className="relative w-full   aspect-square">

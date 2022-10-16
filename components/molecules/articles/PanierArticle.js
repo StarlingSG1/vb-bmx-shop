@@ -60,7 +60,7 @@ export function PanierArticle({
   return (
     <>
       <div className="relative aspect-square xl:mb-8 md:mb-12 500:mb-10 mb-4 md:col-span-2  ">
-        <Link href={"/produits/" + article.slug}>
+        <Link href={"/produit/" + article.slug}>
           <a>
             <Image
               src={article.image}
