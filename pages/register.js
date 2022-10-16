@@ -15,7 +15,7 @@ export default function Register() {
     email: "",
     password: "",
     confirmPassword: "",
-    conditions: true,
+    conditions: false,
   });
   const [loading, setLoading] = useState(false);
 
