@@ -116,7 +116,7 @@ export function PanierArticle({
         }}
         className="font-lato md:hidden cursor-pointer 500:mb-0 mb-10  underline text-white"
         >
-        supprimer article
+        supprimer l'article
       </p>
       </div>
       <div className="md:col-start-6 md:block hidden">
@@ -127,7 +127,7 @@ export function PanierArticle({
         }}
         className="font-lato  cursor-pointer  underline text-white"
         >
-        supprimer article
+        supprimer l'article
       </p>
         </div>
     </>
