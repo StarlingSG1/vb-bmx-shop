@@ -1,0 +1,9 @@
+
+User-agent: *
+Disallow: /password/reset/
+Disallow: /payement/
+Disallow: /account.js
+Disallow: /admin.js
+Disallow: /logout.js
+
+
