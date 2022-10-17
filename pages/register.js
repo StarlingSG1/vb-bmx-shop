@@ -24,19 +24,20 @@ export default function Register() {
 
   const registerTheUser = async () => {
     setLoading(true);
-    if(userCredentials?.firstName != "" && userCredentials?.lastName != "" && userCredentials?.phone != "" && userCredentials?.email != "" && userCredentials?.password != "" && userCredentials?.confirmPassword != "" && userCredentials?.conditions) {
-      if(userCredentials?.password === userCredentials?.confirmPassword) {
-        // if(passwordRegex.test(userCredentials?.password)) {
+    if (userCredentials?.firstName != "" && userCredentials?.lastName != "" && userCredentials?.phone != "" && userCredentials?.email != "" && userCredentials?.password != "" && userCredentials?.confirmPassword != "" && userCredentials?.conditions) {
+      if (userCredentials?.password === userCredentials?.confirmPassword) {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (passwordRegex.test(userCredentials?.password)) {
           const response = await registerUser(userCredentials);
-          if(response) {
+          if (response) {
             toast.success("Votre compte a bien été créé");
             navigate.push("/login");
           } else {
-            toast.error("Cette adresse mail est déjà utilisée");  
+            toast.error("Cette adresse mail est déjà utilisée");
           }
-        // } else {
-        //   toast.error("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre");
-        // }
+        } else {
+          toast.error("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial");
+        }
       } else {
         toast.error("Les mots de passe ne correspondent pas");
       }
@@ -71,11 +72,11 @@ export default function Register() {
               <Input type="password" placeholder={"Mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, password: e.target.value }) }} />
               <Input type="password" placeholder={"Confirmer mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, confirmPassword: e.target.value }) }} />
               <Input type="phone" placeholder={"Numéro de téléphone"} onChange={(e) => { setUserCredentials({ ...userCredentials, phone: e.target.value }) }} />
-                <div className="flex pl-1 gap-2">
-                  <input type="checkbox" className="w-[18px] mt-1.5 aspect-square h-[18px] border border-gray-400 !text-red accent-red rounded-sm" onChange={(e) => { setUserCredentials({ ...userCredentials, conditions: e.target.checked }) }} />
-                  <Paragraph className="text-sm  text-gray-400  text-base">J'accepte les <TextLink href="/politique-de-confidentialite" className="!text-base">conditions générales d'utilisation</TextLink> ainsi que les <TextLink href="/conditions-generales-de-vente" className="!text-base">conditions générales de vente</TextLink> En continuant, vous acceptez les conditions de
-                l'Accord de l'utilisateur et de la Politique de confidentialité.</Paragraph>
-                  </div>
+              <div className="flex pl-1 gap-2">
+                <input type="checkbox" className="w-[18px] mt-1.5 aspect-square h-[18px] border border-gray-400 !text-red accent-red rounded-sm" onChange={(e) => { setUserCredentials({ ...userCredentials, conditions: e.target.checked }) }} />
+                <Paragraph className="text-sm  text-gray-400  text-base">J'accepte les <TextLink href="/politique-de-confidentialite" className="!text-base">conditions générales d'utilisation</TextLink> ainsi que les <TextLink href="/conditions-generales-de-vente" className="!text-base">conditions générales de vente</TextLink> En continuant, vous acceptez les conditions de
+                  l'Accord de l'utilisateur et de la Politique de confidentialité.</Paragraph>
+              </div>
             </div>
 
             <div className="flex sm:flex-row flex-col-reverse justify-between items-center relative mt-[25px] z-10 pl-8 pr-[15px]">
