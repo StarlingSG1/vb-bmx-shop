@@ -21,6 +21,7 @@ import {
 } from "../../api/products/products";
 import { useUserContext } from "../../context";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function Produit() {
   // call context
@@ -68,10 +69,10 @@ export default function Produit() {
   const addToCart = async (theArticle) => {
     const panier = localStorage.getItem("vb-bmx-panier");
     const panierArray = panier ? JSON.parse(panier) : [];
-    if(article?.Size?.length > 0 && (!sizeValue || sizeValue === "Choisir une taille")){
+    if (article?.Size?.length > 0 && (!sizeValue || sizeValue === "Choisir une taille")) {
       return toast.error("Veuillez choisir une taille")
     }
-    if(article?.Color?.length > 0 && (!colorValue || colorValue === "Choisir une couleur  ")){
+    if (article?.Color?.length > 0 && (!colorValue || colorValue === "Choisir une couleur  ")) {
       return toast.error("Veuillez choisir une couleur")
     }
     const item = { id: theArticle.id, name: theArticle.name, price: theArticle.price, size: sizeValue, flocage: flocageValue, color: colorValue, image: theArticle.image, slug: theArticle.slug, quantity: 1, stripe: theArticle.stripe_id };
@@ -91,7 +92,7 @@ export default function Produit() {
     setPanier(panierArray)
     var theQuantity = 0;
     panierArray.forEach((theArticle) => {
-      theQuantity += theArticle.quantity 
+      theQuantity += theArticle.quantity
     });
     setPanierLength(theQuantity);
     setIsOpen(true);
@@ -119,7 +120,7 @@ export default function Produit() {
     }
   };
 
-  
+
 
 
 
@@ -172,8 +173,8 @@ export default function Produit() {
                       </>
                     )}
                   </div>
-                    {article?.Color?.length > 0 &&
-                  <div className="flex items-center gap-4">
+                  {article?.Color?.length > 0 &&
+                    <div className="flex items-center gap-4">
                       <>
                         <BigParagraph>Couleur :</BigParagraph>
                         <select className="h-[30px] w-[200px] pl-2" type="select" onChange={(e) => { setColorValue(e.target.value) }}>
@@ -185,9 +186,9 @@ export default function Produit() {
                             ))}
                         </select>
                       </>
-                  </div>
-                    }
-                </div>  
+                    </div>
+                  }
+                </div>
                 <span className="h-[25px] w-[1px] bg-white 350:block hidden"></span>
                 <Price className="350:block hidden">{article && article.price}€</Price>
               </div>
@@ -243,44 +244,27 @@ export default function Produit() {
             <Title className="!text-intermediate">Nos autres produits</Title>
           </div>
           <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 md:col-span-12 grid  gap-[50px]">
-            {/* <div className="col-span-1 flex items-center cursor-pointer">
-              <div className="bg-red h-20 w-[66px] flex items-center justify-center">
-                <Image
-                  src="/assets/img/arrow.svg"
-                  height={28}
-                  width={15}
-                  alt="left arrow"
-                />
-              </div>{" "}
-            </div> */}
             <div className="xl:col-span-8 lg:col-span-10  896:grid-cols-8 md:grid-cols-9 sm:grid-cols-2 xl:grid-cols-12 gap-[50px] sm:grid flex flex-col">
               {products &&
                 products.map(
                   (product, index) =>
                     product.id !== article.id && (
-                      <div key={index} className="896:col-span-2 md:col-span-3 sm:w-auto col-span-1 relative">
-                        <img src={product.image}
-                          className=" w-full object-cover sm:h-[265px] h-[300px]"
-                          alt="produit" />
-                        <Paragraph className={"my-2.5"}>
-                          {product.name}
-                        </Paragraph>
-                        <Price>{product.price}€</Price>
-                      </div>
+                      <Link href={`/produit/${product?.slug}`}>
+                        <a className="896:col-span-2 cursor-pointer md:col-span-3 sm:w-auto col-span-1 relative">
+                          <div key={index} className="">
+                            <img src={product?.image}
+                              className=" w-full object-cover sm:h-[265px] h-[300px]"
+                              alt="produit" />
+                            <Paragraph className={"my-2.5"}>
+                              {product?.name}
+                            </Paragraph>
+                            <Price>{product?.price}€</Price>
+                          </div>
+                        </a>
+                      </Link>
                     )
                 )}
             </div>
-            {/* <div className="col-span-1 flex items-center cursor-pointer">
-              <div className="bg-red h-20 w-[66px] flex items-center justify-center">
-                <Image
-                  src="/assets/img/arrow.svg"
-                  className="rotate-180"
-                  height={28}
-                  width={15}
-                  alt="right arrow"
-                />
-              </div>
-            </div> */}
           </div>
         </div>
       </Template>
