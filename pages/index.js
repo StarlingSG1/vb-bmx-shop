@@ -13,7 +13,7 @@ export default function Home() {
 
     <>
       <Head>
-        <title>Accueil - Boutique BMX club Verrière le Buisson</title>
+        <title>Accueil - Boutique BMX club Verrières le Buisson</title>
         <meta name="google-site-verification" content="XWvXQ0flMMlWIuwf6unw5V0t0G1CO2L73gDX3KBhzMk" />
         <link rel="canonical" href="https://boutique.vb-bmx-club.fr/produit/" />
       </Head>

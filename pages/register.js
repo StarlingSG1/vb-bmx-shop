@@ -69,7 +69,7 @@ export default function Register() {
               </div>
               <Input type="email" placeholder={"Adresse mail"} onChange={(e) => { setUserCredentials({ ...userCredentials, email: e.target.value }) }} />
               <Input type="password" placeholder={"Mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, password: e.target.value }) }} />
-              <Input type="password " placeholder={"Confirmer mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, confirmPassword: e.target.value }) }} />
+              <Input type="password" placeholder={"Confirmer mot de passe"} onChange={(e) => { setUserCredentials({ ...userCredentials, confirmPassword: e.target.value }) }} />
               <Input type="phone" placeholder={"Numéro de téléphone"} onChange={(e) => { setUserCredentials({ ...userCredentials, phone: e.target.value }) }} />
                 <div className="flex pl-1 gap-2">
                   <input type="checkbox" className="w-[18px] mt-1.5 aspect-square h-[18px] border border-gray-400 !text-red accent-red rounded-sm" onChange={(e) => { setUserCredentials({ ...userCredentials, conditions: e.target.checked }) }} />
