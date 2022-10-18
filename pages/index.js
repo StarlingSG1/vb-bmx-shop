@@ -24,7 +24,7 @@ export default function Home() {
         />
         <meta
           property="og:image"
-          content="https://boutique.vb-bmx-club.fr/assets/img/logo.svg"
+          content="https://boutique.vb-bmx-club.fr/assets/img/logo.png"
         />
       </Head>
       <Header />
