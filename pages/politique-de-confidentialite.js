@@ -6,7 +6,7 @@ export default function PolitiqueDeConfidentialite() {
   return (
     <>
       <Head>
-        <title>Politique de confidentialité - Boutique BMX club Verrière le Buisson</title>
+        <title>Politique de confidentialité - Boutique BMX club Verrières le Buisson</title>
       </Head>
       <Template title="Politique de confidentialité">
         <IntermediateParagraph className={"underline decoration-red"}>

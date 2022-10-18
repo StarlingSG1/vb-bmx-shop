@@ -51,7 +51,7 @@ export default function Produit() {
   return (
     <>
       <Head>
-        <title>Réinitialisation mot de passe - Boutique BMX club Verrière le Buisson</title>
+        <title>Réinitialisation mot de passe - Boutique BMX club Verrières le Buisson</title>
       </Head>
       <Template title="Changer votre mot de passe" hasReturn={true} panier={true}>
         <div className="sm:w-[593px] w-full m-auto">

@@ -6,16 +6,16 @@ export default function PolitiqueDeConfidentialite() {
   return (
     <>
       <Head>
-        <title>Conditions générales de vente - Boutique BMX club Verrière le Buisson</title>
+        <title>Conditions générales de vente - Boutique BMX club Verrières le Buisson</title>
       </Head>
       <Template title="Conditions générales de vente">
         <Paragraph>
           Ce site web est exploité par Association de BMX de
-          Verrière-le-Buisson. Partout sur le site, nous employons les termes
+          Verrières-le-Buisson. Partout sur le site, nous employons les termes
           « nous », « notre » et « nos » en référence à Association de BMX de
-          Verrière-le-Buisson. Ce site web, y compris l'ensemble des
+          Verrières-le-Buisson. Ce site web, y compris l'ensemble des
           informations, outils et services auquel il donne accès, est offert par
-          Association de BMX de Verrière-le-Buisson à l'utilisateur que vous
+          Association de BMX de Verrières-le-Buisson à l'utilisateur que vous
           êtes, à condition que vous acceptiez la totalité des modalités,
           conditions, politiques et avis stipulés ici.
         </Paragraph>
@@ -343,7 +343,7 @@ export default function PolitiqueDeConfidentialite() {
           implicites, y compris toutes les garanties ou conditions implicites de
           commercialisation ou de qualité marchande, d’adaptation à un usage
           particulier, de durabilité, de titre et d’absence de contrefaçon.
-          Association de BMX de Verrière-le-Buisson, nos directeurs,
+          Association de BMX de Verrières-le-Buisson, nos directeurs,
           responsables, employés, sociétés affiliées, agents, contractants,
           stagiaires, fournisseurs, prestataires de services et concédants ne
           peuvent en aucun cas être tenus responsables de toute blessure, perte,
@@ -372,7 +372,7 @@ export default function PolitiqueDeConfidentialite() {
         </IntermediateParagraph>
         <Paragraph>
           Vous acceptez d’indemniser, de défendre et de tenir Association de BMX
-          de Verrière-le-Buisson et notre société mère, nos filiales, sociétés
+          de Verrières-le-Buisson et notre société mère, nos filiales, sociétés
           affiliées, partenaires, responsables, directeurs, agents,
           contractants, concédants, prestataires de services, sous-traitants,
           fournisseurs, stagiaires et employés, quittes de toute réclamation ou

@@ -27,7 +27,7 @@ export default function Reset() {
   return (
     <>
       <Head>
-        <title>Mot de passe oublié - Boutique BMX club Verrière le Buisson</title>
+        <title>Mot de passe oublié - Boutique BMX club Verrières le Buisson</title>
       </Head>
       <Template title="Mot de passe oublié" hasReturn={true}>
         {emailSent === false ? (

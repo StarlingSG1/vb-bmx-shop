@@ -25,7 +25,7 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Déconnexion - Boutique BMX club Verrière le Buisson</title>
+        <title>Déconnexion - Boutique BMX club Verrières le Buisson</title>
       </Head>
       <Template title="Déconnexion">
         <Paragraph>Vous êtes déconnecté</Paragraph>

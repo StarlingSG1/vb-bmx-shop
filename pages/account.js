@@ -13,7 +13,7 @@ export default function Account() {
   return (
     <>
       <Head>
-        <title>Mon compte - Boutique BMX club Verrière le Buisson</title>
+        <title>Mon compte - Boutique BMX club Verrières le Buisson</title>
       </Head>
       <Template title="Mon compte">
         

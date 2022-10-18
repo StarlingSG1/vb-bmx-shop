@@ -16,6 +16,16 @@ export default function Home() {
         <title>Accueil - Boutique BMX club Verrières le Buisson</title>
         <meta name="google-site-verification" content="XWvXQ0flMMlWIuwf6unw5V0t0G1CO2L73gDX3KBhzMk" />
         <link rel="canonical" href="https://boutique.vb-bmx-club.fr/produit/" />
+        <meta name="description" content="Boutique du club de BMX de Verrières le Buisson. Vous pouvez trouver les différents produits du club de BMX de Verrières le Buisson, voir les détails des produits et choisir parmi une selection de taille. Tous nos produits sont adaptés pour la pratique du BMX et sont aux couleurs du club de bmx de Verrières le Buisson " key="desc" />
+        <meta property="og:title" content="Boutique du club de BMX de Verrières le Buisson" />
+        <meta
+          property="og:description"
+          content="Bienvenue sur la boutique du club de BMX de Verrières le Buisson. Vous trouverez ici tous les produits du club."
+        />
+        <meta
+          property="og:image"
+          content="https://boutique.vb-bmx-club.fr/assets/img/logo.svg"
+        />
       </Head>
       <Header />
       <main className={`w-full 896:pt-32 -mb-20`} style={{ minHeight: "calc(100vh - 539px)" }}>
@@ -25,7 +35,7 @@ export default function Home() {
           <div className="max-w-[1600px] w-full  flex flex-col flex-col-reverse 896:grid grid-cols-12 xl:mx-0 mx-4  896:gap-[50px] gap-8">
             <PanierButton className="!top-[275px] 896:!top-[222px]" />
             <div className="xl:col-start-2 xl:col-span-5 col-span-7 p-4 mt-[340px] 896:mt-0">
-              <h1 className="font-josefin font-bold lg:text-title text-white text-center lg:mb-[50px] mb-7">Boutique du Club de BMX de Verrière le Buisson</h1>
+              <h1 className="font-josefin font-bold lg:text-title text-white text-center lg:mb-[50px] mb-7">Boutique du Club de BMX de Verrières le Buisson</h1>
               <div className="flex items-center gap-4">
                 <div className="w-[20px] h-[65px] bg-red   "></div>
                 <Paragraph className={"leading-8"}>Bienvenue sur la boutique du club. Ici vous pourrez commander les produits du club simplement et rapidement ! </Paragraph>

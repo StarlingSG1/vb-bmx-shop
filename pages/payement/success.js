@@ -10,7 +10,7 @@ export default function Success(){
     return (
         <>
         <Head>
-            <title>Confirmation de commande - Boutique BMX club Verrière le Buisson</title>
+            <title>Confirmation de commande - Boutique BMX club Verrières le Buisson</title>
         </Head>
         <Template title="Paiement réussi">
             <div className="shadow-card  w-full md:w-[745px] bg-white rounded-lg m-auto px-10 py-5">
