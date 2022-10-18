@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { SmallArticle } from "../../molecules";
-import { Paragraph, RoundedIcon, BigParagraph, SubTitle } from "../../atoms";
+import { Paragraph, RoundedIcon, BigParagraph, SubTitle, Button } from "../../atoms";
 import { useEffect, useState } from "react";
 import { updateCommandStatus } from "../../../api/commandes/commandes";
+import { toast } from "react-toastify";
 
 export function Modal({ isOpen, setIsOpen = () => { }, index, user, commande, commandes, setCommandes = () => { }, setCommande = () => { } }) {
 
@@ -10,6 +11,7 @@ export function Modal({ isOpen, setIsOpen = () => { }, index, user, commande, co
   const [total, setTotal] = useState(0)
   const [articleQuantity, setArticleQuantity] = useState(0)
   const [commandStatus, setCommandStatus] = useState(commande?.status)
+  const [confirm, setConfirm] = useState(false)
 
   const formatDate = () => {
     const date = new Date(commande?.createdAt)
@@ -45,8 +47,19 @@ export function Modal({ isOpen, setIsOpen = () => { }, index, user, commande, co
     const myNewCommandes = commandes
     myNewCommandes[index] = commande
     setCommandes(myNewCommandes)
-    setIsOpen(false)
+    setConfirm(false)
+    toast.success("Le statut de la commande a bien été modifié")
   }
+
+  const confirmChangeStatus = () => {
+    if (commandStatus === "RECUPERATION") {
+      setConfirm(true)
+    } else {
+      changeStatus()
+    }
+  }
+
+
 
   useEffect(() => {
     formatDate()
@@ -92,37 +105,49 @@ export function Modal({ isOpen, setIsOpen = () => { }, index, user, commande, co
               </div>
               <span className="500:h-[122px] h-[2px] 500:w-[2px] w-full md:ml-[45px] 500:ml-[30px]  mr-5 bg-red"></span>
               <div className="flex py-2 flex-col gap-5 ">
-                <Paragraph className="text-blue">
+                {confirm === false ? <><Paragraph className="text-blue">
                   Nombre d'articles : {articleQuantity > 1 ? " " + articleQuantity + " articles" : " " + articleQuantity + " article"}
                 </Paragraph>
-                <Paragraph className="text-blue">Total : {total}€</Paragraph>
-                <div className="flex sm:flex-row  flex-col  md:items-center gap-2">
-                  <Paragraph className="text-blue">Status :</Paragraph>
-                  {user?.role !== "USER" ? (
-                    <select
-                      className="h-[25px] w-[200px] border border-red focus:outline-red pl-2"
-                      type="select"
-                      defaultValue={!commandStatus ? commande?.status : commandStatus}
-                      onChange={(e) => { setCommandStatus(e.target.value) }}
-                    >
-                      <option value="ENCOURS" >en cours</option>
-                      <option value="RECUPERATION">prêt à être récupéré</option>
-                      <option value="ARCHIVE" >Terminé</option>
-                    </select>
-                  ) : (
-                    commande?.status
-                  )}
-                  {user?.role !== "USER" && commandStatus != commande?.status && (
-                    <div className="flex items-center gap-4">
-                      <p onClick={() => changeStatus()} className="cursor-pointer font-lato underline">
-                        Valider
-                      </p>
-                      <p onClick={(() => setCommandStatus(commande?.status))} className="cursor-pointer font-lato italic text-red">
-                        Annuler
-                      </p>
-                    </div>
-                  )}
-                </div>
+                  <Paragraph className="text-blue">Total : {total}€</Paragraph>
+                  <div className="flex sm:flex-row  flex-col  md:items-center gap-2">
+                    <Paragraph className="text-blue">Status :</Paragraph>
+                    {user?.role !== "USER" ? (
+                      <select
+                        className="h-[25px] w-[200px] border border-red focus:outline-red pl-2"
+                        type="select"
+                        defaultValue={!commandStatus ? commande?.status : commandStatus}
+                        onChange={(e) => { setCommandStatus(e.target.value) }}
+                      >
+                        <option value="ENCOURS" >en cours</option>
+                        <option value="RECUPERATION">prêt à être récupéré</option>
+                        <option value="ARCHIVE" >Terminé</option>
+                      </select>
+                    ) : (
+                      commande?.status
+                    )}
+                    {user?.role !== "USER" && commandStatus != commande?.status && (
+                      <div className="flex items-center gap-4">
+                        <p onClick={() => confirmChangeStatus()} className="cursor-pointer font-lato underline">
+                          Valider
+                        </p>
+                        <p onClick={(() => setCommandStatus(commande?.status))} className="cursor-pointer font-lato italic text-red">
+                          Annuler
+                        </p>
+                      </div>
+                    )}
+                  </div></> : <>
+                  <Paragraph className={"text-blue"}>Êtes-vous sûr de passer le status de la commande à <strong>Prêt à être récupéré </strong>? </Paragraph>
+                  <Paragraph className={"text-blue"}>La personne en sera notifié d'un email.</Paragraph>
+                  <div className="flex items-center gap-4">
+                    <p onClick={() => changeStatus()} className="cursor-pointer font-lato underline">
+                      Oui, envoyer l'email
+                    </p>
+                    <p onClick={(() => setConfirm(false))} className="cursor-pointer font-lato italic text-red">
+                      Annuler
+                    </p>
+                  </div>
+                </>
+                }
               </div>
             </div>
             <div className="mt-[30px] 500:px-8 px-4">
