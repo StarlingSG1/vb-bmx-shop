@@ -19,12 +19,12 @@ export function Article({ id, name, description, price, image }) {
             <Image src={image} objectFit="cover" layout="fill" />
           </div>
           <div className="flex justify-between gap-2.5">
-            <BigParagraph className={"uppercase line-clamp-2 h-[54px]"}>{name}</BigParagraph>
+            <h2 className={"font-roboto font-medium text-bigger text-white  uppercase line-clamp-2 h-[54px]"}>{name}</h2>
             <BigParagraph>{price}€</BigParagraph>
           </div>
-          <Paragraph className={"text-justify line-clamp-4 "}>
+          <h3 className={"text-justify font-lato  text-white line-clamp-4 "}>
             {description}
-          </Paragraph>
+          </h3>
         </div>
       </a>
     </Link>

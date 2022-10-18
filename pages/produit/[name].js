@@ -129,7 +129,7 @@ export default function Produit() {
       <Head>
         <title>{article?.name} - Boutique BMX club Verrières le Buisson</title>
       </Head>
-      <Template title="Nos produits" hasReturn={true} panier={true}>
+      <Template title={false} hasReturn={true} panier={true}>
         <PanierButton />
         <ReturnButton href={"/produits"} />
         <div className="md:grid md:grid-cols-12 gap-[50px]">
@@ -139,12 +139,12 @@ export default function Produit() {
               className="md:col-span-4 md:w-auto md:h-auto h-[400px] m-auto 500:w-2/3  aspect-square object-cover"
             />
             <div className="col-span-4 pt-4">
-              <IntermediateParagraph className={"text-left uppercase"}>
+              <h1 className={"text-left uppercase font-lato font-bold text-intermediate text-white"}>
                 {article && article.name}
-              </IntermediateParagraph>
-              <Paragraph className={"text-justify mt-6 mb-5"}>
+              </h1>
+              <h2 className={"text-justify font-lato  text-white mt-6 mb-5"}>
                 {article && article.description}
-              </Paragraph>
+              </h2>
               {/* Séparator */}
               <div className="h-[2px] w-full bg-red mb-[30px]"></div>
               <div className="flex justify-between items-center mb-5">
