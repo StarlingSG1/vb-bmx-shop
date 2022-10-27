@@ -8,13 +8,14 @@ import { useRouter } from "next/router";
 
 export default function Login() {
     
-    const { setStatus, setUser } = useUserContext();
+    const { setStatus, setUser, setNoLogged } = useUserContext();
 
     const navigate = useRouter()
 
     const logoutFunction = async () => {
         await logout();
         setStatus("disconnected");
+        setNoLogged(true);
         setUser(null);
         navigate.push("/")
     }

@@ -1,15 +1,36 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { Card } from "../components/atoms";
 import { Template } from "../components/molecules";
 import { Commandes } from "../components/organisms";
+import { useUserContext } from "../context";
 
 export default function Admin() {
+
+  const { user, redirectionAdmin, redirection } = useUserContext();
+
+  const navigate = useRouter();
+
+
+  useEffect(() => {
+    if (redirectionAdmin || redirection) {
+      navigate.push('/login');
+    }
+  }, []);
+
+  const redirectionFunc = () => {
+    if (redirectionAdmin || redirection) {
+      navigate.push('/login');
+    }
+  }
+
   const [nbCommandes, setNbCommandes] = useState(0);
   const [commandeTotal, setCommandeTotal] = useState(0);
   const [nbArticles, setNbArticles] = useState(0);
   const [nbCommandesEnCours, setNbCommandesEnCours] = useState(0);
   const [nbCommandesArchive, setNbCommandesArchive] = useState(0);
+  const [redirect, setRedirect] = useState(false);
 
   const stats = (stat) => {
     switch (stat) {
@@ -36,38 +57,45 @@ export default function Admin() {
     }
   };
 
-  return (
-    <>
-      <Head>
-        <title>Espace Admin - Boutique BMX club Verrières le Buisson</title>
-      </Head>
-      <Template title="Espace admin">
-        <div className="grid xl:grid-cols-12 lg:grid-cols-10 sm:grid-cols-12 grid-cols-2  xl:px-0 md:px-12 gap-[50px]">
-          <Card title="Total de commande" icon={"/assets/img/user.svg"}>
-            {stats(nbCommandes)}
-          </Card>
-          <Card title="Total des ventes" icon={"/assets/img/bag.svg"}>
-            {stats(commandeTotal)}€
-          </Card>
-          <Card title="Articles vendus" icon={"/assets/img/tshirt.svg"}>
-            {stats(nbArticles)}
-          </Card>
-          <Card title="Commandes en cours" icon={"/assets/img/loading.svg"}>
-            {stats(nbCommandesEnCours)}
-          </Card>
-          <Card title="Commandes terminés" icon={"/assets/img/archive.svg"}>
-            {stats(nbCommandesArchive)}
-          </Card>
-        </div>
-        <Commandes
-          setNbCommandes={setNbCommandes}
-          setCommandeTotal={setCommandeTotal}
-          setNbArticles={setNbArticles}
-          setNbCommandesEnCours={setNbCommandesEnCours}
-          setNbCommandesArchive={setNbCommandesArchive}
-          admin={true}
-        />
-      </Template>
-    </>
-  );
+  if (redirectionAdmin || redirection) {
+    redirectionFunc();
+    return (<div></div>)
+  } else {
+
+    return (
+      <>
+        <Head>
+          <title>Espace Admin - Boutique BMX club Verrières le Buisson</title>
+        </Head>
+        <Template title="Espace admin">
+          <div className="grid xl:grid-cols-12 lg:grid-cols-10 sm:grid-cols-12 grid-cols-2  xl:px-0 md:px-12 gap-[50px]">
+            <Card title="Total de commande" icon={"/assets/img/user.svg"}>
+              {stats(nbCommandes)}
+            </Card>
+            <Card title="Total des ventes" icon={"/assets/img/bag.svg"}>
+              {stats(commandeTotal)}€
+            </Card>
+            <Card title="Articles vendus" icon={"/assets/img/tshirt.svg"}>
+              {stats(nbArticles)}
+            </Card>
+            <Card title="Commandes en cours" icon={"/assets/img/loading.svg"}>
+              {stats(nbCommandesEnCours)}
+            </Card>
+            <Card title="Commandes terminés" icon={"/assets/img/archive.svg"}>
+              {stats(nbCommandesArchive)}
+            </Card>
+          </div>
+          {redirectionAdmin === false || redirection === false &&
+            <Commandes
+              setNbCommandes={setNbCommandes}
+              setCommandeTotal={setCommandeTotal}
+              setNbArticles={setNbArticles}
+              setNbCommandesEnCours={setNbCommandesEnCours}
+              setNbCommandesArchive={setNbCommandesArchive}
+              admin={true}
+            />}
+        </Template>
+      </>
+    );
+  }
 }

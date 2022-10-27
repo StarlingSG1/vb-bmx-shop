@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         blue: {
           DEFAULT: "#02182b",
+          skeleton: "#183044",
         },
         red: {
           DEFAULT: "#d7263d",
@@ -20,6 +21,7 @@ module.exports = {
         grey: {
           light: "#D9D9D9",
           DEFAULT: "#808080",
+          
         },
         black: {
           DEFAULT: "#010D17",

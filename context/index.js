@@ -12,6 +12,9 @@ const UserContextProvider = ({ children }) => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [panier, setPanier] = useState([]);
+  const [redirection, setRedirection] = useState(false);
+  const [redirectionAdmin, setRedirectionAdmin] = useState(false);
+  const [noLogged, setNoLogged ] = useState(true);
   const navigate = useRouter();
 
   const loginTheUser = async (payload, token) => {
@@ -38,14 +41,25 @@ const UserContextProvider = ({ children }) => {
     setLoading(true);
     const userToken = await verifyToken();
     if (userToken) {
-      
         setUser(userToken.user);
+        if(userToken?.user?.role === "ADMIN" || userToken?.user?.role === "SUPERADMIN") {
+          setRedirectionAdmin(false);
+        } else{
+          setRedirectionAdmin(true);
+        }
+        setNoLogged(false)
         setStatus("connected");
         setLoading(false);
       }
     else{
+      setNoLogged(true)
+      setRedirectionAdmin(true);
+      setRedirection(true);
       setLoading(false);
     }
+
+
+
   }
 
 
@@ -58,6 +72,9 @@ const UserContextProvider = ({ children }) => {
       user,
       setUser,
       loading,
+      redirection,
+      redirectionAdmin,
+      noLogged,
       setLoading,
       loginTheUser,
       status,
@@ -67,8 +84,9 @@ const UserContextProvider = ({ children }) => {
       setPanier,
       setStatus,
       setArticleId,
+      setNoLogged,
     }),
-    [user, loading, panier, setUser, setLoading, verifyTheToken, status, articleId]
+    [user, loading, noLogged,redirection, redirectionAdmin, panier, setNoLogged, setUser, setLoading, verifyTheToken, status, articleId]
   );
 
   return (
