@@ -16,7 +16,7 @@ export default function Account() {
 
   useEffect(() => {
     if (noLogged === true) {
-      navigate.push("/login");
+      navigate.push("/");
     }
   }, [user, noLogged, navigate]);
 

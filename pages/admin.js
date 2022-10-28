@@ -16,7 +16,7 @@ export default function Admin() {
   useEffect(() => {
     console.log(user,redirection, redirectionAdmin, noLogged)
     if (user && user === null || (redirectionAdmin && redirectionAdmin === true && redirection && redirection === true && noLogged && noLogged === true)) {
-      navigate.push('/login');
+      navigate.push('/');
     }
   }, [redirectionAdmin, redirection, user, noLogged, navigate]);
 
