@@ -10,23 +10,17 @@ import { useUserContext } from "../context";
 
 export default function Account() {
 
-  const { user } = useUserContext();
+  const { user, noLogged } = useUserContext();
 
   const navigate = useRouter();
 
   useEffect(() => {
-    if (!user) {
-      navigate.push('/login');
+    if (noLogged === true) {
+      navigate.push("/login");
     }
-  }, [navigate]);
+  }, [user, noLogged, navigate]);
 
   const [commandes, setCommandes] = useState(false);
-
-
-  if (!user) {
-    return (<div></div>)
-  }
-  else {
 
     return (
       <>
@@ -70,5 +64,3 @@ export default function Account() {
       </>
     );
   }
-
-}

@@ -18,9 +18,6 @@ export default function Login() {
   const navigate = useRouter()
 
   useEffect(() => {
-    !noLogged &&  navigate.push("/")
-
-
     const loadScriptByURL = (id, url, callback) => {
       const isScriptExist = document.getElementById(id);
 
@@ -53,8 +50,9 @@ export default function Login() {
     });
   }
 
-  
-
+  if (!noLogged) {
+    navigate.push("/");
+    return (<div></div>)}else{
     return (
       <>
         <Head>
@@ -84,5 +82,5 @@ export default function Login() {
         </Template>
       </>
     );
-  
+  }
 }

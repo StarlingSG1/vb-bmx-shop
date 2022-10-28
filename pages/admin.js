@@ -8,29 +8,23 @@ import { useUserContext } from "../context";
 
 export default function Admin() {
 
-  const { user, redirectionAdmin, redirection } = useUserContext();
+  const { user,noLogged, redirectionAdmin, redirection } = useUserContext();
 
   const navigate = useRouter();
 
 
   useEffect(() => {
-    if (redirectionAdmin || redirection) {
+    console.log(user,redirection, redirectionAdmin, noLogged)
+    if (user && user === null || (redirectionAdmin && redirectionAdmin === true && redirection && redirection === true && noLogged && noLogged === true)) {
       navigate.push('/login');
     }
-  }, []);
-
-  const redirectionFunc = () => {
-    if (redirectionAdmin || redirection) {
-      navigate.push('/login');
-    }
-  }
+  }, [redirectionAdmin, redirection, user, noLogged, navigate]);
 
   const [nbCommandes, setNbCommandes] = useState(0);
   const [commandeTotal, setCommandeTotal] = useState(0);
   const [nbArticles, setNbArticles] = useState(0);
   const [nbCommandesEnCours, setNbCommandesEnCours] = useState(0);
   const [nbCommandesArchive, setNbCommandesArchive] = useState(0);
-  const [redirect, setRedirect] = useState(false);
 
   const stats = (stat) => {
     switch (stat) {
@@ -57,11 +51,7 @@ export default function Admin() {
     }
   };
 
-  if (redirectionAdmin || redirection) {
-    redirectionFunc();
-    return (<div></div>)
-  } else {
-
+  
     return (
       <>
         <Head>
@@ -73,7 +63,7 @@ export default function Admin() {
               {stats(nbCommandes)}
             </Card>
             <Card title="Total des ventes" icon={"/assets/img/bag.svg"}>
-              {stats(commandeTotal)}€
+              {stats(commandeTotal)}{commandeTotal > 0 && "€"}
             </Card>
             <Card title="Articles vendus" icon={"/assets/img/tshirt.svg"}>
               {stats(nbArticles)}
@@ -85,7 +75,7 @@ export default function Admin() {
               {stats(nbCommandesArchive)}
             </Card>
           </div>
-          {redirectionAdmin === false || redirection === false &&
+          {!redirectionAdmin && !redirection &&
             <Commandes
               setNbCommandes={setNbCommandes}
               setCommandeTotal={setCommandeTotal}
@@ -98,4 +88,3 @@ export default function Admin() {
       </>
     );
   }
-}

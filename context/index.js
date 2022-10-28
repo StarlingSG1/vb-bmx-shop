@@ -12,8 +12,8 @@ const UserContextProvider = ({ children }) => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [panier, setPanier] = useState([]);
-  const [redirection, setRedirection] = useState(false);
-  const [redirectionAdmin, setRedirectionAdmin] = useState(false);
+  const [redirection, setRedirection] = useState(true);
+  const [redirectionAdmin, setRedirectionAdmin] = useState(true);
   const [noLogged, setNoLogged ] = useState(true);
   const navigate = useRouter();
 
@@ -27,6 +27,11 @@ const UserContextProvider = ({ children }) => {
       localStorage.setItem("vb-bmx-token", user.token);
       setUser(user);
     setStatus("connected");
+    setNoLogged(false);
+    setRedirection(false);
+    if(user.role === "ADMIN" || user.role === "SUPERADMIN") {
+      setRedirectionAdmin(false);
+    }
     setLoading(false);
     navigate.push("/");
     }else {
@@ -34,7 +39,6 @@ const UserContextProvider = ({ children }) => {
       setStatus("error");
       setLoading(false);
     }
-    
   };
 
   const verifyTheToken = async () => {
@@ -44,22 +48,16 @@ const UserContextProvider = ({ children }) => {
         setUser(userToken.user);
         if(userToken?.user?.role === "ADMIN" || userToken?.user?.role === "SUPERADMIN") {
           setRedirectionAdmin(false);
-        } else{
-          setRedirectionAdmin(true);
+          setRedirection(false);
+          setNoLogged(false);
         }
         setNoLogged(false)
         setStatus("connected");
         setLoading(false);
       }
     else{
-      setNoLogged(true)
-      setRedirectionAdmin(true);
-      setRedirection(true);
       setLoading(false);
     }
-
-
-
   }
 
 
@@ -86,7 +84,7 @@ const UserContextProvider = ({ children }) => {
       setArticleId,
       setNoLogged,
     }),
-    [user, loading, noLogged,redirection, redirectionAdmin, panier, setNoLogged, setUser, setLoading, verifyTheToken, status, articleId]
+    [user, loading, noLogged,redirection, redirectionAdmin, panier, noLogged, setUser, setLoading, verifyTheToken, status, articleId]
   );
 
   return (
