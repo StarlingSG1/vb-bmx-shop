@@ -11,7 +11,7 @@ export function SmallArticle({article}) {
     <div className="flex md:items-start items-center md:flex-row flex-col md:h-[190px] 500:gap-5 gap-2">
       <Link href={"/produit/"+article?.Product?.slug}>
       <a>
-      <img alt={article?.Product?.Image[0].name} src={article?.Product?.Image[0]?.name} className="object-cover aspect-square 500:h-[190px] 500:w-[150px] w-full"  />
+      <img alt={article?.Product?.Image[0].name} src={article?.Product?.Image[0]?.url} className="object-cover aspect-square 500:h-[190px] 500:w-[150px] w-full"  />
       </a>
       </Link>
       <div className="flex flex-col md:items-start items-center gap-1.5 500:w-[183px]">
