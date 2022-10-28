@@ -26,10 +26,8 @@ import Link from "next/link";
 import { SmallSkeletonArticle } from "../../components/molecules/articles/SmallSkeletonArticle";
 
 export default function Produit() {
-  // call context
 
   const { panier, setPanier = () => { } } = useUserContext();
-
   const [isOpen, setIsOpen] = useState(false);
   const [boolFlocageYes, setBoolFlocageYes] = useState(false);
   const [boolFlocageNo, setBoolFlocageNo] = useState(true);
@@ -41,6 +39,8 @@ export default function Produit() {
   const [products, setProducts] = useState(null);
   const [total, setTotal] = useState(0);
   const [panierLength, setPanierLength] = useState(0);
+  const [nbImagesProduct, setNbImagesProduct] = useState(0);
+  const [sliderState, setSliderState] = useState(1);
 
   const fetchProducts = async () => {
     const products = await getAllFrom("products");
@@ -77,7 +77,7 @@ export default function Produit() {
     if (article?.Color?.length > 0 && (!colorValue || colorValue === "Choisir une couleur  ")) {
       return toast.error("Veuillez choisir une couleur")
     }
-    const item = { id: theArticle.id, name: theArticle.name, price: theArticle.price, size: sizeValue, flocage: flocageValue, color: colorValue, image: theArticle.image, slug: theArticle.slug, quantity: 1, stripe: theArticle.stripe_id };
+    const item = { id: theArticle.id, name: theArticle.name, price: theArticle.price, size: sizeValue, flocage: flocageValue, color: colorValue, image: theArticle.Image[0].url, slug: theArticle.slug, quantity: 1, stripe: theArticle.stripe_id };
     setModalItem(item);
     const toAdd = true
     panierArray.forEach((theArticle) => {
@@ -108,6 +108,25 @@ export default function Produit() {
     setTotal(theTotal);
   };
 
+  // function if param is true, add 1 to sliderState, if false remove 1
+  const handleSlider = (param) => {
+    if (sliderState === 1 && param === false) {
+      return
+    } else if (sliderState === nbImagesProduct && param === true) {
+      return
+    } else {
+      const slider = document.getElementById("slider");
+      if (param === true) {
+        setSliderState(sliderState + 1);
+        slider.style.transform = `translateX(-${sliderState * 100}%)`;
+      } else {
+        setSliderState(sliderState - 1);
+        slider.style.transform = `translateX(-${(sliderState - 2) * 100}%)`
+      }
+    }
+  };
+
+
   const router = useRouter();
   const { id, name } = router.query;
 
@@ -115,10 +134,13 @@ export default function Produit() {
     if (id) {
       const products = await getOneFrom("products", id);
       setArticle(products);
+      setNbImagesProduct(products?.Image?.length);
     } else {
       const slug = window.location.href.split("/")[4];
       const products = await getOneFromBody("products/slug", { slug: slug });
       setArticle(products);
+      setNbImagesProduct(products?.Image?.length);
+
     }
   };
 
@@ -130,13 +152,29 @@ export default function Produit() {
       <Template title={false} hasReturn={true} panier={true}>
         <PanierButton />
         <ReturnButton href={"/produits"} />
-          <div className="md:grid md:grid-cols-12 gap-[50px]">
-        {article  ? (
+        <div className="md:grid md:grid-cols-12 gap-[50px]">
+          {article ? (
             <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 md:grid md:grid-cols-8 md:gap-[50px]  flex flex-col  ">
-              <img src={article && article?.image}
-                alt={article && article?.name}
-                className="md:col-span-4 md:w-auto md:h-auto h-[400px] m-auto 500:w-2/3  aspect-square object-cover"
-              />
+              <div className="md:col-span-4 md:w-auto md:h-auto h-[400px] m-auto 500:w-2/3 relative aspect-square overflow-hidden">
+                <div id="slider" className="w-full h-full duration-500 flex" >
+                  {article?.Image?.map((image, index) => {
+                    return (
+                      <img key={index} src={image.url}
+                      alt={image.name}
+                      className=" w-full h-full aspect-square object-cover"
+                      />
+                      )
+                    })}
+                </div>
+                {sliderState !== 1 && <button onClick={() => { handleSlider(false) }} className="bg-red h-10 w-10 absolute z-20 top-1/2 -translate-y-[50%] left-5 flex items-center justify-center opacity-60 duration-200 hover:opacity-100"><svg width="14" height="29" viewBox="0 0 17 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0.717816 16.3814L15.335 1.30371M0.696289 14.9676L15.7745 29.5843" stroke="#F4F5F5" strokeWidth="2" />
+                </svg>
+                </button>}
+                {sliderState !== nbImagesProduct && <button onClick={() => { handleSlider(true) }} className="bg-red h-10 w-10 absolute z-20 top-1/2 -translate-y-[50%] flex items-center justify-center right-5 opacity-60 duration-200 hover:opacity-100 rotate-180"><svg width="14" height="29" viewBox="0 0 17 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0.717816 16.3814L15.335 1.30371M0.696289 14.9676L15.7745 29.5843" stroke="#F4F5F5" strokeWidth="2" />
+                </svg>
+                </button>}
+              </div>
               <div className="col-span-4 pt-4">
                 <h1 className={"text-left uppercase font-lato font-bold text-intermediate text-white"}>
                   {article && article?.name}
@@ -239,8 +277,8 @@ export default function Produit() {
                 </div>
               </div>
             </div>
-                ) : 
-                  <div className=" animate-pulse xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 md:grid md:grid-cols-8 md:gap-[50px]  flex flex-col  ">
+          ) :
+            <div className=" animate-pulse xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 col-span-12 md:grid md:grid-cols-8 md:gap-[50px]  flex flex-col  ">
               <div
                 className="md:col-span-4   h-[400px]   col-span-4 bg-blue-skeleton "
               ></div>
@@ -251,7 +289,7 @@ export default function Produit() {
                 <div className="h-[2px] w-full bg-red mb-[30px]"></div>
                 <div className="flex justify-between items-center mb-5">
                   <div className="flex flex-col w-1/2 gap-6">
-                      <div className="bg-blue-skeleton h-8 w-full"></div>
+                    <div className="bg-blue-skeleton h-8 w-full"></div>
                   </div>
                   <span className="h-[25px] w-[10px] bg-blue-skeleton 350:block hidden"></span>
                   <div className="350:block hidden bg-blue-skeleton h-8 w-14"></div>
@@ -262,41 +300,38 @@ export default function Produit() {
                 </div>
               </div>
             </div>}
-            {/* end first sec */}
-            <div className="col-span-12 flex justify-center mt-10 md:mb-0 mb-10">
-              <Title className="!text-intermediate">Nos autres produits</Title>
-            </div>
-            <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 md:col-span-12 grid  gap-[50px]">
-              <div className="xl:col-span-8 lg:col-span-10  896:grid-cols-8 md:grid-cols-9 sm:grid-cols-2 xl:grid-cols-12 gap-[50px] sm:grid flex flex-col">
-                {products ?
-                  products.map(
-                    (product, index) =>
-                      product.id !== article?.id && (
-                        <Link href={`/produit/${product?.slug}`}>
-                          <a className="896:col-span-2 cursor-pointer md:col-span-3 sm:w-auto col-span-1 relative">
-                            <div key={index} className="">
-                              <img src={product?.image}
-                                className=" w-full object-cover sm:h-[265px] h-[300px]"
-                                alt="produit" />
-                              <Paragraph className={"my-2.5"}>
-                                {product?.name}
-                              </Paragraph>
-                              <Price>{product?.price}€</Price>
-                            </div>
-                          </a>
-                        </Link>
-                        
-                      )
-                  ) : 
-                  <>
-                  <SmallSkeletonArticle/>
-                  <SmallSkeletonArticle/>
-                  <SmallSkeletonArticle/>
-                  <SmallSkeletonArticle/>
-                  </>}
-              </div>
+          {/* end first sec */}
+          <div className="col-span-12 flex justify-center mt-10 md:mb-0 mb-10">
+            <Title className="!text-intermediate">Nos autres produits</Title>
+          </div>
+          <div className="xl:col-span-8 xl:col-start-3 lg:col-span-10 lg:col-start-2 md:col-span-12 grid  gap-[50px]">
+            <div className="xl:col-span-8 lg:col-span-10  896:grid-cols-8 md:grid-cols-9 sm:grid-cols-2 xl:grid-cols-12 gap-[50px] sm:grid flex flex-col">
+              {products ?
+                products.map(
+                  (product, index) =>
+                    product.id !== article?.id && (
+                        <a href={`/produit/${product?.slug}`} className="896:col-span-2 cursor-pointer md:col-span-3 sm:w-auto col-span-1 relative">
+                          <div key={index} className="">
+                            <img src={product?.Image[0]?.url}
+                              className=" w-full object-cover sm:h-[265px] h-[300px]"
+                              alt={product?.Image[0]?.name} />
+                            <Paragraph className={"my-2.5"}>
+                              {product?.name}
+                            </Paragraph>
+                            <Price>{product?.price}€</Price>
+                          </div>
+                        </a>
+                    )
+                ) :
+                <>
+                  <SmallSkeletonArticle />
+                  <SmallSkeletonArticle />
+                  <SmallSkeletonArticle />
+                  <SmallSkeletonArticle />
+                </>}
             </div>
           </div>
+        </div>
       </Template>
       <PanierModal isOpen={isOpen} article={article} modalItem={modalItem} panierLength={panierLength} setIsOpen={setIsOpen} total={total} />
     </>

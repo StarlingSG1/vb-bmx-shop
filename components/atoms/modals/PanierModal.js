@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -40,7 +41,7 @@ export function PanierModal({ isOpen, setIsOpen = () => {}, article, modalItem, 
             </div>
             <div className="sm:h-[230px] w-full mt-[25px] flex sm:flex-row flex-col gap-[15px]">
               <div className="sm:w-2/3 flex sm:border-r-2 sm:border-b-0 border-b-2 sm:pb-0 pb-4 border-red  gap-[15px]">
-                <img src={article.image} className="aspect-square sm:w-auto 500:w-1/3 350:w-[150px] w-[120px] object-cover" alt={article.name} />
+                <img src={article?.Image[0].url} className="aspect-square sm:w-auto 500:w-1/3 350:w-[150px] w-[120px] object-cover" alt={article?.Image[0].name} />
                 <div className="flex flex-col  gap-2.5 sm:w-[183px]">
                   <BigParagraph className="uppercase text-blue">
                     {article.name}

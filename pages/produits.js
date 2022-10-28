@@ -31,7 +31,7 @@ export default function Produit() {
         <PanierButton />
         <div className=" flex flex-col gap-6 sm:grid sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-[50px] lg:grid-cols-4">
           {/* ne pas oublier le props image */}
-          {!skeleton && products ? products.map((product) => <Article key={product.id} id={product.id} name={product.name} price={product.price} description={product.description} image={product.image} />) : <><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /></>}
+          {!skeleton && products ? products.map((product) => <Article key={product.id} id={product.id} name={product.name} price={product.price} description={product.description} image={product?.Image[0]?.url} alt={product?.Image[0].name} />) : <><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /></>}
         </div>
       </Template>
     </>
