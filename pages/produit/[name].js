@@ -166,11 +166,11 @@ export default function Produit() {
                       )
                     })}
                 </div>
-                {sliderState !== 1 && <button onClick={() => { handleSlider(false) }} className="bg-red h-10 w-10 absolute z-20 top-1/2 -translate-y-[50%] left-5 flex items-center justify-center opacity-60 duration-200 hover:opacity-100"><svg width="14" height="29" viewBox="0 0 17 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {sliderState !== 1 && <button onClick={() => { handleSlider(false) }} className="bg-red rounded-md h-10 w-10 absolute z-20 top-1/2 -translate-y-[50%] left-5 flex items-center justify-center opacity-60 duration-200 hover:opacity-100"><svg width="14" height="29" viewBox="0 0 17 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0.717816 16.3814L15.335 1.30371M0.696289 14.9676L15.7745 29.5843" stroke="#F4F5F5" strokeWidth="2" />
                 </svg>
                 </button>}
-                {sliderState !== nbImagesProduct && <button onClick={() => { handleSlider(true) }} className="bg-red h-10 w-10 absolute z-20 top-1/2 -translate-y-[50%] flex items-center justify-center right-5 opacity-60 duration-200 hover:opacity-100 rotate-180"><svg width="14" height="29" viewBox="0 0 17 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {sliderState !== nbImagesProduct && <button onClick={() => { handleSlider(true) }} className="bg-red rounded-md h-10 w-10 absolute z-20 top-1/2 -translate-y-[50%] flex items-center justify-center right-5 opacity-60 duration-200 hover:opacity-100 rotate-180"><svg width="14" height="29" viewBox="0 0 17 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0.717816 16.3814L15.335 1.30371M0.696289 14.9676L15.7745 29.5843" stroke="#F4F5F5" strokeWidth="2" />
                 </svg>
                 </button>}

@@ -25,7 +25,7 @@ export function Footer() {
           <HeaderLink href="/politique-de-confidentialite">Mentions légales</HeaderLink>
         </div>
         <div className="h-full md:w-1/3 flex sm:items-center items-end  justify-end lg:gap-40 gap-16">
-            <a href="https://www.instagram.com/vbbmxclub/" rel="noreferrer" target="_blank">
+            <a href="https://www.facebook.com/profile.php?id=100011345531645" rel="noreferrer" target="_blank">
               <Image
                 src="/assets/img/facebook.svg"
                 alt="logo"
@@ -34,7 +34,7 @@ export function Footer() {
                 className="border-none"
               />
             </a>
-            <a href="https://www.facebook.com/profile.php?id=100011345531645" rel="noreferrer" target="_blank">
+            <a href="https://www.instagram.com/vbbmxclub/" rel="noreferrer" target="_blank">
               <Image
                 src="/assets/img/instagram.svg"
                 alt="logo"

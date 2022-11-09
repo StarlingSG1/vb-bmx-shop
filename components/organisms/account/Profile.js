@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { selfPasswordUpdate, selfUserUpdate } from "../../../api/users/user";
 import { useUserContext } from "../../../context";
 import { BorderedButton, Button, Input, Paragraph } from "../../atoms";
@@ -19,7 +20,7 @@ export function Profile() {
     confirmPassword: "",
   });
 
-  const { user , verifyTheToken} = useUserContext();
+  const { user, verifyTheToken } = useUserContext();
 
   const toUpdate = () => {
     setUpdate(true);
@@ -40,11 +41,24 @@ export function Profile() {
 
   const validePassword = async () => {
     passwordData.token = localStorage.getItem("vb-bmx-token");
-    const response = await selfPasswordUpdate(passwordData)
+    if (passwordData.oldPassword !== passwordData.newPassword) {
+      if (passwordData?.newPassword === passwordData?.confirmPassword) {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (passwordRegex.test(passwordData?.newPassword)) {
+          const response = await selfPasswordUpdate(passwordData)
+          localStorage.setItem("vb-bmx-token", response.newToken);
+          verifyTheToken()
+          setPassword(false)
+        } else {
+          toast.error("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial");
+        }
+      } else {
+        toast.error("Les mots de passe ne correspondent pas");
+      }
+    } else {
+      toast.error("Le nouveau mot de passe ne peut pas être identique à l'ancien")
+    }
 
-    localStorage.setItem("vb-bmx-token", response.newToken);
-    verifyTheToken()
-    setPassword(false)
   };
 
   const returnPassword = () => {
@@ -57,26 +71,24 @@ export function Profile() {
   };
 
   useEffect(() => {
-    setUserData({...userData, email: user?.email , firstName: user?.firstName, lastName: user?.lastName, phone: user?.phone});
-    }, []);
+    setUserData({ ...userData, email: user?.email, firstName: user?.firstName, lastName: user?.lastName, phone: user?.phone });
+  }, []);
 
   return (
     <>
       <div
-        className={`w-full ${
-          update || password ? "gap-5" : "500:gap-10 gap-8"
-        } mt-[70px] flex flex-col `}
+        className={`w-full ${update || password ? "gap-5" : "500:gap-10 gap-8"
+          } mt-[70px] flex flex-col `}
       >
         {!password && (
           <div
-            className={`flex 500:flex-row flex flex-col 500:items-center 500:justify-between  gap-8 ${
-              update && "500:gap-[50px] gap-5"
-            }`}
+            className={`flex 500:flex-row flex flex-col 500:items-center 500:justify-between  gap-8 ${update && "500:gap-[50px] gap-5"
+              }`}
           >
             {update ? (
               <>
-                <Input className={"!500:w-1/2 !w-full"} placeholder="Prénom" onChange={(e) => setUserData({...userData, firstName: e.target.value})} defaultValue={user && user.firstName} />
-                <Input className={"500:!w-1/2 !w-full"} placeholder="Nom" onChange={(e) => setUserData({...userData, lastName: e.target.value})} defaultValue={user && user.lastName} />
+                <Input className={"!500:w-1/2 !w-full"} placeholder="Prénom" onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} defaultValue={user && user.firstName} />
+                <Input className={"500:!w-1/2 !w-full"} placeholder="Nom" onChange={(e) => setUserData({ ...userData, lastName: e.target.value })} defaultValue={user && user.lastName} />
               </>
             ) : (
               <>
@@ -96,17 +108,17 @@ export function Profile() {
         )}
         {update && (
           <>
-            <Input className="!w-full" type="email" placeholder="Adresse mail" onChange={(e) => setUserData({...userData, email: e.target.value})} defaultValue={user && user.email}/>
-            <Input className="!w-full" type="phone" placeholder="Numéro de téléphone" defaultValue={user && user.phone} onChange={(e) => setUserData({...userData, phone: e.target.value})} />
+            <Input className="!w-full" type="email" placeholder="Adresse mail" onChange={(e) => setUserData({ ...userData, email: e.target.value })} defaultValue={user && user.email} />
+            <Input className="!w-full" type="phone" placeholder="Numéro de téléphone" defaultValue={user && user.phone} onChange={(e) => setUserData({ ...userData, phone: e.target.value })} />
           </>
         )}
-        {password  && (
+        {password && (
           <>
-            <Input className="!w-full" type="password"  placeholder="Ancien mot de passe" onChange={(e) => setPasswordData({...passwordData, oldPassword: e.target.value})} defaultValue={null} />
-            <Input className="!w-full" type="password"  placeholder="Nouveau mot de passe" onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})} defaultValue={null}/>
-            <Input className="!w-full" type="password"  placeholder="Confirmer mot de passe" onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})} defaultValue={null}/>
+            <Input className="!w-full" type="password" placeholder="Ancien mot de passe" onChange={(e) => setPasswordData({ ...passwordData, oldPassword: e.target.value })} defaultValue={null} />
+            <Input className="!w-full" type="password" placeholder="Nouveau mot de passe" onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })} defaultValue={null} />
+            <Input className="!w-full" type="password" placeholder="Confirmer mot de passe" onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })} defaultValue={null} />
           </>
-        ) }
+        )}
         {!password && !update && (
           <>
             <div className="flex items-center gap-2.5">
