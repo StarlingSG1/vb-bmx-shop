@@ -14,7 +14,7 @@ export function Article({ id, name, description, price, image, alt }) {
         <a onClick={() => { setArticleId(id) }}>
           <div className="flex flex-col gap-2.5 cursor-pointer ">
             <div className="relative w-full   aspect-square">
-              <img alt={alt} src={image}  className="w-full h-full object-cover" />
+              <img alt={alt} src={image}  className="w-full h-full object-cover aspect-square" />
             </div>
             <div className="flex justify-between gap-2.5">
               <h2 className={"font-roboto font-medium text-bigger text-white  uppercase line-clamp-2 h-[54px]"}>{name}</h2>
