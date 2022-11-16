@@ -7,7 +7,7 @@ export function PanierButton({className = ""}) {
 
   const [panierLength, setPanierLength] = useState(0);
 
-  const { panier  } = useUserContext();
+  const { panier   } = useUserContext();
 
   useEffect(() => {
     // if localstorage is empty, set panierLength to 0
