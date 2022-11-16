@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-import joinClasses from "../../../helpers/joinClasses";
+  import joinClasses from "../../../helpers/joinClasses";
 import { HeaderLink } from "../../atoms";
  import Link from "next/link";
 import { useUserContext } from "../../../context";

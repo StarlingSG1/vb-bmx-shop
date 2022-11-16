@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-import Head from "next/head";
+  import Head from "next/head";
  import { useEffect, useState } from "react";
 import {
   BigParagraph,
