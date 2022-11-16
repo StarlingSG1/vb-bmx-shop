@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+/* eslint-disable @next/next/no-img-element */
+ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { BigParagraph, Paragraph, Price } from "../../atoms";
@@ -62,10 +62,9 @@ export function PanierArticle({
       <div className="relative aspect-square xl:mb-8 md:mb-12 500:mb-10 mb-4 md:col-span-2  ">
         <Link href={"/produit/" + article?.slug}>
           <a>
-            <Image
+            <img
               src={article.image}
-              className="absolute object-cover "
-              layout="fill"
+              className="absolute object-cover w-full h-full"
               alt={article.name}
             />
           </a>

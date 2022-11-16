@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import joinClasses from "../../../helpers/joinClasses";
 import { HeaderLink } from "../../atoms";
-import Image from "next/image";
-import Link from "next/link";
+ import Link from "next/link";
 
 export function LogHeader({ children, className }) {
   return (
@@ -9,7 +9,7 @@ export function LogHeader({ children, className }) {
       <div className="h-full max-w-[1600px] mx-[160px] flex items-center justify-between">
         <Link href="/">
           <a>
-            <Image
+            <img
               src="/assets/img/logo.svg"
               alt="logo"
               height="132"
@@ -35,7 +35,7 @@ export function LogHeader({ children, className }) {
           <li className="flex items-center gap-2.5">
             <Link href="/logout">
               <a className="flex items-center">
-                <Image  src="/assets/img/logout.svg" width={20} height={18} />
+                <img  src="/assets/img/logout.svg" width={20} height={18} alt="logout" />
               </a>
             </Link>
             <HeaderLink href="/logout">Se deconnecter</HeaderLink>

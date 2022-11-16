@@ -1,6 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
-import { getAllFrom } from "../api/products/products";
+ import { getAllFrom } from "../api/products/products";
 import { useEffect, useState } from "react";
 import { BigParagraph, PanierButton, Paragraph } from "../components/atoms";
 import { Template } from "../components/molecules/templates/Template";

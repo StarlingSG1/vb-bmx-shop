@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import joinClasses from "../../../helpers/joinClasses";
 import { HeaderLink } from "../../atoms";
-import Image from "next/image";
-import Link from "next/link";
+ import Link from "next/link";
 import { useUserContext } from "../../../context";
 import { useState } from "react";
 
@@ -17,7 +17,7 @@ export function Header({ children, className }) {
         <div className="h-full max-w-[1600px]  mx-4 w-full flex items-center justify-between">
           <Link href="/">
             <a>
-              <Image
+              <img
                 src="/assets/img/logo.svg"
                 alt="logo"
                 height="132"
@@ -63,7 +63,7 @@ export function Header({ children, className }) {
                 <li className="flex items-center gap-2.5">
                   <Link href="/logout">
                     <a className="flex items-center">
-                      <Image
+                      <img
                         src="/assets/img/logout.svg"
                         width={20}
                         height={18}
@@ -116,7 +116,7 @@ export function Header({ children, className }) {
                 <li className="flex items-center gap-2.5">
                   <Link href="/logout">
                     <a className="flex items-center">
-                      <Image
+                      <img
                         src="/assets/img/logout.svg"
                         width={20}
                         height={18}

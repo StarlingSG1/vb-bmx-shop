@@ -1,6 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+ import { useEffect, useState } from "react";
 import {
   BigParagraph,
   Button,

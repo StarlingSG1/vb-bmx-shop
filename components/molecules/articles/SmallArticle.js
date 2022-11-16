@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
-import Link from "next/link";
+ import Link from "next/link";
 import { Paragraph } from "../../atoms";
 
 export function SmallArticle({article}) {

@@ -1,6 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
+ import Link from "next/link";
 import { Bloc, BorderedButton, Button, IntermediateParagraph, PanierButton, Paragraph, Title } from "../components/atoms";
 import { Footer, Header } from "../components/molecules";
 import HomeArticle from "../components/molecules/articles/HomeArticle";

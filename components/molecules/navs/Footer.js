@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+/* eslint-disable @next/next/no-img-element */
+ import Link from "next/link";
 import { Paragraph, HeaderLink, TextLink } from "../../atoms";
 
 export function Footer() {
@@ -9,7 +9,7 @@ export function Footer() {
         <div className="h-full w-1/3 flex items-center md:justify-start justify-center  ">
           <Link href="/">
             <a>
-              <Image
+              <img
                 src="/assets/img/logo.svg"
                 alt="logo"
                 height="150"
@@ -26,7 +26,7 @@ export function Footer() {
         </div>
         <div className="h-full md:w-1/3 flex sm:items-center items-end  justify-end lg:gap-40 gap-16">
             <a href="https://www.facebook.com/profile.php?id=100011345531645" rel="noreferrer" target="_blank">
-              <Image
+              <img
                 src="/assets/img/facebook.svg"
                 alt="logo"
                 height="50"
@@ -35,7 +35,7 @@ export function Footer() {
               />
             </a>
             <a href="https://www.instagram.com/vbbmxclub/" rel="noreferrer" target="_blank">
-              <Image
+              <img
                 src="/assets/img/instagram.svg"
                 alt="logo"
                 height="50"

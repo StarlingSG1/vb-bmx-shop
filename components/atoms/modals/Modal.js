@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { SmallArticle } from "../../molecules";
+ import { SmallArticle } from "../../molecules";
 import { Paragraph, RoundedIcon, BigParagraph, SubTitle, Button } from "../../atoms";
 import { useEffect, useState } from "react";
 import { updateCommandStatus } from "../../../api/commandes/commandes";
