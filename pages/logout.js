@@ -6,7 +6,7 @@ import { Template } from "../components/molecules/templates/Template";
 import { useUserContext } from "../context";
 import { useRouter } from "next/router";
 
-export default function Login() {
+export default function Logout() {
     
     const { setStatus, setUser, setNoLogged } = useUserContext();
 

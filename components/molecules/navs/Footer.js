@@ -46,7 +46,7 @@ export function Footer() {
       </div>
       <div className="w-full md:my-0 my-5 max-w-[1600px]">
         <Paragraph>
-          Made by <TextLink href="mailto:barriere.jeremie@gmail.com">Jérémie Barrière</TextLink>
+          Made by <a href="https://jeremiebarriere.fr" className={'font-roboto text-[18px]  underline text-white'}>Jérémie Barrière</a>
         </Paragraph>
       </div>
     </footer>
